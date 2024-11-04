@@ -58,6 +58,7 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
+            GameWorld.Camera.Position = new Vector2(this.Position.X, 0);
             HandleInput();
             Move(gameTime);
             base.Update(gameTime);
