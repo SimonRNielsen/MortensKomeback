@@ -17,7 +17,7 @@ namespace MortensKomeback
         private GraphicsDeviceManager _graphics;
         private Texture2D sprite;
         private Texture2D[] sprites;
-        private Vector2 surfacePosition;
+        private Vector2 position;
 
         #endregion
 
@@ -29,8 +29,8 @@ namespace MortensKomeback
         public Surface(GraphicsDeviceManager graphics, Vector2 position)
         {
             this._graphics = graphics;
-            surfacePosition.X = position.X;
-            surfacePosition.Y = position.Y;
+            this.position.X = position.X;
+            this.position.Y = position.Y;
         }
 
         #endregion
@@ -49,12 +49,14 @@ namespace MortensKomeback
 
             //Default sprite
             this.sprite = sprites[0];
+            collisionBox = new Rectangle((int)position.X, (int)position.Y, Sprite.Width, Sprite.Height);
+
         }
 
 
         public void OnCollision(GameObject other)
         {
-            
+            ///Nothing will happen
         }
 
         #endregion

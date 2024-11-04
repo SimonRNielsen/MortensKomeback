@@ -25,6 +25,7 @@ namespace MortensKomeback
         public Background(GraphicsDeviceManager graphics)
         {
             this._graphics = graphics;
+            GameObject.layer = 0f;
         }
 
         #endregion
