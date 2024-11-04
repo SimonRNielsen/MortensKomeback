@@ -13,8 +13,8 @@ namespace MortensKomeback
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private List<GameObject> gameObjects;
-        private List<GameObject> newGameObjects;
+        private List<GameObject> gameObjects =new List<GameObject>();
+        private List<GameObject> newGameObjects = new List<GameObject>();
 
         public GameWorld()
         {
@@ -26,8 +26,10 @@ namespace MortensKomeback
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            gameObjects.Add(new Player());
             base.Initialize();
+
+
         }
 
         protected override void LoadContent()
@@ -35,6 +37,8 @@ namespace MortensKomeback
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            foreach (GameObject gameObj in gameObjects)
+            { gameObj.LoadContent(Content); }
         }
 
         protected override void Update(GameTime gameTime)
@@ -43,21 +47,6 @@ namespace MortensKomeback
                 Exit();
 
             // TODO: Add your update logic here
-
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
-
-            foreach (GameObject gameObject in gameObjects)
-            {
-                gameObject.Draw(_spriteBatch);
-            }
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Update(gameTime);
@@ -79,6 +68,22 @@ namespace MortensKomeback
                 */
 
             }
+
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(_spriteBatch);
+            }
+
 
             _spriteBatch.End();
 

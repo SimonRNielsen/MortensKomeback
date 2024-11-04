@@ -27,6 +27,7 @@ namespace MortensKomeback
         protected int health;
         private int currentIndex;
 
+
         public Rectangle CollisionBox
         {
             get { return new Rectangle((int)Position.X - (sprite.Width / 2), (int)Position.Y - (sprite.Height / 2), sprite.Width, sprite.Height); }
@@ -64,7 +65,6 @@ namespace MortensKomeback
         protected void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             position += ((velocity * speed) * deltaTime);
         }
         

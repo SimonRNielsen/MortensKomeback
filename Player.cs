@@ -32,7 +32,13 @@ namespace MortensKomeback
         /// </summary>
         public Player()
         {
-
+            this.position.X = 0;
+            this.position.Y = 0;
+            this.speed = 300f;
+            this.fps = 15f;
+            this.health = 3;
+            this.layer = 1;
+            this.scale = 1;
 
         }
 
@@ -42,22 +48,24 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            throw new NotImplementedException();
+            sprite = content.Load<Texture2D>("morten_sprite");
         }
 
         public override void OnCollision(GameObject gameObject)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            HandleInput();
+            Move(gameTime);
+            base.Update(gameTime);
         }
         /// <summary>
         /// A method, that handles player input. WASD moves the player, and space makes it shoot. 
         /// </summary>
-        private void HandeInput()
+        private void HandleInput()
         {
             velocity = Vector2.Zero; //Resets the velocity, so move stops when no keys are pressed
 
@@ -118,7 +126,7 @@ namespace MortensKomeback
         /// </summary>
         private void Jump()
         {
-            velocity += new Vector2(0, +1);
+            velocity -= new Vector2(0, +20);
         }
 
         #endregion
