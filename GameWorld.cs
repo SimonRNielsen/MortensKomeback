@@ -13,8 +13,14 @@ namespace MortensKomeback
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private List<GameObject> gameObjects =new List<GameObject>();
-        private List<GameObject> newGameObjects = new List<GameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> newGameObjects = new List<GameObject>();
+        private static Camera2D camera;
+
+        /// <summary>
+        /// Property to get/set the position of the camera, in this case relative to the players position
+        /// </summary>
+        public static Camera2D Camera { get => camera; set => camera = value; }
 
         public GameWorld()
         {
@@ -35,6 +41,7 @@ namespace MortensKomeback
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
 
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObj in gameObjects)
