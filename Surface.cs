@@ -29,15 +29,15 @@ namespace MortensKomeback
         public Surface(GraphicsDeviceManager graphics, Vector2 position)
         {
             this._graphics = graphics;
-            //this.position.X = surfacePosition.X;
-            //this.position.Y = surfacePosition.Y;
+            surfacePosition.X = position.X;
+            surfacePosition.Y = position.Y;
         }
 
         #endregion
 
         #region method
 
-        public override void LoadContent(ContentManager content)
+        public void LoadContent(ContentManager content)
         {
             sprites = new Texture2D[6];
 
