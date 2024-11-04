@@ -21,8 +21,10 @@ namespace MortensKomeback
         protected float layer;
         protected float rotation;
         protected SoundEffect deathSoundEffect;
-        private float timeElapsed;
         private int currentIndex;
+        private float timeElapsed;
+        private float speed;
+        private Vector2 velocity;
 
         public Rectangle CollisionBox
         {
@@ -57,16 +59,14 @@ namespace MortensKomeback
             }
         }
 
-        /*
-        private float speed;
-        private Vector2 velocity;
+        
         protected void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             position += ((velocity * speed) * deltaTime);
         }
-        */
+        
 
         public bool IsColliding(GameObject other)
         {

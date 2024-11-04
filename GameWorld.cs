@@ -1,6 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
@@ -8,6 +13,8 @@ namespace MortensKomeback
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private List<GameObject> gameObjects;
+        private List<GameObject> newGameObjects;
 
         public GameWorld()
         {
@@ -45,6 +52,35 @@ namespace MortensKomeback
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(_spriteBatch);
+            }
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Update(gameTime);
+
+                /*
+            foreach (GameObject other in gameObjects)
+            {
+                if (gameObject is Player && other is Enemy)
+                {
+                    gameObject.CheckCollision(other);
+                    other.CheckCollision(gameObject);
+                }
+                if (gameObject is Laser && other is Enemy)
+                {
+                    gameObject.CheckCollision(other);
+                    other.CheckCollision(gameObject);
+                }
+            }
+                */
+
+            }
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
