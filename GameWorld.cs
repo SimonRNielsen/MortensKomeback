@@ -13,8 +13,14 @@ namespace MortensKomeback
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private List<GameObject> gameObjects;
-        private List<GameObject> newGameObjects;
+        private List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> newGameObjects = new List<GameObject>();
+        private static Camera2D camera;
+
+        /// <summary>
+        /// Property to get/set the position of the camera, in this case relative to the players position
+        /// </summary>
+        public static Camera2D Camera { get => camera; set => camera = value; }
 
         public GameWorld()
         {
@@ -33,6 +39,7 @@ namespace MortensKomeback
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
 
             // TODO: use this.Content to load your game content here
         }
@@ -52,7 +59,7 @@ namespace MortensKomeback
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
+            _spriteBatch.Begin(transformMatrix: camera.GetTransformation(), samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
 
             foreach (GameObject gameObject in gameObjects)
             {
