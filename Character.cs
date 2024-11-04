@@ -10,6 +10,7 @@ namespace MortensKomeback
 {
     public abstract class Character : GameObject
     {
+
         public override void LoadContent(ContentManager content)
         {
             throw new NotImplementedException();
