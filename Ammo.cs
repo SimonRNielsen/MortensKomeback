@@ -47,12 +47,14 @@ namespace MortensKomeback
 
             if (gameObject is Surface)
             {
+                this.collided = true;
                 timer = 0f;
                 this.sprite = this.sprites[1];
                 this.rotation = 0f;
             }
             else if (gameObject is Enemy)
             {
+                this.collided = true;
                 timer = 0f;
                 this.sprite = this.sprites[1];
                 if (flipped)
