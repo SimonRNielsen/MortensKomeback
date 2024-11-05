@@ -44,27 +44,35 @@ namespace MortensKomeback
 
         public override void OnCollision(GameObject gameObject)
         {
+            try
+            {
 
-            if (gameObject is Surface)
-            {
-                this.collided = true;
-                timer = 0f;
-                this.sprite = this.sprites[1];
-                this.rotation = 0f;
+                if (gameObject is Surface)
+                {
+                    this.collided = true;
+                    timer = 0f;
+                    this.sprite = this.sprites[1];
+                    this.rotation = 0f;
+                }
+                else if (gameObject is Enemy)
+                {
+                    this.collided = true;
+                    timer = 0f;
+                    this.sprite = this.sprites[1];
+                    if (flipped)
+                    {
+                        this.rotation = 0.25f;
+                    }
+                    else
+                    {
+                        this.rotation = -0.25f;
+                    }
+                }
+
             }
-            else if (gameObject is Enemy)
+            catch (IndexOutOfRangeException)
             {
-                this.collided = true;
-                timer = 0f;
-                this.sprite = this.sprites[1];
-                if (flipped)
-                {
-                    this.rotation = 0.25f;
-                }
-                else
-                {
-                    this.rotation = -0.25f;
-                }
+
             }
         }
 
@@ -72,26 +80,28 @@ namespace MortensKomeback
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-
-            if (flipped)
+            if (!collided)
             {
-                this.rotation += -0.35f;
-            }
-            else
-            {
-                this.rotation += 0.35f;
-            }
-            if (timer > 1)
-            {
-                this.position.Y += 1;
-            }
-            if (timer > 2)
-            {
-                this.position.Y += 1;
-            }
-            if (timer > 3)
-            {
-                this.position.Y += 2;
+                if (flipped)
+                {
+                    this.rotation += -0.35f;
+                }
+                else
+                {
+                    this.rotation += 0.35f;
+                }
+                if (timer > 1)
+                {
+                    this.position.Y += 1;
+                }
+                if (timer > 2)
+                {
+                    this.position.Y += 1;
+                }
+                if (timer > 3)
+                {
+                    this.position.Y += 2;
+                }
             }
             if (collided && timer > collisionTimer)
             {
