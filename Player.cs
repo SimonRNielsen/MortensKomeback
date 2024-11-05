@@ -19,6 +19,10 @@ namespace MortensKomeback
         private SoundEffect takeDamageSound;
         private bool canShoot = true;
         private bool canJump = true;
+        private bool flipped = false;
+
+        public Texture2D[] AmmoSprites { get => ammoSprites; set => ammoSprites = value; }
+        public bool Flipped { get => flipped; set => flipped = value; }
 
         #endregion
 
@@ -36,7 +40,7 @@ namespace MortensKomeback
             this.position.Y = 0;
             this.speed = 300f;
             this.fps = 15f;
-            this.health = 3;
+            this.Health = 3;
             this.layer = 1;
             this.scale = 1;
 
@@ -48,7 +52,9 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("morten_sprite");
+            Sprite = content.Load<Texture2D>("morten_sprite");
+            AmmoSprites = new Texture2D[1];
+            AmmoSprites[0] = content.Load<Texture2D>("testAmmo");
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -75,12 +81,14 @@ namespace MortensKomeback
             //If a is pressed
             if (keyState.IsKeyDown(Keys.A))
             {
+                Flipped = true;
                 //Move left
                 velocity += new Vector2(-1, 0);
             }
             //If d is pressed
             if (keyState.IsKeyDown(Keys.D))
             {
+                Flipped = false;
                 //Move right
                 velocity += new Vector2(+1, 0);
             }
@@ -120,7 +128,7 @@ namespace MortensKomeback
         /// </summary>
         private void Shoot()
         {
-
+            GameWorld.newGameObjects.Add(new Ammo(this));
         }
         /// <summary>
         /// Makes the player jump
