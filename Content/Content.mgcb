@@ -90,3 +90,9 @@
 /processorParam:TextureFormat=Color
 /build:goose5.png
 
+#begin gooseSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gooseSound.wav
+
