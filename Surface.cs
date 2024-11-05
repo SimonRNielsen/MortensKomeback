@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
-//using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,9 +49,8 @@ namespace MortensKomeback
 
 
             //Default sprite
-            this.sprite = sprites[0];
+            this.sprite = sprites[numberSprite];
             collisionBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
-
         }
 
 
@@ -62,7 +60,5 @@ namespace MortensKomeback
         }
 
         #endregion
-
-
     }
 }
