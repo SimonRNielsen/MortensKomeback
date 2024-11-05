@@ -13,11 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Goose - Sound Effect ProSounds.mp4
-/importer:H264Importer
-/processor:VideoProcessor
-/build:Goose - Sound Effect ProSounds.mp4
-
 #begin goose1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -77,4 +72,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:goose5.png
+
+#begin gooseSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gooseSound.wav
 

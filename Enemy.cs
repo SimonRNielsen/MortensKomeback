@@ -32,7 +32,7 @@ namespace MortensKomeback
             
 
             //Indlæs Lyd
-            honkSound = content.Load<SoundEffect>("Goose Sound Effect ProSounds");
+            honkSound = content.Load<SoundEffect>("gooseSound");
         }
 
         public override void OnCollision(GameObject gameObject)
