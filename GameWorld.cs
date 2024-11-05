@@ -36,7 +36,10 @@ namespace MortensKomeback
             gameObjects.Add(new CharacterGenerator());
             base.Initialize();
 
-
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
+            //_graphics.IsFullScreen = true;
+            _graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
@@ -76,6 +79,14 @@ namespace MortensKomeback
                 */
 
             }
+            foreach (GameObject newGameObject in newGameObjects)
+            {
+                newGameObject.LoadContent(Content);
+                gameObjects.Add(newGameObject);
+            }
+            newGameObjects.Clear();
+
+            gameObjects.RemoveAll(gameObject => gameObject.Health < 1);
 
             base.Update(gameTime);
         }
