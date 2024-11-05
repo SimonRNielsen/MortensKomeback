@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+//using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +18,8 @@ namespace MortensKomeback
         private Texture2D sprite;
         private Texture2D[] sprites;
         private Vector2 position;
+        private Rectangle collisionBox;
+        private int numberSprite; //Which sprite is going to be used
 
         #endregion
 
@@ -26,7 +28,7 @@ namespace MortensKomeback
         #endregion
 
         #region constructor
-        public Surface(GraphicsDeviceManager graphics, Vector2 position)
+        public Surface(GraphicsDeviceManager graphics, Vector2 position, int numberSprite)
         {
             this._graphics = graphics;
             this.position.X = position.X;
@@ -49,7 +51,7 @@ namespace MortensKomeback
 
             //Default sprite
             this.sprite = sprites[0];
-            collisionBox = new Rectangle((int)position.X, (int)position.Y, Sprite.Width, Sprite.Height);
+            collisionBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
 
         }
 
