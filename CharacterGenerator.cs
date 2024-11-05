@@ -10,6 +10,12 @@ using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
+    //TODO:
+    // - Add text, and override draw
+    // - Test with more sprites. 
+    // 
+
+
     /// <summary>
     /// A class for the special GameObject CharacterGenerator. It is used, to make the player choose a sprite for the player
     /// character, and then to instantiate a player GameObject, with the chosen sprite. 
@@ -25,7 +31,7 @@ namespace MortensKomeback
         public CharacterGenerator()
         {
             this.layer = 1;
-            this.health = 3;
+            this.health = 1;
             this.origin = new Vector2(0, 0);
             this.scale = 1;
         }
@@ -53,6 +59,11 @@ namespace MortensKomeback
             HandleInput();
         }
 
+        public override Draw()
+        {
+
+        }
+
         private void AddPlayer()
         {
             GameWorld.newGameObjects.Add(new Player(this.sprite));
@@ -65,12 +76,12 @@ namespace MortensKomeback
             //If a is pressed
             if (keyState.IsKeyDown(Keys.A))
             {
-                if (spriteIndex < sprites.Length-1)
+                if (spriteIndex < sprites.Length - 1)
                 {
                     spriteIndex++;
-                        sprite = sprites[spriteIndex];
+                    sprite = sprites[spriteIndex];
                 }
-          
+
             }
             //If d is pressed
             if (keyState.IsKeyDown(Keys.D))
@@ -87,8 +98,9 @@ namespace MortensKomeback
             //If enter is pressed, the player will shoot
             if (keyState.IsKeyDown(Keys.P))
             {
-                AddPlayer();
-                this.health = 0;
+                    AddPlayer();
+                    this.health = 0;
+                
             }
 
         }

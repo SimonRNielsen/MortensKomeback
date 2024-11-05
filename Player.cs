@@ -52,7 +52,6 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            Sprite = content.Load<Texture2D>("morten_sprite");
             AmmoSprites = new Texture2D[1];
             AmmoSprites[0] = content.Load<Texture2D>("testAmmo");
           //  sprite = content.Load<Texture2D>("morten_sprite");
