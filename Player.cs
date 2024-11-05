@@ -82,12 +82,14 @@ namespace MortensKomeback
             if (keyState.IsKeyDown(Keys.A))
             {
                 Flipped = true;
+                spriteEffectIndex = 1;
                 //Move left
                 velocity += new Vector2(-1, 0);
             }
             //If d is pressed
             if (keyState.IsKeyDown(Keys.D))
             {
+                spriteEffectIndex = 0;
                 Flipped = false;
                 //Move right
                 velocity += new Vector2(+1, 0);
