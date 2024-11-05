@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
-    internal class Surface : Environment
+    internal class Surface : GameObject
     {
         #region field
         private GraphicsDeviceManager _graphics;
@@ -30,6 +30,7 @@ namespace MortensKomeback
             this.position.X = position.X;
             this.position.Y = position.Y;
             this.layer = 1f;
+            this.numberSprite = numberSprite;
         }
 
         #endregion
@@ -47,7 +48,7 @@ namespace MortensKomeback
 
 
             //Default sprite
-            this.sprite = sprites[numberSprite];
+            this.sprite = sprites[numberSprite-1];
             collisionBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }
 
@@ -60,6 +61,10 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             //throw new NotImplementedException();
+        }
+        public static Surface Create(GraphicsDeviceManager graphics,float x, float y, int spriteId)
+        {
+            return new Surface(graphics, new Vector2(x, y), spriteId);
         }
 
         #endregion

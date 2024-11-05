@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MortensKomeback
 {
-    internal class Background : Environment
+    internal class Background : GameObject
     {
         #region field
         private GraphicsDeviceManager _graphics;

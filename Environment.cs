@@ -1,61 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace MortensKomeback
 {
-    public abstract class Environment : GameObject
+    public class Environment
     {
+        //Environment is the layout for the level and not a GameObject 
         #region field
         private GraphicsDeviceManager _graphics;
 
-        private List<Surface> tiles = new List<Surface>();
+        private List<GameObject> surfaces = new List<GameObject>();
+
 
         #endregion
 
         #region properties
+        public List<GameObject> Surfaces { get => surfaces; set => surfaces = value; }
 
         #endregion
 
+        #region constructor
+
+        public Environment(GraphicsDeviceManager graphics)
+        {
+            surfaces.Add(new Background(_graphics));
+            //AddSurface(200f, 400f, 2);
+            //AddSurface(400f, 400f, 4);
+            //tiles.Add(new Surface(graphics, new Vector2(400f, 200f), 2));
+
+            AddSurfaces(200f, 400f, 2, 3);
+
+            AddSurface(600f, 300f, 2);
+        }
+        #endregion
 
         #region method
-        //public void AddTile(Vector2 position, int numberSprite)
-        //{
-        //    tiles.Add(new Surface(_graphics, position, numberSprite));
-        //}
 
-        public override void OnCollision(GameObject gameObject)
+        private void AddSurface(float x, float y, int spriteId)
         {
-
+            surfaces.Add(Surface.Create(_graphics, x, y, spriteId));
         }
 
-        public override void LoadContent(ContentManager content)
+        private void AddSurfaces(float x, float y, int spriteId, int times)
         {
-            tiles.Add(new Surface(_graphics,  new Vector2(90f, 90f), 3));
+            for (int i = 0; i < times; i++)
+            {
+                AddSurface(x * i, y, spriteId);
+            }
         }
-
-        public override void Update(GameTime gameTime)
-        {
-
-        }
-
-        //public List<Surface> GetTiles()
-        //{
-        //    tiles.Add(new Surface(_graphics, new Vector2(90f, 90f), 3));
-
-
-        //    return tiles;
-        //}
 
         #endregion
-
-
     }
+
 }
+
