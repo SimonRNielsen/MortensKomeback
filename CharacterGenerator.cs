@@ -24,6 +24,8 @@ namespace MortensKomeback
     {
         #region Fields
         private int spriteIndex = 0;
+        private SpriteFont standardFont;
+        private string chosenMortenText;
 
         #endregion
 
@@ -43,9 +45,11 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("morten_sprite");
-            sprites = new Texture2D[1];
-            sprites[0] = sprite;
+            standardFont = content.Load<SpriteFont>("standardSpriteFont");
+            sprites = new Texture2D[2];
+            sprites[0] = content.Load<Texture2D>("morten_sprite");
+            sprites[1] = content.Load<Texture2D>("morten_sprite2");
+            sprite = sprites[0];
 
         }
 
@@ -57,10 +61,15 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             HandleInput();
+            SetChosenMortenText();
         }
 
-        public override Draw()
+        public override void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
+            spriteBatch.DrawString(standardFont, "Press a or d to choose between your Morten!", new Vector2(50, -250), Color.Yellow, 0f, Vector2.Zero,3, SpriteEffects.None, 0 );
+            spriteBatch.DrawString(standardFont, "Press p when you are done creating your Morten, and want start the game", new Vector2(-100, -200), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, chosenMortenText, new Vector2(-100, sprite.Height+15), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
 
         }
 
@@ -80,6 +89,7 @@ namespace MortensKomeback
                 {
                     spriteIndex++;
                     sprite = sprites[spriteIndex];
+                   // SetChosenMortenText();
                 }
 
             }
@@ -90,6 +100,7 @@ namespace MortensKomeback
                 {
                     spriteIndex--;
                     sprite = sprites[spriteIndex];
+                    //SetChosenMortenText();
                 }
 
 
@@ -103,7 +114,20 @@ namespace MortensKomeback
                 
             }
 
+
         }
+            private void SetChosenMortenText()
+            {
+            switch (spriteIndex)
+            {
+                case 0:
+                    chosenMortenText = "Undercover Morten";
+                    break;
+                case 1:
+                    chosenMortenText = "PURPLE! Undercover Morten";
+                    break;
+            }
+            }
 
         #endregion
     }
