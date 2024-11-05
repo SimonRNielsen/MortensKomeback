@@ -16,6 +16,8 @@ namespace MortensKomeback
         #region field
         private GraphicsDeviceManager _graphics;
 
+        private List<Surface> tiles = new List<Surface>();
+
         #endregion
 
         #region properties
@@ -36,7 +38,7 @@ namespace MortensKomeback
 
         public override void LoadContent(ContentManager content)
         {
-            //tiles.Add(new Surface(_graphics,  new Vector2(90f, 90f), 3));
+            tiles.Add(new Surface(_graphics,  new Vector2(90f, 90f), 3));
         }
 
         public override void Update(GameTime gameTime)
@@ -44,7 +46,13 @@ namespace MortensKomeback
 
         }
 
+        //public List<Surface> GetTiles()
+        //{
+        //    tiles.Add(new Surface(_graphics, new Vector2(90f, 90f), 3));
 
+
+        //    return tiles;
+        //}
 
         #endregion
 
