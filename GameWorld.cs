@@ -32,7 +32,8 @@ namespace MortensKomeback
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            gameObjects.Add(new Player());
+            //gameObjects.Add(new Player());
+            gameObjects.Add(new CharacterGenerator());
             base.Initialize();
 
 

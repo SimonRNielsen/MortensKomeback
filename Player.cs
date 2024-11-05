@@ -30,7 +30,7 @@ namespace MortensKomeback
         /// <summary>
         /// The constructor for the player
         /// </summary>
-        public Player()
+        public Player(Texture2D sprite)
         {
             this.position.X = 0;
             this.position.Y = 0;
@@ -39,7 +39,7 @@ namespace MortensKomeback
             this.health = 3;
             this.layer = 1;
             this.scale = 1;
-
+            this.sprite = sprite;
         }
 
 
@@ -48,7 +48,7 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("morten_sprite");
+          //  sprite = content.Load<Texture2D>("morten_sprite");
         }
 
         public override void OnCollision(GameObject gameObject)
