@@ -34,12 +34,12 @@ namespace MortensKomeback
         protected void Gravity(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (surfaceContact || position.Y > 300) //|| and after, is because we don't yet have surfaces.
-                velocity += new Vector2(0, 0);
+            if (surfaceContact || position.Y>300) //|| and after, is because we don't yet have surfaces.
+            velocity += new Vector2(0, 0);
             else
             {
                 velocity += new Vector2(0, 1);
-                position.Y += velocity.Y * speed * deltaTime;
+                position.Y += velocity.Y*speed*deltaTime;
             }
         }
 
