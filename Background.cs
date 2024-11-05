@@ -37,7 +37,7 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("background tester");
+            sprite = content.Load<Texture2D>("Sprite\\tile1");
         }
 
         public override void OnCollision(GameObject gameObject)

@@ -17,7 +17,7 @@ namespace MortensKomeback
         protected Vector2 position;
         protected Vector2 origin;
         protected float fps;
-        protected float scale;
+        protected float scale = 1;
         protected float layer;
         protected float rotation;
         protected SoundEffect deathSoundEffect;
