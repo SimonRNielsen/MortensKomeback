@@ -14,9 +14,6 @@ namespace MortensKomeback
     {
         #region field
         private GraphicsDeviceManager _graphics;
-        //private Texture2D sprite;
-        //private Texture2D[] sprites;
-        //private Vector2 position;
         private Rectangle collisionBox;
         private int numberSprite; //Which sprite is going to be used
 
@@ -32,6 +29,7 @@ namespace MortensKomeback
             this._graphics = graphics;
             this.position.X = position.X;
             this.position.Y = position.Y;
+            this.layer = 1f;
         }
 
         #endregion
@@ -44,7 +42,7 @@ namespace MortensKomeback
 
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("Sprite\\tile" + i);
+                sprites[i] = content.Load<Texture2D>("Sprite\\tile" + (i + 1));
             }
 
 
@@ -63,25 +61,6 @@ namespace MortensKomeback
         {
             //throw new NotImplementedException();
         }
-
-        //public string selectSprite(int number)
-        //{
-        //    switch (number)
-        //    {
-        //        case 1:
-        //            return "Sprite\\tile1";
-        //        case 2:
-        //            return "Sprite\\tile2";
-        //        case 3:
-        //            return "Sprite\\tile3";
-        //        case 4:
-        //            return "Sprite\\tile4";
-        //        case 5:
-        //            return "Sprite\\tile5";
-        //        default:
-        //            return "Sprite\\tile6";
-        //    }
-        //}
 
         #endregion
     }

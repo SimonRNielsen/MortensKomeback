@@ -15,6 +15,7 @@ namespace MortensKomeback
         private SpriteBatch _spriteBatch;
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<GameObject> newGameObjects = new List<GameObject>();
+        private Environment envi;
 
         public GameWorld()
         {
@@ -27,7 +28,6 @@ namespace MortensKomeback
         {
             // TODO: Add your initialization logic here
 
-            //gameObjects.Add(new Background(_graphics));
 
             base.Initialize();
         }
