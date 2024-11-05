@@ -97,4 +97,8 @@ namespace MortensKomeback
             base.Draw(gameTime);
         }
     }
+
+    internal class Camera2D
+    {
+    }
 }

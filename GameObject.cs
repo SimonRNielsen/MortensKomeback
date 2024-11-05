@@ -61,13 +61,13 @@ namespace MortensKomeback
             }
         }
 
-        
+
         protected void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             position += ((velocity * speed) * deltaTime);
         }
-        
+
 
         public bool IsColliding(GameObject other)
         {
