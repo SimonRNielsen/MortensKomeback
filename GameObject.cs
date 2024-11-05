@@ -18,7 +18,7 @@ namespace MortensKomeback
         protected Vector2 origin;
         protected Vector2 velocity;
         protected float fps;
-        protected float scale;
+        protected float scale = 1f;
         protected float layer;
         protected float speed;
         protected float rotation;
@@ -26,14 +26,20 @@ namespace MortensKomeback
         protected SoundEffect deathSoundEffect;
         protected int health;
         private int currentIndex;
-
+        protected int spriteEffectIndex;
+        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[2] { SpriteEffects.None, SpriteEffects.FlipHorizontally }; 
+        
 
         public Rectangle CollisionBox
         {
-            get { return new Rectangle((int)Position.X - (sprite.Width / 2), (int)Position.Y - (sprite.Height / 2), sprite.Width, sprite.Height); }
+            get { return new Rectangle((int)Position.X - (Sprite.Width / 2), (int)Position.Y - (Sprite.Height / 2), Sprite.Width, Sprite.Height); }
         }
 
         public Vector2 Position { get => position; set => position = value; }
+
+        public Texture2D Sprite { get => sprite; set => sprite = value; }
+
+        public int Health { get => health; set => health = value; }
 
         public abstract void OnCollision(GameObject gameObject);
 
@@ -43,7 +49,7 @@ namespace MortensKomeback
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, Position, null, Color.White, rotation, new Vector2(sprite.Width / 2, sprite.Height / 2), scale, SpriteEffects.None, layer);
+            spriteBatch.Draw(Sprite, Position, null, Color.White, rotation, new Vector2(Sprite.Width / 2, Sprite.Height / 2), scale, objectSpriteEffects[spriteEffectIndex], layer);
         }
 
         protected void Animate(GameTime gameTime)
@@ -52,7 +58,7 @@ namespace MortensKomeback
 
             currentIndex = (int)(timeElapsed * fps);
 
-            sprite = sprites[currentIndex];
+            Sprite = sprites[currentIndex];
 
             if (currentIndex >= sprites.Length - 1)
             {

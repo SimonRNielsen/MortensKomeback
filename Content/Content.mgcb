@@ -13,23 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin morten_sprite.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:morten_sprite.png
-
-#begin Goose - Sound Effect ProSounds.mp4
-/importer:H264Importer
-/processor:VideoProcessor
-/build:Goose - Sound Effect ProSounds.mp4
-
 #begin goose1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -95,6 +78,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:gooseSound.wav
+
+#begin laserGreen16.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:laserGreen16.png;testAmmo.png
 
 #begin morten_sprite.png
 /importer:TextureImporter
