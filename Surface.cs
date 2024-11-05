@@ -44,7 +44,7 @@ namespace MortensKomeback
 
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("tile" + i);
+                sprites[i] = content.Load<Texture2D>("Sprite\\tile" + i);
             }
 
 
@@ -63,6 +63,25 @@ namespace MortensKomeback
         {
             //throw new NotImplementedException();
         }
+
+        //public string selectSprite(int number)
+        //{
+        //    switch (number)
+        //    {
+        //        case 1:
+        //            return "Sprite\\tile1";
+        //        case 2:
+        //            return "Sprite\\tile2";
+        //        case 3:
+        //            return "Sprite\\tile3";
+        //        case 4:
+        //            return "Sprite\\tile4";
+        //        case 5:
+        //            return "Sprite\\tile5";
+        //        default:
+        //            return "Sprite\\tile6";
+        //    }
+        //}
 
         #endregion
     }

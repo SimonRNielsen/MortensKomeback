@@ -15,9 +15,11 @@ namespace MortensKomeback
     {
         #region field
         private GraphicsDeviceManager _graphics;
-        private Texture2D sprite;
+        //private Texture2D sprite;
 
-        private Background background; 
+        private List<Surface> tiles = new List<Surface>();
+
+        private Background background;
 
         #endregion
 
@@ -31,8 +33,30 @@ namespace MortensKomeback
         #endregion
 
         #region method
+        //public void AddTile(Vector2 position, int numberSprite)
+        //{
+        //    tiles.Add(new Surface(_graphics, position, numberSprite));
+        //}
+
+        public override void OnCollision(GameObject gameObject)
+        {
+
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            tiles.Add(new Surface(_graphics,  new Vector2(90f, 90f), 3));
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
+        }
+
 
 
         #endregion
+
+
     }
 }
