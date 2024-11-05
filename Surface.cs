@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
-    internal class Surface
+    internal class Surface : Environment
     {
         #region field
         private GraphicsDeviceManager _graphics;
-        private Texture2D sprite;
-        private Texture2D[] sprites;
-        private Vector2 position;
+        //private Texture2D sprite;
+        //private Texture2D[] sprites;
+        //private Vector2 position;
         private Rectangle collisionBox;
         private int numberSprite; //Which sprite is going to be used
 
@@ -38,7 +38,7 @@ namespace MortensKomeback
 
         #region method
 
-        public void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             sprites = new Texture2D[6];
 
@@ -54,9 +54,14 @@ namespace MortensKomeback
         }
 
 
-        public void OnCollision(GameObject other)
+        public override void OnCollision(GameObject gameObject)
         {
-            ///Nothing will happen
+            //throw new NotImplementedException();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            //throw new NotImplementedException();
         }
 
         #endregion

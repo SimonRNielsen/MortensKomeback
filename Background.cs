@@ -9,11 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MortensKomeback
 {
-    internal class Background
+    internal class Background : Environment
     {
         #region field
         private GraphicsDeviceManager _graphics;
-        private Texture2D sprite;
+        //private Texture2D sprite;
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace MortensKomeback
         public Background(GraphicsDeviceManager graphics)
         {
             this._graphics = graphics;
-            GameObject.layer = 0f;
+            this.layer = 0f;
         }
 
         #endregion
@@ -35,9 +35,19 @@ namespace MortensKomeback
         /// Loading background
         /// </summary>
         /// <param name="content"></param>
-        public void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("background tester");
+        }
+
+        public override void OnCollision(GameObject gameObject)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            //throw new NotImplementedException();
         }
 
         #endregion
