@@ -10,6 +10,9 @@ namespace MortensKomeback
 {
     public abstract class Character : GameObject
     {
+        protected bool surfaceContact = false;
+
+
         public override void LoadContent(ContentManager content)
         {
             throw new NotImplementedException();
@@ -17,15 +20,28 @@ namespace MortensKomeback
 
         public override void OnCollision(GameObject gameObject)
         {
-            throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            Gravity(gameTime);
         }
 
+        /// <summary>
+        /// Pulls the object downwards if it isn't colliding with a object of the surface class.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        protected void Gravity(GameTime gameTime)
+        {
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (surfaceContact || position.Y > 300) //|| and after, is because we don't yet have surfaces.
+                velocity += new Vector2(0, 0);
+            else
+            {
+                velocity += new Vector2(0, 1);
+                position.Y += velocity.Y * speed * deltaTime;
+            }
+        }
 
-        
     }
 }

@@ -16,15 +16,17 @@ namespace MortensKomeback
         protected Texture2D[] sprites;
         protected Vector2 position;
         protected Vector2 origin;
+        protected Vector2 velocity;
         protected float fps;
         protected float scale;
         protected float layer;
+        protected float speed;
         protected float rotation;
-        protected SoundEffect deathSoundEffect;
-        private int currentIndex;
         private float timeElapsed;
-        private float speed;
-        private Vector2 velocity;
+        protected SoundEffect deathSoundEffect;
+        protected int health;
+        private int currentIndex;
+
 
         public Rectangle CollisionBox
         {
@@ -59,14 +61,13 @@ namespace MortensKomeback
             }
         }
 
-        
+
         protected void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             position += ((velocity * speed) * deltaTime);
         }
-        
+
 
         public bool IsColliding(GameObject other)
         {
