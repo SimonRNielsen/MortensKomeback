@@ -36,11 +36,11 @@ namespace MortensKomeback
         /// </summary>
         public Player()
         {
-            this.position.X = 0;
-            this.position.Y = 0;
+            this.position.X = 10;
+            this.position.Y = 10;
             this.speed = 300f;
             this.fps = 15f;
-            this.Health = 3;
+            this.Health = 20;
             this.layer = 1;
             this.scale = 1;
 

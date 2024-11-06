@@ -6,6 +6,7 @@ using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,21 +16,39 @@ namespace MortensKomeback
     {
         #region fields
         private SoundEffect honkSound;
-        //private SoundEffect takeDamageSound;
         private List<Texture2D> spriteEnemy = new List<Texture2D>();
-        //private string[] spriteEnemy = new string[] { "goose1", "goose2", "goose3", "goose4", "goose5" };
-        private Vector2 direction; //?
+        //private Texture2D[] enemySpriteArray = new Texture2D[];
+        private Vector2 direction;
+        protected static Random rnd = new Random();
+
         #endregion
+        /// <summary>
+        /// enemy constructor
+        /// </summary>
+        public Enemy()
+        {
+            this.position.X = 0;
+            this.position.Y = 0;
+            this.speed = 200f;
+           
+            this.fps = 15f;
+            this.Health = 3;
+            this.layer = 1;
+            this.scale = 1;
+            
+        }
 
 
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            //Indlæs animation frames
+            sprite = content.Load<Texture2D>("goose1");
+           
+
+            //Indlæs 
             spriteEnemy.Add(content.Load<Texture2D>("goose3"));
             spriteEnemy.Add(content.Load<Texture2D>("goose4"));
             spriteEnemy.Add(content.Load<Texture2D>("goose5"));
-            
 
             //Indlæs Lyd
             honkSound = content.Load<SoundEffect>("gooseSound");

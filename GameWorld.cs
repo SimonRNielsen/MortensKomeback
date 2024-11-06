@@ -33,6 +33,7 @@ namespace MortensKomeback
         {
             // TODO: Add your initialization logic here
             gameObjects.Add(new Player());
+            gameObjects.Add(new Enemy());
             base.Initialize();
 
             _graphics.PreferredBackBufferWidth = 1920;
