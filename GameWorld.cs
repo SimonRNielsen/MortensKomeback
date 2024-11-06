@@ -14,7 +14,13 @@ namespace MortensKomeback
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private List<GameObject> gameObjects = new List<GameObject>();
-        private List<GameObject> newGameObjects = new List<GameObject>();
+        public static List<GameObject> newGameObjects = new List<GameObject>();
+        private static Camera2D camera;
+
+        /// <summary>
+        /// Property to get/set the position of the camera, in this case relative to the players position
+        /// </summary>
+        public static Camera2D Camera { get => camera; set => camera = value; }
 
         public GameWorld()
         {
@@ -26,14 +32,19 @@ namespace MortensKomeback
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-
+            gameObjects.Add(new Player());
             base.Initialize();
+
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
+            //_graphics.IsFullScreen = true;
+            _graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
 
             gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
 
@@ -43,6 +54,8 @@ namespace MortensKomeback
             }
 
             // TODO: use this.Content to load your game content here
+            foreach (GameObject gameObj in gameObjects)
+            { gameObj.LoadContent(Content); }
         }
 
         protected override void Update(GameTime gameTime)
@@ -50,6 +63,7 @@ namespace MortensKomeback
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            // TODO: Add your update logic here
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Update(gameTime);
@@ -71,7 +85,14 @@ namespace MortensKomeback
                 */
 
             }
-            // TODO: Add your update logic here
+            foreach (GameObject newGameObject in newGameObjects)
+            {
+                newGameObject.LoadContent(Content);
+                gameObjects.Add(newGameObject);
+            }
+            newGameObjects.Clear();
+
+            gameObjects.RemoveAll(gameObject => gameObject.Health < 1);
 
             base.Update(gameTime);
         }
@@ -81,12 +102,13 @@ namespace MortensKomeback
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
+            _spriteBatch.Begin(transformMatrix: Camera.GetTransformation(), samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
 
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(_spriteBatch);
             }
+
 
             _spriteBatch.End();
 
