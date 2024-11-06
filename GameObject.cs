@@ -27,8 +27,8 @@ namespace MortensKomeback
         protected int health;
         private int currentIndex;
         protected int spriteEffectIndex;
-        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[2] { SpriteEffects.None, SpriteEffects.FlipHorizontally }; 
-        
+        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[2] { SpriteEffects.None, SpriteEffects.FlipHorizontally };
+
 
         public Rectangle CollisionBox
         {
@@ -47,7 +47,7 @@ namespace MortensKomeback
 
         public abstract void Update(GameTime gameTime);
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite, Position, null, Color.White, rotation, new Vector2(Sprite.Width / 2, Sprite.Height / 2), scale, objectSpriteEffects[spriteEffectIndex], layer);
         }

@@ -37,7 +37,7 @@ namespace MortensKomeback
         /// <summary>
         /// The constructor for the player
         /// </summary>
-        public Player()
+        public Player(Texture2D sprite)
         {
             this.position.X = 0;
             this.position.Y = 0;
@@ -46,7 +46,7 @@ namespace MortensKomeback
             this.Health = 3;
             this.layer = 1;
             this.scale = 1;
-
+            this.sprite = sprite;
         }
 
 
