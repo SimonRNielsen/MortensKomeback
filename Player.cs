@@ -20,6 +20,10 @@ namespace MortensKomeback
         private bool canShoot = true;
         private bool canJump = true;
         private bool flipped = false;
+        private int ammoHealth = 1;
+        private int ammoSprite = 0;
+        private float powerUpDuration = 30f;
+        private float timer;
 
         public Texture2D[] AmmoSprites { get => ammoSprites; set => ammoSprites = value; }
         public bool Flipped { get => flipped; set => flipped = value; }
@@ -53,8 +57,12 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
             Sprite = content.Load<Texture2D>("morten_sprite");
-            AmmoSprites = new Texture2D[1];
-            AmmoSprites[0] = content.Load<Texture2D>("testAmmo");
+            AmmoSprites = new Texture2D[5];
+            AmmoSprites[0] = content.Load<Texture2D>("egg1");
+            AmmoSprites[1] = content.Load<Texture2D>("egg2");
+            AmmoSprites[2] = content.Load<Texture2D>("groundegg0");
+            AmmoSprites[3] = content.Load<Texture2D>("groundegg1");
+            AmmoSprites[4] = content.Load<Texture2D>("groundegg2");
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -64,6 +72,12 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (timer >= powerUpDuration)
+            {
+                this.ammoHealth = 1;
+                this.ammoSprite = 0;
+            }
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0);
             HandleInput();
             Move(gameTime);
@@ -130,7 +144,7 @@ namespace MortensKomeback
         /// </summary>
         private void Shoot()
         {
-            GameWorld.newGameObjects.Add(new Ammo(this));
+            GameWorld.newGameObjects.Add(new Ammo(this, ammoHealth, ammoSprite));
         }
         /// <summary>
         /// Makes the player jump
@@ -138,6 +152,13 @@ namespace MortensKomeback
         private void Jump()
         {
             velocity -= new Vector2(0, +20);
+        }
+
+        public void OverPowered()
+        {
+            this.ammoSprite = 1;
+            this.ammoHealth = 3;
+            this.timer = 0f;
         }
 
         #endregion

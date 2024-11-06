@@ -12,14 +12,15 @@ namespace MortensKomeback
 {
     internal class Ammo : GameObject
     {
+        Random random = new Random();
         private float timer = 0f;
         private float collisionTimer = 4f;
         private bool collided = false;
         private bool flipped = false;
 
-        public Ammo(Player player)
+        public Ammo(Player player, int ammoHealth, int ammoSprite)
         {
-            this.Health = 1;
+            this.Health = ammoHealth;
             position.Y = player.Position.Y + 50;
             if (player.Flipped)
             {
@@ -34,7 +35,7 @@ namespace MortensKomeback
             }
             this.speed = 500f;
             this.sprites = player.AmmoSprites;
-            this.sprite = sprites[0];
+            this.sprite = sprites[ammoSprite];
         }
 
         public override void LoadContent(ContentManager content)
@@ -46,33 +47,42 @@ namespace MortensKomeback
         {
             try
             {
-
-                if (gameObject is Surface)
+                if (this.health == 1)
                 {
-                    this.collided = true;
-                    timer = 0f;
-                    this.sprite = this.sprites[1];
-                    this.rotation = 0f;
-                }
-                else if (gameObject is Enemy)
-                {
-                    this.collided = true;
-                    timer = 0f;
-                    this.sprite = this.sprites[1];
-                    if (flipped)
-                    {
-                        this.rotation = 0.25f;
-                    }
-                    else
-                    {
-                        this.rotation = -0.25f;
-                    }
-                }
 
+                    if (gameObject is Surface)
+                    {
+                        this.collided = true;
+                        timer = 0f;
+                        this.sprite = this.sprites[5];
+                        this.rotation = 0f;
+                    }
+                    else if (gameObject is Enemy)
+                    {
+                        gameObject.Health--;
+                        this.collided = true;
+                        timer = 0f;
+                        this.sprite = this.sprites[random.Next(3,5)];
+                        if (flipped)
+                        {
+                            this.rotation = 0.25f;
+                        }
+                        else
+                        {
+                            this.rotation = -0.25f;
+                        }
+                    }
+
+                }
+                else
+                {
+                    gameObject.Health--;
+                    this.health--;
+                }
             }
             catch (IndexOutOfRangeException)
             {
-
+                this.health = 0;
             }
         }
 
@@ -90,6 +100,7 @@ namespace MortensKomeback
                 {
                     this.rotation += 0.35f;
                 }
+
                 if (timer > 1)
                 {
                     this.position.Y += 1;
