@@ -47,37 +47,47 @@ namespace MortensKomeback
         {
             try
             {
-                if (this.health == 1)
+                if (gameObject is Surface || gameObject is Enemy)
                 {
-
-                    if (gameObject is Surface)
+                    if (this.health == 1)
                     {
-                        this.collided = true;
-                        timer = 0f;
-                        this.sprite = this.sprites[5];
-                        this.rotation = 0f;
+
+                        if (gameObject is Surface)
+                        {
+                            this.collided = true;
+                            timer = 0f;
+                            this.sprite = this.sprites[4];
+                            this.rotation = 0f;
+                        }
+                        else if (gameObject is Enemy)
+                        {
+                            gameObject.Health--;
+                            this.collided = true;
+                            timer = 0f;
+                            this.sprite = this.sprites[random.Next(2, 4)];
+                            if (flipped)
+                            {
+                                this.rotation = 0.25f;
+                            }
+                            else
+                            {
+                                this.rotation = -0.25f;
+                            }
+                        }
+
                     }
                     else if (gameObject is Enemy)
                     {
                         gameObject.Health--;
+                        this.health--;
+                    }
+                    else
+                    {
                         this.collided = true;
                         timer = 0f;
-                        this.sprite = this.sprites[random.Next(3, 5)];
-                        if (flipped)
-                        {
-                            this.rotation = 0.25f;
-                        }
-                        else
-                        {
-                            this.rotation = -0.25f;
-                        }
+                        this.sprite = this.sprites[4];
+                        this.rotation = 0f;
                     }
-
-                }
-                else
-                {
-                    gameObject.Health--;
-                    this.health--;
                 }
             }
             catch (IndexOutOfRangeException)
