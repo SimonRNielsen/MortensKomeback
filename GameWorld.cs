@@ -60,8 +60,6 @@ namespace MortensKomeback
             // TODO: Add your update logic here
             foreach (GameObject gameObject in gameObjects)
             {
-
-
                 foreach (GameObject other in gameObjects)
                 {
                     if (gameObject is Player && other is Enemy)
@@ -81,9 +79,7 @@ namespace MortensKomeback
                         other.CheckCollision(gameObject);
                     }
                 }
-
                 gameObject.Update(gameTime);
-
             }
             foreach (GameObject newGameObject in newGameObjects)
             {
