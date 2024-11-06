@@ -50,7 +50,7 @@ namespace MortensKomeback
             }
 
             //Choosen sprite
-            this.sprite = sprites[numberSprite - 1];
+            this.Sprite = sprites[numberSprite - 1];
         }
 
 

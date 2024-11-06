@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
 
 namespace MortensKomeback
 {
@@ -24,8 +25,14 @@ namespace MortensKomeback
         public Background(GraphicsDeviceManager graphics)
         {
             this._graphics = graphics;
-            this.layer = 1f;
+            this.layer = 0f;
             this.scale = 1f;
+            this.position.X = 1;
+            this.position.Y = 1;
+
+
+            //this.layer = 0.9f;
+            this.health = 1;
         }
 
         #endregion
@@ -37,7 +44,7 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
+            Sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
         }
 
         public override void OnCollision(GameObject gameObject)

@@ -29,7 +29,7 @@ namespace MortensKomeback
             this._graphics = graphics;
             this.position.X = position.X;
             this.position.Y = position.Y;
-            this.layer = 0.1f;
+            this.layer = 0.9f;
             this.spriteID = spriteID;
             this.health = 1;
         }
@@ -48,7 +48,7 @@ namespace MortensKomeback
             }
 
             //Choosen sprite
-            this.sprite = sprites[spriteID-1];
+            this.Sprite = sprites[spriteID-1];
         }
 
 

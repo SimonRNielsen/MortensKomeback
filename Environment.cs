@@ -34,15 +34,19 @@ namespace MortensKomeback
         {
             surfaces.Add(new Background(_graphics));
 
-            for (int i = 0; i < 66; i++)
-            {
-            AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight, 2);
-            }
+            //for (int i = 0; i < 66; i++)
+            //{
+            //AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight, 2);
+            //}
 
-            for (int i = 0; i < 5; i++)
-            {
-                AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight-tileHeight, 5);
-            }
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight-tileHeight, 5);
+            //}
+
+            AddSurface((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 2), 1);
+
+            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - tileHeight, 5, 66);
         }
         #endregion
 
@@ -54,13 +58,13 @@ namespace MortensKomeback
         }
 
 
-        //private void AddSurfaces(float x, float y, int spriteId, int times)
-        //{
-        //    for (int i = 0; i < times; i++)
-        //    {
-        //        AddSurface(x * i, y, spriteId);
-        //    }
-        //}
+        private void AddSurfaces(float x, float y, int spriteId, int times)
+        {
+            for (int i = 0; i < times; i++)
+            {
+                AddSurface(x * i, y, spriteId);
+            }
+        }
 
         private void AddAvSurface(float x, float y, int spriteId)
         {
