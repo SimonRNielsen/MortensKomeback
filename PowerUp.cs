@@ -58,12 +58,12 @@ namespace MortensKomeback
 
                 this.health--;
 
-                if (powerUpType == 1)
+                if (powerUpType == 0)
                 {
                     (gameObject as Player).OverPowered();
                 }
 
-                if (powerUpType == 2)
+                if (powerUpType == 1)
                 {
                     gameObject.Health = 3;
                 }

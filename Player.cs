@@ -22,8 +22,7 @@ namespace MortensKomeback
         private bool flipped = false;
         private int ammoHealth = 1;
         private int ammoSprite = 0;
-        private float powerUpDuration = 30f;
-        private float timer;
+        private int ammoCount = 10;
 
         public Texture2D[] AmmoSprites { get => ammoSprites; set => ammoSprites = value; }
         public bool Flipped { get => flipped; set => flipped = value; }
@@ -72,16 +71,18 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timer >= powerUpDuration)
+
+            if (ammoCount <= 0)
             {
                 this.ammoHealth = 1;
                 this.ammoSprite = 0;
             }
+
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0);
             HandleInput();
             Move(gameTime);
             base.Update(gameTime);
+
         }
         /// <summary>
         /// A method, that handles player input. WASD moves the player, and space makes it shoot. 
@@ -144,6 +145,10 @@ namespace MortensKomeback
         /// </summary>
         private void Shoot()
         {
+            if (ammoCount > 0)
+            {
+                ammoCount--;
+            }
             GameWorld.newGameObjects.Add(new Ammo(this, ammoHealth, ammoSprite));
         }
         /// <summary>
@@ -158,7 +163,7 @@ namespace MortensKomeback
         {
             this.ammoSprite = 1;
             this.ammoHealth = 3;
-            this.timer = 0f;
+            this.ammoCount += 10;
         }
 
         #endregion

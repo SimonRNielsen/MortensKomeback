@@ -21,16 +21,16 @@ namespace MortensKomeback
         public Ammo(Player player, int ammoHealth, int ammoSprite)
         {
             this.Health = ammoHealth;
-            position.Y = player.Position.Y + 50;
+            position.Y = player.Position.Y + 20;
             if (player.Flipped)
             {
-                position.X = player.Position.X;
+                position.X = player.Position.X - (player.Sprite.Width / 2);
                 this.velocity.X = -1f;
                 this.flipped = player.Flipped;
             }
             else
             {
-                position.X = player.Position.X + player.Sprite.Width;
+                position.X = player.Position.X + (player.Sprite.Width / 2);
                 this.velocity.X = 1;
             }
             this.speed = 500f;
@@ -62,7 +62,7 @@ namespace MortensKomeback
                         gameObject.Health--;
                         this.collided = true;
                         timer = 0f;
-                        this.sprite = this.sprites[random.Next(3,5)];
+                        this.sprite = this.sprites[random.Next(3, 5)];
                         if (flipped)
                         {
                             this.rotation = 0.25f;
@@ -92,6 +92,7 @@ namespace MortensKomeback
 
             if (!collided)
             {
+
                 if (flipped)
                 {
                     this.rotation += -0.35f;
@@ -113,13 +114,16 @@ namespace MortensKomeback
                 {
                     this.position.Y += 2;
                 }
+
+                this.Move(gameTime);
+
             }
+
             if (collided && timer > collisionTimer)
             {
                 this.Health--;
             }
 
-            this.Move(gameTime);
         }
     }
 }

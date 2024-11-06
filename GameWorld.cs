@@ -67,6 +67,7 @@ namespace MortensKomeback
                         gameObject.CheckCollision(other);
                         other.CheckCollision(gameObject);
                     }
+
                     if (gameObject is Player && other is Surface)
                     {
                         gameObject.CheckCollision(other);
@@ -74,6 +75,12 @@ namespace MortensKomeback
                     }
 
                     if (gameObject is Ammo && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
+                    if (gameObject is PowerUp && other is Player)
                     {
                         gameObject.CheckCollision(other);
                         other.CheckCollision(gameObject);
