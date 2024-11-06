@@ -1,6 +1,11 @@
-﻿
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MortensKomeback
 {
@@ -12,7 +17,7 @@ namespace MortensKomeback
 
         private List<GameObject> surfaces = new List<GameObject>();
 
-        private int tileHeight = 195-1;
+        private int tileHeight = 195 - 1;
         private int tileWidth = 206 - 1;
 
 
@@ -27,7 +32,7 @@ namespace MortensKomeback
 
         public Environment(GraphicsDeviceManager graphics)
         {
-            //surfaces.Add(new Background(_graphics));
+            surfaces.Add(new Background(_graphics));
 
             for (int i = 0; i < 66; i++)
             {
@@ -48,10 +53,6 @@ namespace MortensKomeback
             surfaces.Add(Surface.Create(_graphics, x, y, spriteId));
         }
 
-        private void AddAvSurface(float x, float y, int spriteId)
-        {
-            surfaces.Add(AvSurface.Create(_graphics, x, y));
-        }
 
         //private void AddSurfaces(float x, float y, int spriteId, int times)
         //{
@@ -61,6 +62,10 @@ namespace MortensKomeback
         //    }
         //}
 
+        private void AddAvSurface(float x, float y, int spriteId)
+        {
+            surfaces.Add(AvSurface.Create(_graphics, x, y));
+        }
         #endregion
     }
 

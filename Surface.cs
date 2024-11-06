@@ -14,8 +14,7 @@ namespace MortensKomeback
     {
         #region field
         private GraphicsDeviceManager _graphics;
-        private Rectangle collisionBox;
-        private int numberSprite; //Which sprite is going to be used
+        private int spriteID; //Which sprite is going to be used
 
 
         #endregion
@@ -25,13 +24,13 @@ namespace MortensKomeback
         #endregion
 
         #region constructor
-        public Surface(GraphicsDeviceManager graphics, Vector2 position, int numberSprite)
+        public Surface(GraphicsDeviceManager graphics, Vector2 position, int spriteID)
         {
             this._graphics = graphics;
             this.position.X = position.X;
             this.position.Y = position.Y;
             this.layer = 0.1f;
-            this.numberSprite = numberSprite;
+            this.spriteID = spriteID;
             this.health = 1;
         }
 
@@ -49,7 +48,7 @@ namespace MortensKomeback
             }
 
             //Choosen sprite
-            this.sprite = sprites[numberSprite-1];
+            this.sprite = sprites[spriteID-1];
         }
 
 
