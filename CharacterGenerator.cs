@@ -26,9 +26,11 @@ namespace MortensKomeback
         private int spriteIndex = 0;
         private SpriteFont standardFont;
         private string chosenMortenText;
-        private int generatorStage;
         private Texture2D[,] mortenSprites = new Texture2D[3, 3];
         private Vector2 mortenIndex;
+        private bool pressWASDAllowed = true;
+
+
 
         #endregion
 
@@ -39,7 +41,6 @@ namespace MortensKomeback
             this.health = 1;
             this.origin = new Vector2(0, 0);
             this.scale = 1;
-            generatorStage = 1;
         }
 
 
@@ -79,18 +80,9 @@ namespace MortensKomeback
         {
             base.Draw(spriteBatch);
             spriteBatch.DrawString(standardFont, "Press a or d to choose between your Morten!", new Vector2(50, -350), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, "Press w to enable weapon selection. Press s to enable outift selection", new Vector2(50, -300), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, "Press p when you are done creating your Morten, and want start the game", new Vector2(-100, -250), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, "Press w or s to choosen between your weapon!", new Vector2(50, -300), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, "Press p when you are done creating your Morten, and want to start the game", new Vector2(-100, -250), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
             spriteBatch.DrawString(standardFont, chosenMortenText, new Vector2(-100, sprite.Height + 5), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            if (generatorStage == 1)
-            {
-                spriteBatch.DrawString(standardFont, "Outfit selection:", new Vector2(-100, -200), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            }
-            else if (generatorStage == 2)
-            {
-                spriteBatch.DrawString(standardFont, "Weapon selection:", new Vector2(-100, -200), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-
-            }
         }
 
         private void AddPlayer()
@@ -103,61 +95,55 @@ namespace MortensKomeback
             KeyboardState keyState = Keyboard.GetState();//Get the current keyboard state
 
             //If a is pressed
-            if (keyState.IsKeyDown(Keys.A))
+            if (keyState.IsKeyDown(Keys.A) && pressWASDAllowed)
             {
-                if (generatorStage == 1)
+                pressWASDAllowed = false;
+
+                if (mortenIndex.Y < mortenSprites.GetLength(1) - 1)
                 {
-                    if (mortenIndex.Y < mortenSprites.GetLength(1)-1)
-                    {
-                        mortenIndex.Y++;
-                        sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
-                        // SetChosenMortenText();
-                    }
+                    mortenIndex.Y++;
+                    sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
+                    // SetChosenMortenText();
                 }
-                if (generatorStage == 2)
-                {
-                    if (mortenIndex.X < mortenSprites.GetLength(0)-1)
-                    {
-                        mortenIndex.X++;
-                        sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
-                        // SetChosenMortenText();
-                    }
-                }
+
 
             }
             //If d is pressed
-            if (keyState.IsKeyDown(Keys.D))
+            if (keyState.IsKeyDown(Keys.D) && pressWASDAllowed)
             {
-                if (generatorStage == 1)
+
+                pressWASDAllowed = false;
+                if (mortenIndex.Y > 0)
                 {
-                    if (mortenIndex.Y > 0)
-                    {
-                        mortenIndex.Y--;
-                        sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
-                        // SetChosenMortenText();
-                    }
+                    mortenIndex.Y--;
+                    sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
+                    // SetChosenMortenText();
                 }
-                if (generatorStage == 2)
-                {
-                    if (mortenIndex.X > 0)
-                    {
-                        mortenIndex.X--;
-                        sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
-                        // SetChosenMortenText();
-                    }
-                }
+
 
 
             }
             //If w is pressed, genrator stage is switched so the player can choose weapon
-            if (keyState.IsKeyDown(Keys.W))
+            if (keyState.IsKeyDown(Keys.W) && pressWASDAllowed)
             {
-                generatorStage = 2;
+                pressWASDAllowed = false;
+                if (mortenIndex.X > 0)
+                {
+                    mortenIndex.X--;
+                    sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
+                    // SetChosenMortenText();
+                }
             }
             //If s is pressed, generator stage is switched so the player can choose outfit
-            if (keyState.IsKeyDown(Keys.S))
+            if (keyState.IsKeyDown(Keys.S) && pressWASDAllowed)
             {
-                generatorStage = 1;
+                pressWASDAllowed = false;
+                if (mortenIndex.X < mortenSprites.GetLength(0) - 1)
+                {
+                    mortenIndex.X++;
+                    sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
+                    // SetChosenMortenText();
+                }
             }
 
             //If P is pressed, the generator is done, and the player will spawn
@@ -169,16 +155,24 @@ namespace MortensKomeback
 
             }
 
+            if (keyState.IsKeyUp(Keys.A) && keyState.IsKeyUp(Keys.D) && keyState.IsKeyUp(Keys.W) && keyState.IsKeyUp(Keys.S))
+            {
+                pressWASDAllowed = true;
+            }
+
         }
         private void SetChosenMortenText()
         {
-            switch (spriteIndex)
+            switch (mortenIndex.Y)
             {
                 case 0:
                     chosenMortenText = "Undercover Morten";
                     break;
                 case 1:
                     chosenMortenText = "PURPLE! Undercover Morten";
+                    break;
+                case 2:
+                    chosenMortenText = "Green! Undercover Morten";
                     break;
             }
         }
