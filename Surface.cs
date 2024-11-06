@@ -17,6 +17,7 @@ namespace MortensKomeback
         private Rectangle collisionBox;
         private int numberSprite; //Which sprite is going to be used
 
+
         #endregion
 
         #region properties
@@ -66,6 +67,7 @@ namespace MortensKomeback
         {
             return new Surface(graphics, new Vector2(x, y), spriteId);
         }
+
 
         #endregion
     }
