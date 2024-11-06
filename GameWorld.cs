@@ -33,7 +33,6 @@ namespace MortensKomeback
         {
             // TODO: Add your initialization logic here
             gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
-            gameObjects.Add(new Player());
             //gameObjects.Add(new Player());
             gameObjects.Add(new CharacterGenerator());
             base.Initialize();
