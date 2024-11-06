@@ -54,7 +54,7 @@ namespace MortensKomeback
                     {
                         this.collided = true;
                         timer = 0f;
-                        this.sprite = this.sprites[5];
+                        this.sprite = this.sprites[4];
                         this.rotation = 0f;
                     }
                     else if (gameObject is Enemy)
