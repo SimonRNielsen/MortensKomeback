@@ -32,6 +32,9 @@ namespace MortensKomeback
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
+            //gameObjects.Add(new Player());
+            gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
             base.Initialize();
@@ -60,24 +63,33 @@ namespace MortensKomeback
             // TODO: Add your update logic here
             foreach (GameObject gameObject in gameObjects)
             {
+                foreach (GameObject other in gameObjects)
+                {
+                    if (gameObject is Player && other is Enemy)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
+                    if (gameObject is Player && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
+                    if (gameObject is Ammo && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
+                    if (gameObject is PowerUp && other is Player)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+                }
                 gameObject.Update(gameTime);
-
-                /*
-            foreach (GameObject other in gameObjects)
-            {
-                if (gameObject is Player && other is Enemy)
-                {
-                    gameObject.CheckCollision(other);
-                    other.CheckCollision(gameObject);
-                }
-                if (gameObject is Laser && other is Enemy)
-                {
-                    gameObject.CheckCollision(other);
-                    other.CheckCollision(gameObject);
-                }
-            }
-                */
-
             }
             foreach (GameObject newGameObject in newGameObjects)
             {

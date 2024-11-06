@@ -12,29 +12,30 @@ namespace MortensKomeback
 {
     internal class Ammo : GameObject
     {
+        Random random = new Random();
         private float timer = 0f;
         private float collisionTimer = 4f;
         private bool collided = false;
         private bool flipped = false;
 
-        public Ammo(Player player)
+        public Ammo(Player player, int ammoHealth, int ammoSprite)
         {
-            this.Health = 1;
-            position.Y = player.Position.Y + 50;
+            this.Health = ammoHealth;
+            position.Y = player.Position.Y + 20;
             if (player.Flipped)
             {
-                position.X = player.Position.X;
+                position.X = player.Position.X - (player.Sprite.Width / 2);
                 this.velocity.X = -1f;
                 this.flipped = player.Flipped;
             }
             else
             {
-                position.X = player.Position.X + player.Sprite.Width;
+                position.X = player.Position.X + (player.Sprite.Width / 2);
                 this.velocity.X = 1;
             }
             this.speed = 500f;
             this.sprites = player.AmmoSprites;
-            this.sprite = sprites[0];
+            this.sprite = sprites[ammoSprite];
         }
 
         public override void LoadContent(ContentManager content)
@@ -46,33 +47,52 @@ namespace MortensKomeback
         {
             try
             {
-
-                if (gameObject is Surface)
+                if (gameObject is Surface || gameObject is Enemy)
                 {
-                    this.collided = true;
-                    timer = 0f;
-                    this.sprite = this.sprites[1];
-                    this.rotation = 0f;
-                }
-                else if (gameObject is Enemy)
-                {
-                    this.collided = true;
-                    timer = 0f;
-                    this.sprite = this.sprites[1];
-                    if (flipped)
+                    if (this.health == 1)
                     {
-                        this.rotation = 0.25f;
+
+                        if (gameObject is Surface)
+                        {
+                            this.collided = true;
+                            timer = 0f;
+                            this.sprite = this.sprites[4];
+                            this.rotation = 0f;
+                        }
+                        else if (gameObject is Enemy)
+                        {
+                            gameObject.Health--;
+                            this.collided = true;
+                            timer = 0f;
+                            this.sprite = this.sprites[random.Next(2, 4)];
+                            if (flipped)
+                            {
+                                this.rotation = 0.25f;
+                            }
+                            else
+                            {
+                                this.rotation = -0.25f;
+                            }
+                        }
+
+                    }
+                    else if (gameObject is Enemy)
+                    {
+                        gameObject.Health--;
+                        this.health--;
                     }
                     else
                     {
-                        this.rotation = -0.25f;
+                        this.collided = true;
+                        timer = 0f;
+                        this.sprite = this.sprites[4];
+                        this.rotation = 0f;
                     }
                 }
-
             }
             catch (IndexOutOfRangeException)
             {
-
+                this.health = 0;
             }
         }
 
@@ -82,6 +102,7 @@ namespace MortensKomeback
 
             if (!collided)
             {
+
                 if (flipped)
                 {
                     this.rotation += -0.35f;
@@ -90,6 +111,7 @@ namespace MortensKomeback
                 {
                     this.rotation += 0.35f;
                 }
+
                 if (timer > 1)
                 {
                     this.position.Y += 1;
@@ -102,13 +124,16 @@ namespace MortensKomeback
                 {
                     this.position.Y += 2;
                 }
+
+                this.Move(gameTime);
+
             }
+
             if (collided && timer > collisionTimer)
             {
                 this.Health--;
             }
 
-            this.Move(gameTime);
         }
     }
 }
