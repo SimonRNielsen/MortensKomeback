@@ -12,7 +12,7 @@ namespace MortensKomeback
 
         private List<GameObject> surfaces = new List<GameObject>();
 
-        private int tileHeight = 195;
+        private int tileHeight = 195-1;
         private int tileWidth = 206 - 1;
 
 
@@ -27,11 +27,16 @@ namespace MortensKomeback
 
         public Environment(GraphicsDeviceManager graphics)
         {
-            surfaces.Add(new Background(_graphics));
+            //surfaces.Add(new Background(_graphics));
 
             for (int i = 0; i < 66; i++)
             {
             AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight, 2);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight-tileHeight, 5);
             }
         }
         #endregion

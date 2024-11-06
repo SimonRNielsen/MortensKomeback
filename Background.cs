@@ -13,7 +13,6 @@ namespace MortensKomeback
     {
         #region field
         private GraphicsDeviceManager _graphics;
-        //private Texture2D sprite;
 
         #endregion
 
@@ -25,7 +24,7 @@ namespace MortensKomeback
         public Background(GraphicsDeviceManager graphics)
         {
             this._graphics = graphics;
-            this.layer = 0f;
+            this.layer = 1f;
             this.scale = 500f;
         }
 
@@ -38,7 +37,7 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("Sprite\\tile1");
+            sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
         }
 
         public override void OnCollision(GameObject gameObject)
