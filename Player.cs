@@ -20,6 +20,9 @@ namespace MortensKomeback
         private bool canShoot = true;
         private bool canJump = true;
         private bool flipped = false;
+        private int ammoHealth = 1;
+        private int ammoSprite = 0;
+        private int ammoCount = 10;
 
         public Texture2D[] AmmoSprites { get => ammoSprites; set => ammoSprites = value; }
         public bool Flipped { get => flipped; set => flipped = value; }
@@ -52,9 +55,13 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            AmmoSprites = new Texture2D[1];
-            AmmoSprites[0] = content.Load<Texture2D>("testAmmo");
-          //  sprite = content.Load<Texture2D>("morten_sprite");
+            Sprite = content.Load<Texture2D>("morten_sprite");
+            AmmoSprites = new Texture2D[5];
+            AmmoSprites[0] = content.Load<Texture2D>("egg1");
+            AmmoSprites[1] = content.Load<Texture2D>("egg2");
+            AmmoSprites[2] = content.Load<Texture2D>("groundegg0");
+            AmmoSprites[3] = content.Load<Texture2D>("groundegg1");
+            AmmoSprites[4] = content.Load<Texture2D>("groundegg2");
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -64,10 +71,18 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
+
+            if (ammoCount <= 0)
+            {
+                this.ammoHealth = 1;
+                this.ammoSprite = 0;
+            }
+
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0);
             HandleInput();
             Move(gameTime);
             base.Update(gameTime);
+
         }
         /// <summary>
         /// A method, that handles player input. WASD moves the player, and space makes it shoot. 
@@ -130,7 +145,11 @@ namespace MortensKomeback
         /// </summary>
         private void Shoot()
         {
-            GameWorld.newGameObjects.Add(new Ammo(this));
+            if (ammoCount > 0)
+            {
+                ammoCount--;
+            }
+            GameWorld.newGameObjects.Add(new Ammo(this, ammoHealth, ammoSprite));
         }
         /// <summary>
         /// Makes the player jump
@@ -138,6 +157,13 @@ namespace MortensKomeback
         private void Jump()
         {
             velocity -= new Vector2(0, +20);
+        }
+
+        public void OverPowered()
+        {
+            this.ammoSprite = 1;
+            this.ammoHealth = 3;
+            this.ammoCount += 10;
         }
 
         #endregion

@@ -32,6 +32,8 @@ namespace MortensKomeback
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
+            gameObjects.Add(new Player());
             //gameObjects.Add(new Player());
             gameObjects.Add(new CharacterGenerator());
             base.Initialize();
@@ -67,6 +69,7 @@ namespace MortensKomeback
                         gameObject.CheckCollision(other);
                         other.CheckCollision(gameObject);
                     }
+
                     if (gameObject is Player && other is Surface)
                     {
                         gameObject.CheckCollision(other);
@@ -74,6 +77,12 @@ namespace MortensKomeback
                     }
 
                     if (gameObject is Ammo && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
+                    if (gameObject is PowerUp && other is Player)
                     {
                         gameObject.CheckCollision(other);
                         other.CheckCollision(gameObject);
