@@ -60,23 +60,29 @@ namespace MortensKomeback
             // TODO: Add your update logic here
             foreach (GameObject gameObject in gameObjects)
             {
-                gameObject.Update(gameTime);
 
-                /*
-            foreach (GameObject other in gameObjects)
-            {
-                if (gameObject is Player && other is Enemy)
+
+                foreach (GameObject other in gameObjects)
                 {
-                    gameObject.CheckCollision(other);
-                    other.CheckCollision(gameObject);
+                    if (gameObject is Player && other is Enemy)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+                    if (gameObject is Player && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
+                    if (gameObject is Ammo && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
                 }
-                if (gameObject is Laser && other is Enemy)
-                {
-                    gameObject.CheckCollision(other);
-                    other.CheckCollision(gameObject);
-                }
-            }
-                */
+
+                gameObject.Update(gameTime);
 
             }
             foreach (GameObject newGameObject in newGameObjects)

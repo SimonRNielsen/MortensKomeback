@@ -59,7 +59,7 @@ namespace MortensKomeback
 
         public override void OnCollision(GameObject gameObject)
         {
-
+            surfaceContact = true;
         }
 
         public override void Update(GameTime gameTime)
