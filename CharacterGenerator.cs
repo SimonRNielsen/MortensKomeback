@@ -50,9 +50,6 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
             standardFont = content.Load<SpriteFont>("standardSpriteFont");
-            sprites = new Texture2D[2];
-            sprites[0] = content.Load<Texture2D>("morten_sprite");
-            sprites[1] = content.Load<Texture2D>("morten_sprite2");
             mortenSprites[0, 0] = content.Load<Texture2D>("morten_sprite");
             mortenSprites[0, 1] = content.Load<Texture2D>("morten_sprite2");
             mortenSprites[0, 2] = content.Load<Texture2D>("morten_sprite3");
