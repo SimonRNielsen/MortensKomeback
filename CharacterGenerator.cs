@@ -79,10 +79,10 @@ namespace MortensKomeback
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(standardFont, "Press a or d to choose between your Morten!", new Vector2(50, -350), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, "Press w or s to choosen between your weapon!", new Vector2(50, -300), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, "Press p when you are done creating your Morten, and want to start the game", new Vector2(-100, -250), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, chosenMortenText, new Vector2(-100, sprite.Height + 5), Color.Yellow, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, "Press A or D to choose between your Morten!", new Vector2(-420, -350), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, "Press W or S to choose between your weapon!", new Vector2(-420, -300), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, "Press P when you want to start the game", new Vector2(-420, -250), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, chosenMortenText, new Vector2(-chosenMortenText.Length*12, sprite.Height / 2 + 10), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
         }
 
         private void AddPlayer()
@@ -98,31 +98,25 @@ namespace MortensKomeback
             if (keyState.IsKeyDown(Keys.A) && pressWASDAllowed)
             {
                 pressWASDAllowed = false;
-
-                if (mortenIndex.Y < mortenSprites.GetLength(1) - 1)
-                {
-                    mortenIndex.Y++;
-                    sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
-                    // SetChosenMortenText();
-                }
-
-
-            }
-            //If d is pressed
-            if (keyState.IsKeyDown(Keys.D) && pressWASDAllowed)
-            {
-
-                pressWASDAllowed = false;
                 if (mortenIndex.Y > 0)
                 {
                     mortenIndex.Y--;
                     sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
                     // SetChosenMortenText();
                 }
-
-
-
             }
+            //If d is pressed
+            if (keyState.IsKeyDown(Keys.D) && pressWASDAllowed)
+            {
+                pressWASDAllowed = false;
+                if (mortenIndex.Y < mortenSprites.GetLength(1) - 1)
+                {
+                    mortenIndex.Y++;
+                    sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
+                    // SetChosenMortenText();
+                }
+            }
+
             //If w is pressed, genrator stage is switched so the player can choose weapon
             if (keyState.IsKeyDown(Keys.W) && pressWASDAllowed)
             {
