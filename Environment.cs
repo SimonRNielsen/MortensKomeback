@@ -29,7 +29,7 @@ namespace MortensKomeback
             //AddSurface(400f, 400f, 4);
             //tiles.Add(new Surface(graphics, new Vector2(400f, 200f), 2));
 
-            AddSurfaces(200f, 400f, 2, 3);
+            AddSurfaces(200f, 400f, 2, 5);
 
             AddSurface(600f, 300f, 2);
         }
