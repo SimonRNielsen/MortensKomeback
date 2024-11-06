@@ -13,7 +13,7 @@ namespace MortensKomeback
         private List<GameObject> surfaces = new List<GameObject>();
 
         private int tileHeight = 195;
-        private int tileWidth = 206;
+        private int tileWidth = 206 - 1;
 
 
         #endregion
@@ -29,9 +29,10 @@ namespace MortensKomeback
         {
             surfaces.Add(new Background(_graphics));
 
-            AddSurfaces(1f, graphics.PreferredBackBufferHeight - tileHeight, 2, 30);
-
-            AddSurface(600f, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2);
+            for (int i = 0; i < 66; i++)
+            {
+            AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight, 2);
+            }
         }
         #endregion
 
@@ -42,13 +43,18 @@ namespace MortensKomeback
             surfaces.Add(Surface.Create(_graphics, x, y, spriteId));
         }
 
-        private void AddSurfaces(float x, float y, int spriteId, int times)
+        private void AddAvSurface(float x, float y, int spriteId)
         {
-            for (int i = 0; i < times; i++)
-            {
-                AddSurface(x * i, y, spriteId);
-            }
+            surfaces.Add(AvSurface.Create(_graphics, x, y));
         }
+
+        //private void AddSurfaces(float x, float y, int spriteId, int times)
+        //{
+        //    for (int i = 0; i < times; i++)
+        //    {
+        //        AddSurface(x * i, y, spriteId);
+        //    }
+        //}
 
         #endregion
     }

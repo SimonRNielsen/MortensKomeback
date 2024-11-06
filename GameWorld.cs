@@ -33,6 +33,7 @@ namespace MortensKomeback
         {
             // TODO: Add your initialization logic here
             gameObjects.Add(new Player());
+            gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
             base.Initialize();
 
             _graphics.PreferredBackBufferWidth = 1920;
@@ -46,7 +47,6 @@ namespace MortensKomeback
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera2D(GraphicsDevice, Vector2.Zero);
 
-            gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
 
             foreach (GameObject go in gameObjects)
             {
@@ -54,8 +54,7 @@ namespace MortensKomeback
             }
 
             // TODO: use this.Content to load your game content here
-            foreach (GameObject gameObj in gameObjects)
-            { gameObj.LoadContent(Content); }
+            
         }
 
         protected override void Update(GameTime gameTime)

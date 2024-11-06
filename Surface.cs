@@ -30,8 +30,9 @@ namespace MortensKomeback
             this._graphics = graphics;
             this.position.X = position.X;
             this.position.Y = position.Y;
-            this.layer = 1f;
+            this.layer = 0.1f;
             this.numberSprite = numberSprite;
+            this.health = 1;
         }
 
         #endregion
@@ -47,10 +48,8 @@ namespace MortensKomeback
                 sprites[i] = content.Load<Texture2D>("Sprite\\tile" + (i + 1));
             }
 
-
-            //Default sprite
+            //Choosen sprite
             this.sprite = sprites[numberSprite-1];
-            collisionBox = new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
         }
 
 

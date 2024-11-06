@@ -72,7 +72,7 @@ namespace MortensKomeback
             }
             catch (IndexOutOfRangeException)
             {
-
+                this.health = 0;
             }
         }
 

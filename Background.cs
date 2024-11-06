@@ -26,6 +26,7 @@ namespace MortensKomeback
         {
             this._graphics = graphics;
             this.layer = 0f;
+            this.scale = 500f;
         }
 
         #endregion
