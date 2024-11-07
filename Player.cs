@@ -60,6 +60,7 @@ namespace MortensKomeback
             this.layer = 1;
             this.scale = 1;
             this.sprite = sprite;
+            Overlay.healthCount = this.Health;
         }
 
 
@@ -80,6 +81,7 @@ namespace MortensKomeback
         public override void OnCollision(GameObject gameObject)
         {
             surfaceContact = true;
+            Overlay.healthCount = this.Health;
         }
 
         public override void Update(GameTime gameTime)
@@ -163,6 +165,7 @@ namespace MortensKomeback
             if (ammoCount > 0)
             {
                 ammoCount--;
+                Overlay.playerAmmoCount = this.ammoCount;
             }
             GameWorld.newGameObjects.Add(new Ammo(this, ammoHealth, ammoSprite));
         }
@@ -182,6 +185,7 @@ namespace MortensKomeback
             this.ammoSprite = 1;
             this.ammoHealth = 3;
             this.ammoCount += 10;
+            Overlay.playerAmmoCount = this.ammoCount;
         }
 
         #endregion
