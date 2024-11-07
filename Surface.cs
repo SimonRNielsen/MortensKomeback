@@ -61,6 +61,15 @@ namespace MortensKomeback
         {
             //throw new NotImplementedException();
         }
+        
+        /// <summary>
+        /// It's used to create a surface in Environment
+        /// </summary>
+        /// <param name="graphics"></param>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="spriteId">Whice sprite is going to be showed</param>
+        /// <returns></returns>
         public static Surface Create(GraphicsDeviceManager graphics,float x, float y, int spriteId)
         {
             return new Surface(graphics, new Vector2(x, y), spriteId);

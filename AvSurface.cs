@@ -15,7 +15,6 @@ namespace MortensKomeback
 
         #region field
         private GraphicsDeviceManager _graphics;
-        private Rectangle collisionBox;
         private int numberSprite = 1; //Which sprite is going to be used
 
 

@@ -29,9 +29,6 @@ namespace MortensKomeback
             this.scale = 1f;
             this.position.X = 1;
             this.position.Y = 1;
-
-
-            //this.layer = 0.9f;
             this.health = 1;
         }
 
