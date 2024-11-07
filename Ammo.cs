@@ -12,12 +12,20 @@ namespace MortensKomeback
 {
     internal class Ammo : GameObject
     {
+        #region Fields
+
         Random random = new Random(); //Used for random "on hit" sprite
         private float timer = 0f;
         private float collisionTimer = 4f;
         private bool collided = false;
         private bool flipped = false;
 
+        #endregion
+
+        #region Property
+        #endregion
+
+        #region Constructor
         /// <summary>
         /// Constructor for "spawning" eggs that Morten shoots with his sling
         /// </summary>
@@ -44,7 +52,9 @@ namespace MortensKomeback
             this.sprites = player.AmmoSprites;
             this.sprite = sprites[ammoSprite];
         }
+        #endregion
 
+        #region Methods
         public override void LoadContent(ContentManager content)
         {
             //Content loaded by Player class
@@ -158,5 +168,6 @@ namespace MortensKomeback
             }
 
         }
+        #endregion
     }
 }
