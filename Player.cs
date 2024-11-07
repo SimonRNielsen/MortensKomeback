@@ -27,7 +27,14 @@ namespace MortensKomeback
         private int ammoSprite = 0;
         private int ammoCount = 10;
 
+        /// <summary>
+        /// Property to access the sprites upon constructing "Ammo"
+        /// </summary>
         public Texture2D[] AmmoSprites { get => ammoSprites; set => ammoSprites = value; }
+
+        /// <summary>
+        /// Property to access which direction Morten is facing upon constructing "Ammo"
+        /// </summary>
         public bool Flipped { get => flipped; set => flipped = value; }
 
         #endregion
@@ -62,6 +69,7 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
             //Sprite = content.Load<Texture2D>("morten_sprite");
+            //Sprites for the Ammo class to pull upon being "constructed" by Morten
             AmmoSprites = new Texture2D[5];
             AmmoSprites[0] = content.Load<Texture2D>("egg1");
             AmmoSprites[1] = content.Load<Texture2D>("egg2");
@@ -84,7 +92,7 @@ namespace MortensKomeback
                 this.ammoSprite = 0;
             }
 
-            GameWorld.Camera.Position = new Vector2(this.Position.X, 0);
+            GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
             HandleInput();
             Move(gameTime);
             base.Update(gameTime);
@@ -167,6 +175,9 @@ namespace MortensKomeback
             velocity -= new Vector2(0, +20);
         }
 
+        /// <summary>
+        /// Sets changed parameters for when Morten picks up an Ammo PowerUp
+        /// </summary>
         public void OverPowered()
         {
             this.ammoSprite = 1;
