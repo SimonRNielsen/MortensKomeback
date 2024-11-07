@@ -18,12 +18,22 @@ namespace MortensKomeback
         private Texture2D[] ammoSprites;
         public static int healthCount;
         public static int playerAmmoCount;
-        private Rectangle ammoRectangle;
+        private Vector2 ammoPosition;
+        private Vector2 killsPosition;
+        private Vector2 healthPosition;
 
         #endregion
         #region Cosntructor
         public Overlay()
         {
+            this.health = 1;
+            ammoPosition.Y = -500;
+            ammoPosition.X = -300;
+            killsPosition.Y = -450;
+            killsPosition.X = -300;
+            healthPosition.Y = -400;
+            healthPosition.X = -300;
+
         }
 
         #endregion
@@ -37,8 +47,7 @@ namespace MortensKomeback
             killsSprite = content.Load<Texture2D>("goose1");
             ammoSprites = new Texture2D[2] { content.Load<Texture2D>("egg1"), content.Load<Texture2D>("egg2") };
             ammoSprite = ammoSprites[0];
-            ammoRectangle = new Rectangle(0, 0, ammoSprite.Width, ammoSprite.Height);
-
+            
         }
         /// <summary>
         /// OnCollision for Overlay, should not have any functionality. It is just a result of the method being abstract 
@@ -54,12 +63,15 @@ namespace MortensKomeback
         /// <param name="gameTime">GameTime, given by GameWorld</param>
         public override void Update(GameTime gameTime)
         {
-
+            ammoPosition.X = GameWorld.Camera.Position.X;
+         
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ammoSprite, ammoRectangle, Color.White);
+            spriteBatch.Draw(ammoSprite, ammoPosition, Color.White);
+            spriteBatch.Draw(killsSprite, killsPosition, Color.White);
+
         }
     }
 }
