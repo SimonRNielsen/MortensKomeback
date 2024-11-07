@@ -36,7 +36,7 @@ namespace MortensKomeback
 
         #region method
         /// <summary>
-        /// Loading background
+        /// Loading background in to content
         /// </summary>
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
@@ -44,14 +44,22 @@ namespace MortensKomeback
             Sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
         }
 
+        /// <summary>
+        /// Tjecking if a gameobject is collidering but there is not anything going to happens to the Background
+        /// </summary>
+        /// <param name="gameObject">The gameobject it's collidering woth</param>
         public override void OnCollision(GameObject gameObject)
         {
-            //throw new NotImplementedException();
+            //Nothing is going to happens
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
+            //Nothing is going to happens
         }
 
         #endregion

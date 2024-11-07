@@ -58,10 +58,22 @@ namespace MortensKomeback
             //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Updating AvSurface with Animation
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             Animate(gameTime);
         }
+
+        /// <summary>
+        /// It's used to create a AvSurface in Environment
+        /// </summary>
+        /// <param name="graphics"></param>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <returns></returns>
         public static AvSurface Create(GraphicsDeviceManager graphics, float x, float y)
         {
             return new AvSurface(graphics, new Vector2(x, y), 1);
