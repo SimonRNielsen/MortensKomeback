@@ -59,7 +59,7 @@ namespace MortensKomeback
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ammoSprite)
+            spriteBatch.Draw(ammoSprite, ammoRectangle, Color.White);
         }
     }
 }
