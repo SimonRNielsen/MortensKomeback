@@ -68,7 +68,6 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            //Sprite = content.Load<Texture2D>("morten_sprite");
             //Sprites for the Ammo class to pull upon being "constructed" by Morten
             AmmoSprites = new Texture2D[5];
             AmmoSprites[0] = content.Load<Texture2D>("egg1");
