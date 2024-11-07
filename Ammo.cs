@@ -12,12 +12,18 @@ namespace MortensKomeback
 {
     internal class Ammo : GameObject
     {
-        Random random = new Random();
+        Random random = new Random(); //Used for random "on hit" sprite
         private float timer = 0f;
         private float collisionTimer = 4f;
         private bool collided = false;
         private bool flipped = false;
 
+        /// <summary>
+        /// Constructor for "spawning" eggs that Morten shoots with his sling
+        /// </summary>
+        /// <param name="player">Accesses the player class for relative spawning position and for the sprites used</param>
+        /// <param name="ammoHealth">Determines how effective the ammo is, dependant on Morten picking up powerups or not</param>
+        /// <param name="ammoSprite">Determines how Mortens ammo looks like when he shoots it</param>
         public Ammo(Player player, int ammoHealth, int ammoSprite)
         {
             this.Health = ammoHealth;
@@ -34,6 +40,7 @@ namespace MortensKomeback
                 this.velocity.X = 1;
             }
             this.speed = 500f;
+            this.layer = 0.9f;
             this.sprites = player.AmmoSprites;
             this.sprite = sprites[ammoSprite];
         }
@@ -43,59 +50,71 @@ namespace MortensKomeback
             //Content loaded by Player class
         }
 
+        /// <summary>
+        /// Handles how the Ammo behaves on impact according to hitting either an Enemy, Surface or nothing
+        /// </summary>
+        /// <param name="gameObject">Other object being collided with</param>
         public override void OnCollision(GameObject gameObject)
         {
+            /*
             try
             {
-                if (gameObject is Surface || gameObject is Enemy)
+            */
+            if (gameObject is Surface || gameObject is Enemy)
+            {
+                if (this.health == 1)
                 {
-                    if (this.health == 1)
-                    {
 
-                        if (gameObject is Surface)
-                        {
-                            this.collided = true;
-                            timer = 0f;
-                            this.sprite = this.sprites[4];
-                            this.rotation = 0f;
-                        }
-                        else if (gameObject is Enemy)
-                        {
-                            gameObject.Health--;
-                            this.collided = true;
-                            timer = 0f;
-                            this.sprite = this.sprites[random.Next(2, 4)];
-                            if (flipped)
-                            {
-                                this.rotation = 0.25f;
-                            }
-                            else
-                            {
-                                this.rotation = -0.25f;
-                            }
-                        }
-
-                    }
-                    else if (gameObject is Enemy)
-                    {
-                        gameObject.Health--;
-                        this.health--;
-                    }
-                    else
+                    if (gameObject is Surface)
                     {
                         this.collided = true;
                         timer = 0f;
                         this.sprite = this.sprites[4];
                         this.rotation = 0f;
                     }
+                    else if (gameObject is Enemy)
+                    {
+                        gameObject.Health--;
+                        this.collided = true;
+                        timer = 0f;
+                        this.sprite = this.sprites[random.Next(2, 4)];
+                        if (flipped)
+                        {
+                            this.rotation = 0.25f;
+                        }
+                        else
+                        {
+                            this.rotation = -0.25f;
+                        }
+                    }
+
                 }
+                else if (gameObject is Enemy)
+                {
+                    gameObject.Health--;
+                    this.health--;
+                }
+                else
+                {
+                    this.collided = true;
+                    timer = 0f;
+                    this.sprite = this.sprites[4];
+                    this.rotation = 0f;
+                }
+            }
+            /*
             }
             catch (IndexOutOfRangeException)
             {
                 this.health = 0;
             }
+            */
         }
 
+        /// <summary>
+        /// Handles movement and rotation based on which way Morten is looking
+        /// </summary>
+        /// <param name="gameTime">Timer and syncronization</param>
         public override void Update(GameTime gameTime)
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -132,6 +151,10 @@ namespace MortensKomeback
             if (collided && timer > collisionTimer)
             {
                 this.Health--;
+            }
+            if (this.position.Y > 5000)
+            {
+                this.health = 0;
             }
 
         }
