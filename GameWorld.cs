@@ -17,6 +17,10 @@ namespace MortensKomeback
         public static List<GameObject> newGameObjects = new List<GameObject>();
         private static Camera2D camera;
 
+#if DEBUG
+        public Texture2D collisionTexture;
+#endif
+
         /// <summary>
         /// Property to get/set the position of the camera, in this case relative to the players position
         /// </summary>
@@ -50,14 +54,12 @@ namespace MortensKomeback
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera2D(GraphicsDevice, Vector2.Zero);
 
-
-            foreach (GameObject go in gameObjects)
-            {
-                go.LoadContent(Content);
-            }
-
             // TODO: use this.Content to load your game content here
-            
+            foreach (GameObject gameObj in gameObjects)
+            { gameObj.LoadContent(Content); }
+#if DEBUG
+            collisionTexture = Content.Load<Texture2D>("pixel");
+#endif
         }
 
         protected override void Update(GameTime gameTime)
@@ -82,7 +84,19 @@ namespace MortensKomeback
                         other.CheckCollision(gameObject);
                     }
 
+                    if (gameObject is Enemy && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
                     if (gameObject is Ammo && other is Surface)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
+                    if (gameObject is Ammo && other is Enemy)
                     {
                         gameObject.CheckCollision(other);
                         other.CheckCollision(gameObject);
@@ -118,6 +132,14 @@ namespace MortensKomeback
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(_spriteBatch);
+#if DEBUG
+                DrawCollisionBox(gameObject);
+                if (gameObject is Surface)
+                {
+                    DrawLeftSideCollisionBox((gameObject as Surface));
+                    DrawRightSideCollisionBox((gameObject as Surface));
+                }
+#endif
             }
 
 
@@ -125,5 +147,49 @@ namespace MortensKomeback
 
             base.Draw(gameTime);
         }
+
+#if DEBUG
+        private void DrawCollisionBox(GameObject gameObject)
+        {
+            Rectangle collisionBox = gameObject.CollisionBox;
+            Rectangle topLine = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
+            Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
+            Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);
+            Rectangle leftLine = new Rectangle(collisionBox.X, collisionBox.Y, 1, collisionBox.Height);
+
+            _spriteBatch.Draw(collisionTexture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+        }
+
+        private void DrawLeftSideCollisionBox(Surface surface)
+        {
+            Rectangle collisionBox = surface.LeftSideCollisionBox;
+            Rectangle topLine = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
+            Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
+            Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);
+            Rectangle leftLine = new Rectangle(collisionBox.X, collisionBox.Y, 1, collisionBox.Height);
+
+            _spriteBatch.Draw(collisionTexture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+        }
+
+        private void DrawRightSideCollisionBox(Surface surface)
+        {
+            Rectangle collisionBox = surface.RightSideCollisionBox;
+            Rectangle topLine = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
+            Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
+            Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);
+            Rectangle leftLine = new Rectangle(collisionBox.X, collisionBox.Y, 1, collisionBox.Height);
+
+            _spriteBatch.Draw(collisionTexture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+            _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
+        }
+#endif
     }
 }
