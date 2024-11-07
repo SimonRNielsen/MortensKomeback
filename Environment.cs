@@ -14,7 +14,6 @@ namespace MortensKomeback
         //Environment is the layout for the level and not a GameObject 
         #region field
         private GraphicsDeviceManager _graphics;
-
         private List<GameObject> surfaces = new List<GameObject>();
 
         private int tileHeight = 195 - 1;
@@ -29,20 +28,13 @@ namespace MortensKomeback
         #endregion
 
         #region constructor
-
+        /// <summary>
+        /// Construction the Environment of all the surfaces and backgroud
+        /// </summary>
+        /// <param name="graphics"></param>
         public Environment(GraphicsDeviceManager graphics)
         {
             surfaces.Add(new Background(_graphics));
-
-            //for (int i = 0; i < 66; i++)
-            //{
-            //AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight, 2);
-            //}
-
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    AddSurface((tileWidth * i), graphics.PreferredBackBufferHeight-tileHeight, 5);
-            //}
 
             AddSurface((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 2), 1);
 
@@ -51,13 +43,24 @@ namespace MortensKomeback
         #endregion
 
         #region method
-
+        /// <summary>
+        /// Adding one Surface
+        /// </summary>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="spriteId">The sprite of the Surface</param>
         private void AddSurface(float x, float y, int spriteId)
         {
             surfaces.Add(Surface.Create(_graphics, x, y, spriteId));
         }
 
-
+        /// <summary>
+        /// Adding multipel Surfac
+        /// </summary>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="spriteId">The sprite of the Surface</param>
+        /// <param name="times">The number of time the Surface is added</param>
         private void AddSurfaces(float x, float y, int spriteId, int times)
         {
             for (int i = 0; i < times; i++)
@@ -66,6 +69,12 @@ namespace MortensKomeback
             }
         }
 
+        /// <summary>
+        /// Adding one AvSurface
+        /// </summary>
+        /// <param name="x">X coordinate</param>
+        /// <param name="y">Y coordinate</param>
+        /// <param name="spriteId">The sprite of the AvSurface</param>
         private void AddAvSurface(float x, float y, int spriteId)
         {
             surfaces.Add(AvSurface.Create(_graphics, x, y));
