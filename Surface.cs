@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +19,15 @@ namespace MortensKomeback
         #endregion
 
         #region properties
+        public Rectangle LeftSideCollisionBox
+        {
+            get { return new Rectangle((int)Position.X - ((Sprite.Width / 2) + 2), (int)Position.Y - ((Sprite.Height / 2) + 2), 2, (Sprite.Height) - 4); }
+        }
+
+        public Rectangle RightSideCollisionBox
+        {
+            get { return new Rectangle((int)Position.X + ((Sprite.Width / 2) + 2), (int)Position.Y - ((Sprite.Height / 2) + 2), 2, (Sprite.Height) - 4); }
+        }
 
         #endregion
 
@@ -48,7 +56,7 @@ namespace MortensKomeback
             }
 
             //Choosen sprite
-            this.Sprite = sprites[spriteID-1];
+            this.Sprite = sprites[spriteID - 1];
         }
 
 
@@ -61,7 +69,7 @@ namespace MortensKomeback
         {
             //throw new NotImplementedException();
         }
-        
+
         /// <summary>
         /// It's used to create a surface in Environment
         /// </summary>
@@ -70,39 +78,12 @@ namespace MortensKomeback
         /// <param name="y">Y coordinate</param>
         /// <param name="spriteId">Whice sprite is going to be showed</param>
         /// <returns></returns>
-        public static Surface Create(GraphicsDeviceManager graphics,float x, float y, int spriteId)
+        public static Surface Create(GraphicsDeviceManager graphics, float x, float y, int spriteId)
         {
             return new Surface(graphics, new Vector2(x, y), spriteId);
         }
 
 
         #endregion
-    internal class Surface : GameObject
-    {
-
-        public Rectangle LeftSideCollisionBox
-        {
-            get { return new Rectangle((int)Position.X - ((Sprite.Width / 2) + 2), (int)Position.Y - ((Sprite.Height / 2) + 2), 2, (Sprite.Height) - 4); }
-        }
-
-        public Rectangle RightSideCollisionBox
-        {
-            get { return new Rectangle((int)Position.X + ((Sprite.Width / 2) + 2), (int)Position.Y - ((Sprite.Height / 2) + 2), 2, (Sprite.Height) - 4); }
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public override void OnCollision(GameObject gameObject)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            //throw new NotImplementedException();
-        }
     }
 }
