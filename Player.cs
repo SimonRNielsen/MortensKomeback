@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
+    /// <summary>
+    /// Class for the player. Is the players avatar in the game, and can be moved etc. by the player. 
+    /// </summary>
     internal class Player : Character
     {
         #region Fields
@@ -35,8 +38,11 @@ namespace MortensKomeback
 
         #region Constructor
         /// <summary>
-        /// The constructor for the player
+        /// The players constructor. All relevant fields are set, for a normal running gaming-experience. 
+        /// The Player constructor, should only be used by the CharacterGenerator, as character creation at hte start of the game, is the only
+        /// case in which a new Player should be spawned.
         /// </summary>
+        /// <param name="sprite">The sprite of the player character, as chosen in character generator.</param>
         public Player(Texture2D sprite)
         {
             this.position.X = 0;
@@ -55,7 +61,7 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            Sprite = content.Load<Texture2D>("morten_sprite");
+            //Sprite = content.Load<Texture2D>("morten_sprite");
             AmmoSprites = new Texture2D[5];
             AmmoSprites[0] = content.Load<Texture2D>("egg1");
             AmmoSprites[1] = content.Load<Texture2D>("egg2");
@@ -85,7 +91,7 @@ namespace MortensKomeback
 
         }
         /// <summary>
-        /// A method, that handles player input. WASD moves the player, and space makes it shoot. 
+        /// A method, that handles player input. AD moves the player, space makes it jump and enter makes it shoot. 
         /// </summary>
         private void HandleInput()
         {
@@ -93,7 +99,7 @@ namespace MortensKomeback
 
             KeyboardState keyState = Keyboard.GetState();//Get the current keyboard state
 
-            //If a is pressed
+            //If a is pressed the player moves left, and the sprite is flipped so it faces left
             if (keyState.IsKeyDown(Keys.A))
             {
                 Flipped = true;
@@ -101,7 +107,7 @@ namespace MortensKomeback
                 //Move left
                 velocity += new Vector2(-1, 0);
             }
-            //If d is pressed
+            //If d is pressed the player moves right and the sprite is flipped so it faces right.
             if (keyState.IsKeyDown(Keys.D))
             {
                 spriteEffectIndex = 0;
@@ -109,7 +115,7 @@ namespace MortensKomeback
                 //Move right
                 velocity += new Vector2(+1, 0);
             }
-
+            //Normalises the velocity
             if (velocity != Vector2.Zero)
             {
                 velocity.Normalize();
@@ -118,7 +124,7 @@ namespace MortensKomeback
             //If enter is pressed, the player will shoot
             if (keyState.IsKeyDown(Keys.Enter) && canShoot)
             {
-                //Makes sure that you can only fire ones per space-click
+                //Makes sure that you can only fire ones per click on enter
                 canShoot = false;
                 Shoot();
             }
@@ -130,6 +136,7 @@ namespace MortensKomeback
             //If space is pressed, the player will jump.
             if (keyState.IsKeyDown(Keys.Space) && canJump)
             {
+                //Makes sure the player only jumps once per click on space. 
                 canJump = false;
                 Jump();
             }
@@ -141,10 +148,11 @@ namespace MortensKomeback
         }
 
         /// <summary>
-        /// Shoots. 
+        /// Shoots, by creating a new instance of Ammo. 
         /// </summary>
         private void Shoot()
         {
+            //If ammo count (special ammo) is available it will be used, and therefore one subtracted from the count here. 
             if (ammoCount > 0)
             {
                 ammoCount--;
