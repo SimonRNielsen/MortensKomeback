@@ -24,7 +24,7 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            Gravity(gameTime);
+            //Gravity(gameTime);
         }
 
         /// <summary>
@@ -34,10 +34,16 @@ namespace MortensKomeback
         protected void Gravity(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (surfaceContact || position.Y > 300) //|| and after, is because we don't yet have surfaces.
+
+            if (surfaceContact || position.Y > 500) //|| and after, is because we don't yet have surfaces.
             {
-                velocity += new Vector2(0, 0);
+                //if(velocity.Y>0)
+                {
+                velocity = new Vector2(velocity.X, -1);
+                    position.Y -= 0;
+                }
                 surfaceContact = false;
+
             }
             else
             {

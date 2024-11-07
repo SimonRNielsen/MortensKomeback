@@ -92,6 +92,11 @@ namespace MortensKomeback
         /// <param name="other">Accesses the object being collided with</param>
         public void CheckCollision(GameObject other)
         {
+            if (CollisionBox.Intersects(other.CollisionBox))
+            {
+                OnCollision(other);
+            }
+
             if (this is Player || this is Enemy)
             {
 
@@ -101,6 +106,7 @@ namespace MortensKomeback
                     if (CollisionBox.Intersects((other as Surface).LeftSideCollisionBox))
                     {
                         this.position.X -= 1;
+                        this.velocity.X -= 1;
                         if (this is Enemy)
                         {
                             this.velocity.X -= 2;
@@ -122,10 +128,6 @@ namespace MortensKomeback
 
             }
 
-            if (CollisionBox.Intersects(other.CollisionBox))
-            {
-                OnCollision(other);
-            }
         }
     }
 }

@@ -36,9 +36,8 @@ namespace MortensKomeback
         {
             surfaces.Add(new Background(_graphics));
 
-            AddSurface((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 2), 1);
-
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - tileHeight, 5, 66);
+            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight , 2, 66); // Græstop på jorden (Morten spawner på den rigtige overflade)
+            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 5, 66); // Jordbund
         }
         #endregion
 

@@ -82,7 +82,10 @@ namespace MortensKomeback
         {
             surfaceContact = true;
             Overlay.healthCount = this.Health;
-        }
+           /* if (gameObject is Surface)
+                this.velocity.Y = 0;
+        */
+            }
 
         public override void Update(GameTime gameTime)
         {
@@ -94,8 +97,9 @@ namespace MortensKomeback
             }
 
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
-            HandleInput();
             Move(gameTime);
+            HandleInput();
+            Gravity(gameTime);
             base.Update(gameTime);
 
         }
