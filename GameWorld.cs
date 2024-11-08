@@ -40,6 +40,8 @@ namespace MortensKomeback
             //gameObjects.Add(new Player());
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Overlay());
+            gameObjects.Add(new Background(_graphics));
+            gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
             base.Initialize();
 
             _graphics.PreferredBackBufferWidth = 1920;
