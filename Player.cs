@@ -25,7 +25,10 @@ namespace MortensKomeback
         private bool flipped = false;
         private int ammoHealth = 1;
         private int ammoSprite = 0;
-        private int ammoCount = 10;
+        private int ammoCount = 0;
+        private float invincibleTimer = 1f; //Used to make player invincible after damaging collison
+        private float timer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
+        private bool invincible = false; //Used to make player invincible after damaging collison
 
         /// <summary>
         /// Property to access the sprites upon constructing "Ammo"
@@ -81,12 +84,22 @@ namespace MortensKomeback
         public override void OnCollision(GameObject gameObject)
         {
             surfaceContact = true;
+            if (gameObject is Enemy && !invincible)
+            {
+                this.Health--;
+                timer = 0;
+                invincible = true;
+            }
             Overlay.healthCount = this.Health;
         }
 
         public override void Update(GameTime gameTime)
         {
-
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (timer>invincibleTimer)
+            {
+                invincible = false;
+            }
             if (ammoCount <= 0)
             {
                 this.ammoHealth = 1;
@@ -153,7 +166,6 @@ namespace MortensKomeback
             {
                 canJump = true;
             }
-
         }
 
         /// <summary>
