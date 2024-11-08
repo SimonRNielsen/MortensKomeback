@@ -25,12 +25,11 @@ namespace MortensKomeback
         private bool flipped = false;
         private int ammoHealth = 1;
         private int ammoSprite = 0;
-        private int ammoCount = 10;
+        private int ammoCount = 0;
         private float smoothJump = 0.21f;
         private float jumpingTime = 0.2f;
-        private int ammoCount = 0;
-        private float invincibleTimer = 1f; //Used to make player invincible after damaging collison
-        private float timer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
+        private float invincibleCooldown = 1f; //Used to make player invincible after damaging collison
+        private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
 
 
@@ -91,7 +90,7 @@ namespace MortensKomeback
             if (gameObject is Enemy && !invincible)
             {
                 this.Health--;
-                timer = 0;
+                invincibleTimer = 0;
                 invincible = true;
             }
             Overlay.healthCount = this.Health;
@@ -102,8 +101,8 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timer>invincibleTimer)
+            invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (invincibleTimer>invincibleCooldown)
             {
                 invincible = false;
             }

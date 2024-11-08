@@ -105,7 +105,7 @@ namespace MortensKomeback
             spriteBatch.Draw(ammoSprite, ammoPosition, null, Color.White, 0, origin, 1.5f, SpriteEffects.None, 0.9f);
             spriteBatch.Draw(killsSprite, killsPosition, null, Color.White, 0, origin, 0.5f, SpriteEffects.None, 0.9f);
             spriteBatch.Draw(killsSprite, killsPosition, null, Color.White, 0, origin, 0.5f, SpriteEffects.None, 0.9f);
-            spriteBatch.DrawString(mortalKombatFont, $"Kills: {GameWorld.killCount}", new Vector2(killsPosition.X + 75, killsPosition.Y + (killsSprite.Height / 4)), Color.Black, 0f, new Vector2(0, 5), 3f, SpriteEffects.None, 0.9f);
+            spriteBatch.DrawString(mortalKombatFont, $"Kills: {killCount}", new Vector2(killsPosition.X + 75, killsPosition.Y + (killsSprite.Height / 4)), Color.Black, 0f, new Vector2(0, 5), 3f, SpriteEffects.None, 0.9f);
             //Draws the text for ammocount. If ammocount is 0, standard ammo is used, and ammo is endless. 
             if (playerAmmoCount > 0)
             {
