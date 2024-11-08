@@ -24,7 +24,7 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            //Gravity(gameTime);
+            Gravity(gameTime);
         }
 
         /// <summary>
@@ -37,11 +37,10 @@ namespace MortensKomeback
 
             if (surfaceContact || position.Y > 500) //|| and after, is because we don't yet have surfaces.
             {
-                //if(velocity.Y>0)
-                {
-                velocity = new Vector2(velocity.X, -1);
-                    position.Y -= 0;
-                }
+                
+                velocity += new Vector2(0, 0);
+                
+                
                 surfaceContact = false;
 
             }

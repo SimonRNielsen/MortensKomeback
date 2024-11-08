@@ -15,7 +15,7 @@ namespace MortensKomeback
 
         #region field
         private GraphicsDeviceManager _graphics;
-        private int numberSprite = 1; //Which sprite is going to be used
+        private int startSprite = 0; //It's starting with sprite 0
 
 
         #endregion
@@ -31,8 +31,9 @@ namespace MortensKomeback
             this.position.X = position.X;
             this.position.Y = position.Y;
             this.layer = 0.1f;
-            this.numberSprite = numberSprite;
+            this.startSprite = numberSprite;
             this.health = 1;
+            this.fps = 0.07f; //Not sure if it's the correkt amount
         }
 
         #endregion
@@ -48,8 +49,8 @@ namespace MortensKomeback
                 sprites[i] = content.Load<Texture2D>("Sprite\\tile" + (i + 1));
             }
 
-            //Choosen sprite
-            this.Sprite = sprites[numberSprite - 1];
+            //Start sprite
+            this.Sprite = sprites[startSprite];
         }
 
 

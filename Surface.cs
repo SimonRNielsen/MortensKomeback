@@ -37,7 +37,7 @@ namespace MortensKomeback
             this._graphics = graphics;
             this.position.X = position.X;
             this.position.Y = position.Y;
-            this.layer = 0.9f;
+            this.layer = 0.1f;
             this.spriteID = spriteID;
             this.health = 1;
         }
