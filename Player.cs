@@ -57,7 +57,7 @@ namespace MortensKomeback
         {
             this.position.X = 0;
             this.position.Y = 0;
-            this.speed = 300f;
+            this.speed = 1000f; //Husk at ændre tilbage til 300f
             this.fps = 15f;
             this.Health = 3;
             this.layer = 1;
@@ -137,7 +137,7 @@ namespace MortensKomeback
                 spriteEffectIndex = 0;
                 Flipped = false;
                 //Move right
-                velocity += new Vector2(+1, 0);
+                velocity += new Vector2(+1, 0); //Test rettelse af Rikke. Skal ikke gemmes
             }
             //Normalises the velocity
             if (velocity != Vector2.Zero)
