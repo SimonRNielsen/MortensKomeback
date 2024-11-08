@@ -101,6 +101,7 @@ namespace MortensKomeback
                     if (CollisionBox.Intersects((other as Surface).LeftSideCollisionBox))
                     {
                         this.position.X -= 1;
+                        this.velocity.X -= 1;
                         if (this is Enemy)
                         {
                             this.velocity.X -= 2;
@@ -111,6 +112,7 @@ namespace MortensKomeback
                     else if (CollisionBox.Intersects((other as Surface).RightSideCollisionBox))
                     {
                         this.position.X += 1;
+                        this.velocity.X += 1;
                         if (this is Enemy)
                         {
                             this.velocity.X += 2;

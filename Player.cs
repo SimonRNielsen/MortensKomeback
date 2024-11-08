@@ -83,6 +83,7 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Move(gameTime);
             HandleInput();
 
             if (smoothJump < jumpingTime)
@@ -98,10 +99,10 @@ namespace MortensKomeback
             }
 
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
-            Move(gameTime);
             base.Update(gameTime);
 
         }
+
         /// <summary>
         /// A method, that handles player input. WASD moves the player, and space makes it shoot. 
         /// </summary>
