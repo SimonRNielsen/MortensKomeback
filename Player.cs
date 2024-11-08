@@ -89,21 +89,22 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Move(gameTime);
-            HandleInput();
-
-            if (smoothJump < jumpingTime)
-                velocity -= new Vector2(0, +3);
-            
-            if (smoothJump > 1.3f)
-                canJump = true;
-
             if (ammoCount <= 0)
             {
+                this.ammoCount = 0;
                 this.ammoHealth = 1;
                 this.ammoSprite = 0;
             }
+            smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            HandleInput();
+            if (smoothJump < jumpingTime)
+                velocity -= new Vector2(0, +4);
+            
+            if (smoothJump > 1.3f)
+                canJump = true;
+            Move(gameTime);
+
+
 
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
             base.Update(gameTime);
