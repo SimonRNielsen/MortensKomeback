@@ -21,12 +21,12 @@ namespace MortensKomeback
         #region properties
         public Rectangle LeftSideCollisionBox
         {
-            get { return new Rectangle((int)Position.X - ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 5, 2, (Sprite.Height) - 4); }
+            get { return new Rectangle((int)Position.X - ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 10, 2, (Sprite.Height) - 20); }
         }
 
         public Rectangle RightSideCollisionBox
         {
-            get { return new Rectangle((int)Position.X + ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 5, 2, (Sprite.Height) - 4); }
+            get { return new Rectangle((int)Position.X + ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 10, 2, (Sprite.Height) - 20); }
         }
 
         #endregion

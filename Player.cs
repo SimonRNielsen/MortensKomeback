@@ -21,11 +21,14 @@ namespace MortensKomeback
         private SoundEffect shootSound;
         private SoundEffect takeDamageSound;
         private bool canShoot = true;
-        private bool canJump = true;
+        private bool canJump = false;
         private bool flipped = false;
         private int ammoHealth = 1;
         private int ammoSprite = 0;
         private int ammoCount = 10;
+        private float smoothJump = 0.21f;
+        private float jumpingTime = 0.2f;
+
 
         /// <summary>
         /// Property to access the sprites upon constructing "Ammo"
@@ -89,20 +92,28 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-
             if (ammoCount <= 0)
             {
+                this.ammoCount = 0;
                 this.ammoHealth = 1;
                 this.ammoSprite = 0;
             }
+            smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            HandleInput();
+            if (smoothJump < jumpingTime)
+                velocity -= new Vector2(0, +4);
+            
+            if (smoothJump > 1.3f)
+                canJump = true;
+            Move(gameTime);
+
+
 
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
-            Move(gameTime);
-            HandleInput();
-            
             base.Update(gameTime);
 
         }
+
         /// <summary>
         /// A method, that handles player input. AD moves the player, space makes it jump and enter makes it shoot. 
         /// </summary>
@@ -153,11 +164,12 @@ namespace MortensKomeback
                 canJump = false;
                 Jump();
             }
+            /*
             if (keyState.IsKeyUp(Keys.Space))
             {
                 canJump = true;
             }
-
+            */
         }
 
         /// <summary>
@@ -178,7 +190,8 @@ namespace MortensKomeback
         /// </summary>
         private void Jump()
         {
-            velocity -= new Vector2(0, +20);
+            smoothJump = 0f;
+            //velocity -= new Vector2(0, +20);
         }
 
         /// <summary>

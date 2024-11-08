@@ -12,35 +12,37 @@ namespace MortensKomeback
 {
     internal class PowerUp : GameObject
     {
-       
+
         private int powerUpType;
 
         /// <summary>
         /// Powerup Creator
         /// </summary>
-        /// <param name="graphics"></param>
         /// <param name="placement">X and Y vector placement for spawning the item</param>
         /// <param name="type">0 for ammo PowerUp, 1 for healing PowerUp</param>
         public PowerUp(Vector2 placement, int type)
         {
 
             this.powerUpType = type;
-            this.position.X = placement.X;
-            this.position.Y = placement.Y;
+            this.position = placement;
             this.health = 1;
             this.layer = 0.2f;
 
         }
 
+        /// <summary>
+        /// Loads sprites for powerups
+        /// </summary>
+        /// <param name="content">Contentmanager</param>
         public override void LoadContent(ContentManager content)
         {
-            
+
             sprites = new Texture2D[2];
             this.sprites[0] = content.Load<Texture2D>("egg2");
             //this.sprites[1] = content.Load<Texture2D>("");
             try
             {
-            this.sprite = sprites[powerUpType];
+                this.sprite = sprites[powerUpType];
             }
             catch (IndexOutOfRangeException)
             {
@@ -50,6 +52,10 @@ namespace MortensKomeback
 
         }
 
+        /// <summary>
+        /// Applies effects on Player
+        /// </summary>
+        /// <param name="gameObject">Player</param>
         public override void OnCollision(GameObject gameObject)
         {
 
