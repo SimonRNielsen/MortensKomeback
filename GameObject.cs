@@ -31,6 +31,7 @@ namespace MortensKomeback
 
 
 
+
         public Rectangle CollisionBox
         {
             get { return new Rectangle((int)Position.X - (Sprite.Width / 2), (int)Position.Y - (Sprite.Height / 2), Sprite.Width, Sprite.Height); }
