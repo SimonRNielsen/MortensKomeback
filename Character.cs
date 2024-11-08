@@ -37,17 +37,18 @@ namespace MortensKomeback
 
             if (surfaceContact || position.Y > 500) //|| and after, is because we don't yet have surfaces.
             {
-                
+
                 velocity += new Vector2(0, 0);
-                
-                
+
+
                 surfaceContact = false;
 
             }
             else
             {
                 velocity += new Vector2(0, 1);
-                position.Y += velocity.Y * speed * deltaTime;
+                if (velocity.Y >= 0)
+                    position.Y += velocity.Y * 3 * speed * deltaTime;
             }
         }
 

@@ -101,9 +101,9 @@ namespace MortensKomeback
             smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
             HandleInput();
             if (smoothJump < jumpingTime)
-                velocity -= new Vector2(0, +4);
+                velocity -= new Vector2(0, +8);
             
-            if (smoothJump > 1.3f)
+            if (surfaceContact)
                 canJump = true;
             Move(gameTime);
 
