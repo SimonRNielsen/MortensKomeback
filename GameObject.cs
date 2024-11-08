@@ -49,6 +49,10 @@ namespace MortensKomeback
 
         public abstract void Update(GameTime gameTime);
 
+        /// <summary>
+        /// Modified to recieve individual sprite, position, rotation, scale, spriteeffects and layerdepth from each individual gameobject
+        /// </summary>
+        /// <param name="spriteBatch">Drawing tool</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite, Position, null, Color.White, rotation, new Vector2(Sprite.Width / 2, Sprite.Height / 2), scale, objectSpriteEffects[spriteEffectIndex], layer);
@@ -84,12 +88,49 @@ namespace MortensKomeback
             return isColliding;
         }
 
+        /// <summary>
+        /// Handles collision with other objects and Player/Enemy movement restrictions in regards to Surface sides
+        /// </summary>
+        /// <param name="other">Accesses the object being collided with</param>
         public void CheckCollision(GameObject other)
         {
             if (CollisionBox.Intersects(other.CollisionBox))
             {
                 OnCollision(other);
             }
+
+            if (this is Player || this is Enemy)
+            {
+
+                if (other is Surface)
+                {
+
+                    if (CollisionBox.Intersects((other as Surface).LeftSideCollisionBox))
+                    {
+                        this.position.X = other.Position.X - (other.Sprite.Width/2)-(this.Sprite.Width/2)-1;
+                        if (this is Enemy)
+                        {
+                            this.velocity.X -= 2;
+                            this.spriteEffectIndex = 1;
+                        }
+                    }
+
+                    else if (CollisionBox.Intersects((other as Surface).RightSideCollisionBox))
+                    {
+                        this.position.X = other.Position.X + (other.Sprite.Width/2)+(this.Sprite.Width/2)+1;
+                        this.position.X += 1;
+                        this.velocity.X += 1;
+                        if (this is Enemy)
+                        {
+                            this.velocity.X += 2;
+                            this.spriteEffectIndex = 0;
+                        }
+                    }
+
+                }
+
+            }
+
         }
     }
 }
