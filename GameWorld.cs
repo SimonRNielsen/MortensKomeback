@@ -35,7 +35,6 @@ namespace MortensKomeback
             gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
             //gameObjects.Add(new Player());
             gameObjects.Add(new CharacterGenerator());
-            gameObjects.Add(new Player());
             gameObjects.Add(new Enemy());
             base.Initialize();
 

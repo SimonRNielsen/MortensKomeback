@@ -15,26 +15,33 @@ namespace MortensKomeback
     internal class Enemy : Character
     {
         #region fields
-        private SoundEffect honkSound;
         private List<Texture2D> spriteEnemy = new List<Texture2D>();
-        //private Texture2D[] enemySpriteArray = new Texture2D[];
+        private SoundEffect honkSound;
         private Vector2 direction;
-        protected static Random rnd = new Random();
-
+        private Random rnd = new Random();
+        private float leftLimit;      //patrulje-grænse venstre
+        private float rightLimit;     //patrulje-grænse højre
+        private bool flipped = false;
+        private float enemyMoveTimer;
+        private float enemyHonkTimer;
         #endregion
+
+
         /// <summary>
         /// enemy constructor
         /// </summary>
         public Enemy()
         {
-            this.position.X = 0;
-            this.position.Y = 0;
-            this.speed = 200f;
-           
-            this.fps = 15f;
+            this.position.X = 10;
+            this.position.Y = 10;
+            this.speed = 250;
+            this.velocity = new Vector2(1,0);
+            this.fps = 30f;
             this.Health = 3;
-            this.layer = 1;
+            this.layer = 0;
             this.scale = 1;
+            this.leftLimit = 100;
+            this.rightLimit = 300;
             
         }
 
@@ -43,38 +50,53 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("goose1");
-           
-
-            //Indlæs 
             spriteEnemy.Add(content.Load<Texture2D>("goose3"));
             spriteEnemy.Add(content.Load<Texture2D>("goose4"));
             spriteEnemy.Add(content.Load<Texture2D>("goose5"));
 
             //Indlæs Lyd
-            honkSound = content.Load<SoundEffect>("gooseSound");
+            honkSound = content.Load<SoundEffect>("gooseSound_cut");
         }
 
         public override void OnCollision(GameObject gameObject)
         {
-
+            surfaceContact = true;
         }
 
         public override void Update(GameTime gameTime)
         {
-            //Move(gameTime);
+            enemyHonkTimer++;
+            
+            velocity = new Vector2(0, 0);
 
-            //Fjende movement
+
+
+            #region fjendemovement patrulje med pixel afgrænsning
+            //Fjende movement i stedet for Move()
             Position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //Fjende move pattern
-            if (Position.X < 0 || Position.X > 800) //movementbox skal justeres efter ønske
+            if (Position.X <= leftLimit)
             {
-                direction.X *= -1; //Skifter retning
-                honkSound.Play(); //Honk lyd ved retning-skift
+                direction.X = 1;
+                honkSound.Play();
             }
+            else if (Position.X >= rightLimit)
+            {
+                direction.X = -1;
+                honkSound.Play();
+            }
+            #endregion
 
 
+
+            //if (enemyHonkTimer == 5f)
+            //{ 
+            //    honkSound.Play();
+            //}
+
+            //Move(gameTime);
             base.Update(gameTime);
+
         }
 
         #endregion

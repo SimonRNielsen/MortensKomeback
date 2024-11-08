@@ -37,30 +37,6 @@
 /processorParam:TextureFormat=Color
 /build:egg2.png
 
-#begin ../../../Downloads/morten_sprite.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../Downloads/morten_sprite.png;morten_sprite.png
-
-#begin ../../../Downloads/morten_sprite2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../Downloads/morten_sprite2.png;morten_sprite2.png
-
 #begin goose1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -120,6 +96,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:goose5.png
+
+#begin gooseSound_cut.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gooseSound_cut.wav
 
 #begin gooseSound.wav
 /importer:WavImporter
