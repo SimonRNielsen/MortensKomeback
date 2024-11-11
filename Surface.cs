@@ -48,12 +48,10 @@ namespace MortensKomeback
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[6];
+            sprites = new Texture2D[2];
 
-            for (int i = 0; i < sprites.Length; i++)
-            {
-                sprites[i] = content.Load<Texture2D>("Sprite\\tile" + (i + 1));
-            }
+            sprites[0] = content.Load<Texture2D>("Sprite\\dirt_tile1");
+            sprites[1] = content.Load<Texture2D>("Sprite\\grass_tile1");
 
             //Choosen sprite
             this.Sprite = sprites[spriteID - 1];

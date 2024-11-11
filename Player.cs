@@ -109,7 +109,7 @@ namespace MortensKomeback
 
 
 
-            GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
+            GameWorld.Camera.Position = new Vector2(this.Position.X, this.Position.Y); //"Attaches" The viewport to Morten on the X-axis
             base.Update(gameTime);
 
         }
@@ -137,7 +137,7 @@ namespace MortensKomeback
                 spriteEffectIndex = 0;
                 Flipped = false;
                 //Move right
-                velocity += new Vector2(+1, 0); //Test rettelse af Rikke. Skal ikke gemmes
+                velocity += new Vector2(+1, 0); 
             }
             //Normalises the velocity
             if (velocity != Vector2.Zero)
