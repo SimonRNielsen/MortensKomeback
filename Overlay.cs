@@ -119,9 +119,9 @@ namespace MortensKomeback
             switch (healthCount)
             {
                 case 3:
-                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X - 50, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 50, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 150, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X - 50, healthPosition.Y), null, Color.Black, 0, origin, 4f, SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 50, healthPosition.Y), null, Color.Black, 0, origin, 4f, SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 150, healthPosition.Y), null, Color.Black, 0, origin, 4f, SpriteEffects.None, 0.9f);
                     break;
                 case 2:
                     spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X - 50, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
