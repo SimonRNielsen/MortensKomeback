@@ -63,7 +63,7 @@ namespace MortensKomeback
             this.speed = 300f;
             this.fps = 15f;
             this.Health = 3;
-            this.layer = 1;
+            this.layer = 0.9f;
             this.scale = 1;
             this.sprite = sprite;
             Overlay.healthCount = this.Health;
@@ -123,7 +123,7 @@ namespace MortensKomeback
 
 
 
-            GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
+            GameWorld.Camera.Position = this.Position; //"Attaches" The viewport to Morten on the X-axis
             base.Update(gameTime);
 
         }

@@ -16,6 +16,14 @@ namespace MortensKomeback
         private List<GameObject> gameObjects = new List<GameObject>();
         public static List<GameObject> newGameObjects = new List<GameObject>();
         private static Camera2D camera;
+        public static bool leftMouseButtonClick;
+        public static bool exitGame = false;
+        public static bool removeIntro = false;
+        public static bool spawnOutro = false;
+        public static bool win;
+        public static bool loss;
+        public static Vector2 mousePosition;
+        private SpriteFont standardSpriteFont;
 
 #if DEBUG
         public Texture2D collisionTexture;
@@ -35,31 +43,35 @@ namespace MortensKomeback
 
         protected override void Initialize()
         {
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
+            //_graphics.IsFullScreen = true;
+            _graphics.ApplyChanges();
+            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
+
             // TODO: Add your initialization logic here
+
             gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
             //gameObjects.Add(new Player());
+            gameObjects.Add(new IntroScreen(Camera.Position));
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Overlay());
             gameObjects.Add(new Background(_graphics));
             gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
             base.Initialize();
 
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
-            //_graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
 
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObj in gameObjects)
             { gameObj.LoadContent(Content); }
 #if DEBUG
             collisionTexture = Content.Load<Texture2D>("pixel");
+            standardSpriteFont = Content.Load<SpriteFont>("standardSpriteFont");
 #endif
         }
 
@@ -67,6 +79,23 @@ namespace MortensKomeback
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (exitGame)
+                Exit();
+            if (removeIntro)
+            {
+                foreach (GameObject gameObj in gameObjects)
+                {
+                    if (gameObj is IntroScreen || gameObj is Button)
+                    {
+                        gameObj.Health = 0;
+                    }
+                }
+            }
+            var mouseState = Mouse.GetState();
+
+            mousePosition = new Vector2(mouseState.X, mouseState.Y);
+
+            leftMouseButtonClick = mouseState.LeftButton == ButtonState.Pressed;
 
             // TODO: Add your update logic here
             foreach (GameObject gameObject in gameObjects)
@@ -143,6 +172,10 @@ namespace MortensKomeback
                 }
 #endif
             }
+#if DEBUG
+            _spriteBatch.DrawString(standardSpriteFont, $"{mousePosition.X}\n{mousePosition.Y}", Camera.Position, Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
+
+#endif
 
 
             _spriteBatch.End();
@@ -193,5 +226,6 @@ namespace MortensKomeback
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
         }
 #endif
+        
     }
 }
