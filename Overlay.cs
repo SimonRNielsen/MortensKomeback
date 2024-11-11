@@ -19,18 +19,32 @@ namespace MortensKomeback
         private Texture2D killsSprite;
         private Texture2D ammoSprite;
         private Texture2D[] ammoSprites;
-        //Players health. Is public static, so it can be affected by other classes, like the player
-        public static int healthCount;
-        //Players ammo. Is public static, so it can be affected by other classes, like the player
-        public static int playerAmmoCount;
+        private static int healthCount;
+        private static int playerAmmoCount;
         //Count players kills. Is public static, so it can be affected by other classes, like the an enemy when it is killed.
-        public static int killCount;
+        private static int killCount;
         private Vector2 ammoPosition;
         private Vector2 killsPosition;
         private Vector2 healthPosition;
         private SpriteFont mortalKombatFont;
-
         #endregion
+
+        #region Properties
+        /// <summary>
+        /// Property for accessing Players health. It can be affected by other classes, like the player, for example when it is damaged.
+        /// </summary>
+        public static int HealthCount { get => healthCount; set => healthCount = value; }
+        /// <summary>
+        /// Property for accessing Players ammo count. It can be affected by other classes, like the player, for example when it shoots or picks
+        /// up special ammo.
+        /// </summary>
+        public static int PlayerAmmoCount { get => playerAmmoCount; set => playerAmmoCount = value; }
+        /// <summary>
+        /// Property for accessing the count of players kills. It can be affected by other classes, like the an enemy when it is killed.
+        /// </summary>
+        public static int KillCount { get => killCount; set => killCount = value; }
+        #endregion
+        
         #region Constructor
         /// <summary>
         /// Overlays constructor. Sould be added to gameObjects in gameworld, when the game is initialised. 
@@ -49,6 +63,7 @@ namespace MortensKomeback
 
         #endregion
 
+        #region Methods
         /// <summary>
         /// Loads the neccessary sprites for the Overlay
         /// </summary>
@@ -88,11 +103,11 @@ namespace MortensKomeback
 
             //Sets the ammosprite depending on ammocount. If ammocount is over 0, it means that the player is using special ammo, and
             //therefore ammosprite must cahnge to reflect this. 
-            if (playerAmmoCount > 0)
+            if (PlayerAmmoCount > 0)
             {
                 ammoSprite = ammoSprites[1];
             }
-            else if (playerAmmoCount == 0)
+            else if (PlayerAmmoCount == 0)
             {
                 ammoSprite = ammoSprites[0];
             }
@@ -106,18 +121,18 @@ namespace MortensKomeback
             spriteBatch.Draw(ammoSprite, ammoPosition, null, Color.White, 0, origin, 1.5f, SpriteEffects.None, 0.9f);
             spriteBatch.Draw(killsSprite, killsPosition, null, Color.White, 0, origin, 0.5f, SpriteEffects.None, 0.9f);
             spriteBatch.Draw(killsSprite, killsPosition, null, Color.White, 0, origin, 0.5f, SpriteEffects.None, 0.9f);
-            spriteBatch.DrawString(mortalKombatFont, $"Kills: {killCount}", new Vector2(killsPosition.X + 75, killsPosition.Y + (killsSprite.Height / 4)), Color.Black, 0f, new Vector2(0, 5), 3f, SpriteEffects.None, 0.9f);
+            spriteBatch.DrawString(mortalKombatFont, $"Kills: {KillCount}", new Vector2(killsPosition.X + 75, killsPosition.Y + (killsSprite.Height / 4)), Color.Black, 0f, new Vector2(0, 5), 3f, SpriteEffects.None, 0.9f);
             //Draws the text for ammocount. If ammocount is 0, standard ammo is used, and ammo is endless. 
-            if (playerAmmoCount > 0)
+            if (PlayerAmmoCount > 0)
             {
-                spriteBatch.DrawString(mortalKombatFont, $"Ammo: {playerAmmoCount}", new Vector2(ammoPosition.X + 75, ammoPosition.Y + (ammoSprite.Height / 4)), Color.Black, 0f, new Vector2(0, 5), 3f, SpriteEffects.None, 0.9f);
+                spriteBatch.DrawString(mortalKombatFont, $"Ammo: {PlayerAmmoCount}", new Vector2(ammoPosition.X + 75, ammoPosition.Y + (ammoSprite.Height / 4)), Color.Black, 0f, new Vector2(0, 5), 3f, SpriteEffects.None, 0.9f);
             }
             else
             {
                 spriteBatch.DrawString(mortalKombatFont, $"Ammo: infinite", new Vector2(ammoPosition.X + 75, ammoPosition.Y + (ammoSprite.Height / 4)), Color.Black, 0f, new Vector2(0, 5), 3f, SpriteEffects.None, 0.9f);
             }
             //Health is represented by hearts. This switch draws hearts depending on players healthcount. 
-            switch (healthCount)
+            switch (HealthCount)
             {
                 case 3:
                     spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X - 50, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
@@ -134,5 +149,7 @@ namespace MortensKomeback
             }
 
         }
+
+        #endregion
     }
 }
