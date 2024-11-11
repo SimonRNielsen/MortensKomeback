@@ -31,7 +31,7 @@ namespace MortensKomeback
         private SpriteFont mortalKombatFont;
 
         #endregion
-        #region Cosntructor
+        #region Constructor
         /// <summary>
         /// Overlays constructor. Sould be added to gameObjects in gameworld, when the game is initialised. 
         /// </summary>
