@@ -80,10 +80,11 @@ namespace MortensKomeback
             //event when the player is moving. 
             ammoPosition.X = GameWorld.Camera.Position.X - (930 / GameWorld.Camera.Zoom);
             killsPosition.X = GameWorld.Camera.Position.X - (930 / GameWorld.Camera.Zoom);
-            ammoPosition.Y = -(520 / GameWorld.Camera.Zoom);
-            killsPosition.Y = -(480 / GameWorld.Camera.Zoom);
+            ammoPosition.Y = GameWorld.Camera.Position.Y - (520 / GameWorld.Camera.Zoom);
+            killsPosition.Y = GameWorld.Camera.Position.Y - (480 / GameWorld.Camera.Zoom);
             healthPosition.X = GameWorld.Camera.Position.X - (955 / GameWorld.Camera.Zoom);
-            healthPosition.Y = -(460 / GameWorld.Camera.Zoom);
+            healthPosition.Y = GameWorld.Camera.Position.Y - (460 / GameWorld.Camera.Zoom);
+            healthPosition.Y = GameWorld.Camera.Position.Y - (460 / GameWorld.Camera.Zoom);
 
             //Sets the ammosprite depending on ammocount. If ammocount is over 0, it means that the player is using special ammo, and
             //therefore ammosprite must cahnge to reflect this. 
@@ -119,9 +120,9 @@ namespace MortensKomeback
             switch (healthCount)
             {
                 case 3:
-                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X - 50, healthPosition.Y), null, Color.Black, 0, origin, 4f, SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 50, healthPosition.Y), null, Color.Black, 0, origin, 4f, SpriteEffects.None, 0.9f);
-                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 150, healthPosition.Y), null, Color.Black, 0, origin, 4f, SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X - 50, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 50, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
+                    spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X + 150, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
                     break;
                 case 2:
                     spriteBatch.Draw(healthSprite, new Vector2(healthPosition.X - 50, healthPosition.Y), null, Color.White, 0, origin, 4f, SpriteEffects.None, 0.9f);
