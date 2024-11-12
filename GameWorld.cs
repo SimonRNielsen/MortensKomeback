@@ -43,6 +43,7 @@ namespace MortensKomeback
             gameObjects.Add(new Overlay());
             gameObjects.Add(new Background(_graphics));
             gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
+            gameObjects.Add(new KeybindingsOverlay());
             base.Initialize();
 
             _graphics.PreferredBackBufferWidth = 1920;
@@ -135,7 +136,7 @@ namespace MortensKomeback
             {
                 gameObject.Draw(_spriteBatch);
 #if DEBUG
-                if (!(gameObject is Overlay)) //Overlay doesn't have sprite declared, so it will give an exception, when trying to draw collisionbox.
+                if (!(gameObject is Overlay) && !(gameObject is KeybindingsOverlay)) //Overlay doesn't have sprite declared, so it will give an exception, when trying to draw collisionbox.
                     DrawCollisionBox(gameObject);
                 if (gameObject is Surface)
                 {
