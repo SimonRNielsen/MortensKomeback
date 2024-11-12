@@ -39,7 +39,7 @@ namespace MortensKomeback
             gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
             //gameObjects.Add(new Player());
             gameObjects.Add(new CharacterGenerator());
-            gameObjects.Add(new Background(_graphics));
+            gameObjects.Add(new Background());
             gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
             base.Initialize();
 
@@ -72,40 +72,29 @@ namespace MortensKomeback
             {
                 foreach (GameObject other in gameObjects)
                 {
-                    if (gameObject is Player && other is Enemy)
-                    {
-                        gameObject.CheckCollision(other);
-                        other.CheckCollision(gameObject);
-                    }
+                    if (gameObject == other) 
+                        continue;
 
-                    if (gameObject is Player && other is Surface)
+                    if (gameObject is Player)
                     {
-                        gameObject.CheckCollision(other);
-                        other.CheckCollision(gameObject);
+                        if (other is Enemy || other is Surface || other is Ammo || other is PowerUp)
+                        {
+                            gameObject.CheckCollision(other);
+                        }
                     }
-
-                    if (gameObject is Enemy && other is Surface)
+                    else if (gameObject is Enemy)
                     {
-                        gameObject.CheckCollision(other);
-                        other.CheckCollision(gameObject);
+                        if (other is Surface || other is Ammo)
+                        {
+                            gameObject.CheckCollision(other);
+                        }
                     }
-
-                    if (gameObject is Ammo && other is Surface)
+                    else if (gameObject is Ammo)
                     {
-                        gameObject.CheckCollision(other);
-                        other.CheckCollision(gameObject);
-                    }
-
-                    if (gameObject is Ammo && other is Enemy)
-                    {
-                        gameObject.CheckCollision(other);
-                        other.CheckCollision(gameObject);
-                    }
-
-                    if (gameObject is PowerUp && other is Player)
-                    {
-                        gameObject.CheckCollision(other);
-                        other.CheckCollision(gameObject);
+                        if (other is Surface || other is Enemy)
+                        {
+                            gameObject.CheckCollision(other);
+                        }
                     }
                 }
                 gameObject.Update(gameTime);
@@ -128,7 +117,6 @@ namespace MortensKomeback
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin(transformMatrix: Camera.GetTransformation(), samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.FrontToBack);
-
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(_spriteBatch);
@@ -141,8 +129,6 @@ namespace MortensKomeback
                 }
 #endif
             }
-
-
             _spriteBatch.End();
 
             base.Draw(gameTime);

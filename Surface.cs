@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,21 +13,20 @@ namespace MortensKomeback
     internal class Surface : GameObject
     {
         #region field
-        private GraphicsDeviceManager _graphics;
         private int spriteID; //Which sprite is going to be used
-
-
+        private static Texture2D sprite1;
+        private static Texture2D sprite2;
         #endregion
 
         #region properties
         public Rectangle LeftSideCollisionBox
         {
-            get { return new Rectangle((int)Position.X - ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 10, 2, (Sprite.Height) - 20); }
+            get; private set;
         }
 
         public Rectangle RightSideCollisionBox
         {
-            get { return new Rectangle((int)Position.X + ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 10, 2, (Sprite.Height) - 20); }
+            get; private set;
         }
 
         #endregion
@@ -34,7 +34,6 @@ namespace MortensKomeback
         #region constructor
         public Surface(GraphicsDeviceManager graphics, Vector2 position, int spriteID)
         {
-            this._graphics = graphics;
             this.position.X = position.X;
             this.position.Y = position.Y;
             this.layer = 0.1f;
@@ -48,24 +47,34 @@ namespace MortensKomeback
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[2];
-
-            sprites[0] = content.Load<Texture2D>("Sprite\\dirt_tile1");
-            sprites[1] = content.Load<Texture2D>("Sprite\\grass_tile1");
-
-            //Choosen sprite
-            this.Sprite = sprites[spriteID - 1];
+            if(sprite1 == default)
+            {
+                sprite1 = content.Load<Texture2D>("Sprite\\dirt_tile1");
+            }
+            if(sprite2 == default)
+            {
+                sprite2 = content.Load<Texture2D>("Sprite\\grass_tile1");
+            }
+            if (spriteID == 1)
+            {
+                this.Sprite = sprite1;
+            }
+            if (spriteID == 2)
+            {
+                this.Sprite = sprite2;
+            }
+            LeftSideCollisionBox = new Rectangle((int)Position.X - ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 10, 2, (Sprite.Height) - 20);
+            RightSideCollisionBox = new Rectangle((int)Position.X + ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 10, 2, (Sprite.Height) - 20);
+           
         }
 
 
         public override void OnCollision(GameObject gameObject)
         {
-            //throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
         }
 
         /// <summary>

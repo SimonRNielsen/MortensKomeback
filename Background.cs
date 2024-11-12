@@ -13,7 +13,6 @@ namespace MortensKomeback
     internal class Background : GameObject
     {
         #region field
-        private GraphicsDeviceManager _graphics;
 
         #endregion
 
@@ -22,9 +21,8 @@ namespace MortensKomeback
         #endregion
 
         #region constructor
-        public Background(GraphicsDeviceManager graphics)
+        public Background()
         {
-            this._graphics = graphics;
             this.layer = 0f;
             this.scale = 1f;
             this.position.X = 1;

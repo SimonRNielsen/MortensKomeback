@@ -14,7 +14,6 @@ namespace MortensKomeback
     {
 
         #region field
-        private GraphicsDeviceManager _graphics;
         private int startSprite = 0; //It's starting with sprite 0
 
 
@@ -27,10 +26,6 @@ namespace MortensKomeback
         #region constructor
         public AvSurface(GraphicsDeviceManager graphics, Vector2 position, int numberSprite) : base(graphics, position, numberSprite)
         {
-            this._graphics = graphics;
-            this.position.X = position.X;
-            this.position.Y = position.Y;
-            this.layer = 0.1f;
             this.startSprite = numberSprite;
             this.health = 1;
             this.fps = 0.07f; //Not sure if it's the correkt amount

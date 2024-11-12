@@ -16,8 +16,8 @@ namespace MortensKomeback
         private GraphicsDeviceManager _graphics;
         private List<GameObject> surfaces = new List<GameObject>();
 
-        private int tileHeight = 200 - 1;
-        private int tileWidth = 200 - 1;
+        private int tileHeight = 199;
+        private int tileWidth = 199;
 
 
         #endregion
@@ -34,15 +34,13 @@ namespace MortensKomeback
         /// <param name="graphics"></param>
         public Environment(GraphicsDeviceManager graphics)
         {
-            surfaces.Add(new Background(_graphics));
-
             #region button
             //First buttom
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight , 2, 1, 31); // Græstop på jorden (Morten spawner på den rigtige overflade)
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 1, 31); // Jordbund
-            
+
             //Second buttom
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight, 2, 34, 49); 
+            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight, 2, 34, 49);
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 34, 49);
 
             //Third buttom
@@ -52,7 +50,7 @@ namespace MortensKomeback
             //Forth buttom
             for (int i = -1; i < 3; i++)
             {
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight + (tileHeight * i), 1, 109, 110);
+                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight + (tileHeight * i), 1, 109, 110);
             }
             AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 109, 110);
 
@@ -190,19 +188,37 @@ namespace MortensKomeback
             #endregion
 
             #region end hill
-            
-
-            for (int j = 0; j < 4; j++)
+            for (int i = 0; i < 5; i++)
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    AddSurface(tileWidth * (225 + i + j), graphics.PreferredBackBufferHeight - (tileHeight * (i + j)), 2);
-                    AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + j)), 1, 227 + i + j, 232 + j);
-                }
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (5 + j)), 2, 231 + j, 232 + j);
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (6 + j)), 2, 233 + j, 237 + j);
+                AddSurface(tileWidth * (225 + i), graphics.PreferredBackBufferHeight - (tileHeight * i), 2);
+                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * i), 1, 227 + i, 232);
             }
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2, 231, 232);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2, 233, 237);
 
+            for (int i = 0; i < 5; i++)
+            {
+                AddSurface(tileWidth * (237 + i), graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 2);
+                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 1, 239 + i, 244);
+            }
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 11), 2, 243, 245);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 12), 2, 246, 248);
+
+            for (int i = 0; i < 5; i++)
+            {
+                AddSurface(tileWidth * (248 + i), graphics.PreferredBackBufferHeight - (tileHeight * (i + 13)), 2);
+                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 13)), 1, 250 + i, 255);
+            }
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 18), 2, 254, 256);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 19), 2, 257, 267);
+
+            for (int i = 0; i < 5; i++)
+            {
+                AddSurface(tileWidth * (267 + i), graphics.PreferredBackBufferHeight - (tileHeight * (i + 20)), 2);
+                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 20)), 1, 250 + i, 255);
+            }
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 25), 2, 273, 275);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 26), 2, 276, 300);
             #endregion
         }
         #endregion
@@ -225,10 +241,11 @@ namespace MortensKomeback
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <param name="spriteId">The sprite of the Surface</param>
-        /// <param name="times">The number of time the Surface is added</param>
-        private void AddSurfaces(float x, float y, int spriteId, int start, int times) /// Lav ændring
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex">The number of time the Surface is added</param>
+        private void AddSurfaces(float x, float y, int spriteId, int startIndex, int endIndex) /// Lav ændring
         {
-            for (int i = start-1; i < times; i++)
+            for (int i = startIndex-1; i < endIndex; i++)
             {
                 AddSurface(x * i, y, spriteId);
             }
