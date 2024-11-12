@@ -44,7 +44,7 @@ namespace MortensKomeback
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (!(surfaceContact || position.Y > 500)) //|| and after, is because we don't yet have surfaces.
+            if (!(surfaceContact))
             {
                 if (velocity.Y == 0)
                     velocity.Y += 1;

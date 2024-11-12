@@ -121,8 +121,7 @@ namespace MortensKomeback
 
 
 
-            GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
-
+            GameWorld.Camera.Position = this.Position; //"Attaches" The viewport to Morten
         }
 
         /// <summary>

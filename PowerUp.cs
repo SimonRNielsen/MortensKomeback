@@ -20,7 +20,7 @@ namespace MortensKomeback
         {
 
             if (type > 1)
-                type = random.Next(0,2);
+                type = random.Next(0, 2);
             this.powerUpType = type;
             this.position = placement;
             this.health = 1;
@@ -62,7 +62,10 @@ namespace MortensKomeback
 
                 if (powerUpType == 1)
                 {
-                    gameObject.Health++;
+                    if (gameObject.Health < 3)
+                    {
+                        gameObject.Health++;
+                    }
                 }
 
             }
