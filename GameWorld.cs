@@ -18,8 +18,9 @@ namespace MortensKomeback
         private static Camera2D camera;
         public static bool leftMouseButtonClick;
         public static bool exitGame = false;
-        public static bool removeIntro = false;
+        public static bool removeScreen = false;
         public static bool spawnOutro = false;
+        private bool mortenLives = true;
         public static bool win;
         public static bool loss;
         public static Vector2 mousePosition;
@@ -51,9 +52,11 @@ namespace MortensKomeback
 
             // TODO: Add your initialization logic here
 
-            gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
+            gameObjects.Add(new PowerUp(new Vector2(150, 500), 0));
+            gameObjects.Add(new PowerUp(new Vector2(450, 500), 1));
             //gameObjects.Add(new Player());
             gameObjects.Add(new IntroScreen(Camera.Position));
+            gameObjects.Add(new MousePointer(_graphics));
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Overlay());
             gameObjects.Add(new Background(_graphics));
@@ -81,7 +84,7 @@ namespace MortensKomeback
                 Exit();
             if (exitGame)
                 Exit();
-            if (removeIntro)
+            if (removeScreen)
             {
                 foreach (GameObject gameObj in gameObjects)
                 {
@@ -90,6 +93,7 @@ namespace MortensKomeback
                         gameObj.Health = 0;
                     }
                 }
+                removeScreen = false;
             }
             var mouseState = Mouse.GetState();
 
@@ -98,10 +102,17 @@ namespace MortensKomeback
             leftMouseButtonClick = mouseState.LeftButton == ButtonState.Pressed;
 
             // TODO: Add your update logic here
+            mortenLives = false;
             foreach (GameObject gameObject in gameObjects)
             {
                 foreach (GameObject other in gameObjects)
                 {
+                    if (gameObject is MousePointer && other is Button)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
                     if (gameObject is Player && other is Enemy)
                     {
                         gameObject.CheckCollision(other);
@@ -139,6 +150,14 @@ namespace MortensKomeback
                     }
                 }
                 gameObject.Update(gameTime);
+
+                if (gameObject is Player || gameObject is CharacterGenerator || gameObject is OutroScreen)
+                    mortenLives = true;
+                //if (gameObject is OutroScreen && !spawnOutro)
+                //{
+                //    gameObject.LoadContent(Content);
+                //    spawnOutro = true;
+                //}
             }
             foreach (GameObject newGameObject in newGameObjects)
             {
@@ -148,6 +167,12 @@ namespace MortensKomeback
             newGameObjects.Clear();
 
             gameObjects.RemoveAll(gameObject => gameObject.Health < 1);
+            //spawn Outroscreen
+            if (!mortenLives)
+            {
+                //spawnOutro = true;
+                newGameObjects.Add(new OutroScreen(Camera.Position));
+            }
 
             base.Update(gameTime);
         }
@@ -226,6 +251,6 @@ namespace MortensKomeback
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
         }
 #endif
-        
+
     }
 }

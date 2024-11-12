@@ -33,7 +33,7 @@ namespace MortensKomeback
         private SpriteFont standardSpriteFont;
 
 
-        public Rectangle CollisionBox
+        public virtual Rectangle CollisionBox
         {
             get { return new Rectangle((int)Position.X - (Sprite.Width / 2), (int)Position.Y - (Sprite.Height / 2), Sprite.Width, Sprite.Height); }
         }

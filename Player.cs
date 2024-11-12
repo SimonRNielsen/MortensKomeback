@@ -184,6 +184,10 @@ namespace MortensKomeback
                 canJump = true;
             }
             */
+#if DEBUG
+            if (keyState.IsKeyDown(Keys.K))
+                this.health = 0;
+#endif
         }
 
         /// <summary>
