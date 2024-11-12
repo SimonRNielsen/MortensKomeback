@@ -1,12 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Audio;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
@@ -14,15 +9,18 @@ namespace MortensKomeback
     {
 
         private int powerUpType;
+        Random random = new Random();
 
         /// <summary>
         /// Powerup Creator
         /// </summary>
         /// <param name="placement">X and Y vector placement for spawning the item</param>
-        /// <param name="type">0 for ammo PowerUp, 1 for healing PowerUp</param>
+        /// <param name="type">0 for ammo PowerUp, 1 for healing PowerUp, above 1 for random</param>
         public PowerUp(Vector2 placement, int type)
         {
 
+            if (type > 1)
+                type = random.Next(0, 2);
             this.powerUpType = type;
             this.position = placement;
             this.health = 1;
@@ -39,15 +37,8 @@ namespace MortensKomeback
 
             sprites = new Texture2D[2];
             this.sprites[0] = content.Load<Texture2D>("egg2");
-            //this.sprites[1] = content.Load<Texture2D>("");
-            try
-            {
-                this.sprite = sprites[powerUpType];
-            }
-            catch (IndexOutOfRangeException)
-            {
-                this.sprite = sprites[0];
-            }
+            this.sprites[1] = content.Load<Texture2D>("wallTurkey");
+            this.sprite = sprites[powerUpType];
             this.position.Y -= sprite.Height / 2;
 
         }
@@ -71,7 +62,10 @@ namespace MortensKomeback
 
                 if (powerUpType == 1)
                 {
-                    gameObject.Health = 3;
+                    if (gameObject.Health < 3)
+                    {
+                        gameObject.Health++;
+                    }
                 }
 
             }
