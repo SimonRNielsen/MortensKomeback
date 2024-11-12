@@ -139,6 +139,18 @@
 /processorParam:TextureFormat=Color
 /build:groundegg2.png
 
+#begin heartSprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:heartSprite.png
+
 #begin laserGreen16.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -150,6 +162,25 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:laserGreen16.png;testAmmo.png
+
+#begin mortalKombatFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:mortalKombatFont.spritefont
+
+#begin morten_sprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:morten_sprite.png
 
 #begin morten_sprite.png
 /importer:TextureImporter

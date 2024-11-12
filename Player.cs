@@ -25,9 +25,12 @@ namespace MortensKomeback
         private bool flipped = false;
         private int ammoHealth = 1;
         private int ammoSprite = 0;
-        private int ammoCount = 10;
+        private int ammoCount = 0;
         private float smoothJump = 0.21f;
         private float jumpingTime = 0.2f;
+        private float invincibleCooldown = 1f; //Used to make player invincible after damaging collison
+        private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
+        private bool invincible = false; //Used to make player invincible after damaging collison
 
 
         /// <summary>
@@ -63,7 +66,7 @@ namespace MortensKomeback
             this.layer = 1;
             this.scale = 1;
             this.sprite = sprite;
-            Overlay.healthCount = this.Health;
+            Overlay.HealthCount = this.Health;
         }
 
 
@@ -84,7 +87,13 @@ namespace MortensKomeback
         public override void OnCollision(GameObject gameObject)
         {
             surfaceContact = true;
-            Overlay.healthCount = this.Health;
+            if (gameObject is Enemy && !invincible)
+            {
+                this.Health--;
+                invincibleTimer = 0;
+                invincible = true;
+            }
+            Overlay.HealthCount = this.Health;
            /* if (gameObject is Surface)
                 this.velocity.Y = 0;
         */
@@ -92,6 +101,11 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
+            invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (invincibleTimer>invincibleCooldown)
+            {
+                invincible = false;
+            }
             if (ammoCount <= 0)
             {
                 this.ammoCount = 0;
@@ -101,9 +115,9 @@ namespace MortensKomeback
             smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
             HandleInput();
             if (smoothJump < jumpingTime)
-                velocity -= new Vector2(0, +4);
+                velocity -= new Vector2(0, +8);
             
-            if (smoothJump > 1.3f)
+            if (surfaceContact)
                 canJump = true;
             Move(gameTime);
 
@@ -181,7 +195,7 @@ namespace MortensKomeback
             if (ammoCount > 0)
             {
                 ammoCount--;
-                Overlay.playerAmmoCount = this.ammoCount;
+                Overlay.PlayerAmmoCount = this.ammoCount;
             }
             GameWorld.newGameObjects.Add(new Ammo(this, ammoHealth, ammoSprite));
         }
@@ -202,7 +216,7 @@ namespace MortensKomeback
             this.ammoSprite = 1;
             this.ammoHealth = 3;
             this.ammoCount += 10;
-            Overlay.playerAmmoCount = this.ammoCount;
+            Overlay.PlayerAmmoCount = this.ammoCount;
         }
 
         #endregion
