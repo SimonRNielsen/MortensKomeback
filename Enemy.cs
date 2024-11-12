@@ -22,6 +22,11 @@ namespace MortensKomeback
         private Vector2 direction;
         private Random rnd = new Random();
         private SpriteEffects spriteEffects;
+
+        private SharpDX.Direct2D1.Transform player;
+        private float distance;
+        public float moveSpeed;
+        public float howClose;
         #endregion
 
 
@@ -57,6 +62,7 @@ namespace MortensKomeback
 
             //Indlæs honk Lyd
             honkSound = content.Load<SoundEffect>("gooseSound_cut");
+
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -85,11 +91,6 @@ namespace MortensKomeback
             else
             {
                 spriteEffects = SpriteEffects.None;
-            }
-
-            if (Player )
-            {
-
             }
 
             velocity = new Vector2(0, 0);
