@@ -14,7 +14,6 @@ namespace MortensKomeback
     {
 
         #region field
-        private GraphicsDeviceManager _graphics;
         private int startSprite = 0; //It's starting with sprite 0
 
 
@@ -27,26 +26,23 @@ namespace MortensKomeback
         #region constructor
         public AvSurface(GraphicsDeviceManager graphics, Vector2 position, int numberSprite) : base(graphics, position, numberSprite)
         {
-            this._graphics = graphics;
-            this.position.X = position.X;
-            this.position.Y = position.Y;
-            this.layer = 0.1f;
             this.startSprite = numberSprite;
             this.health = 1;
-            this.fps = 0.07f; //Not sure if it's the correkt amount
+            this.fps = 2f; //Not sure if it's the correkt amount
+            this.layer = 0f;
         }
 
         #endregion
 
         #region method
 
-        public override void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content) //Skal have de rigtige sprites
         {
-            sprites = new Texture2D[6];
+            sprites = new Texture2D[4];
 
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("Sprite\\tile" + (i + 1));
+                sprites[i] = content.Load<Texture2D>("Sprite\\avsurfaceILD" + (i + 1));
             }
 
             //Start sprite

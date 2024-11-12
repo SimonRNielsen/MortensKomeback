@@ -27,7 +27,7 @@ namespace MortensKomeback
         protected int health;
         private int currentIndex;
         protected int spriteEffectIndex;
-        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[2] { SpriteEffects.None, SpriteEffects.FlipHorizontally }; 
+        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[3] { SpriteEffects.None, SpriteEffects.FlipHorizontally, SpriteEffects.FlipVertically }; 
         public static bool leftMouseButtonClick;
         public static Vector2 mousePosition;
         private SpriteFont standardSpriteFont;
@@ -43,6 +43,7 @@ namespace MortensKomeback
         public Texture2D Sprite { get => sprite; set => sprite = value; }
 
         public int Health { get => health; set => health = value; }
+        public float Speed { get => speed;set => speed = value; }
 
         public abstract void OnCollision(GameObject gameObject);
 
@@ -78,7 +79,7 @@ namespace MortensKomeback
         protected void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            position += ((velocity * speed) * deltaTime);
+            position += ((velocity * Speed) * deltaTime);
         }
 
 

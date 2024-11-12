@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,13 +14,20 @@ namespace MortensKomeback
     internal class Surface : GameObject
     {
         #region field
-        private GraphicsDeviceManager _graphics;
         private int spriteID; //Which sprite is going to be used
-
-
+        private static Texture2D sprite1;
+        private static Texture2D sprite2;
+        private static Texture2D sprite3;
+        private static Texture2D sprite4;
+        private static Texture2D sprite5;
         #endregion
 
         #region properties
+        public override Rectangle CollisionBox
+        {
+            get { return new Rectangle((int)(Position.X - (Sprite.Width / 2) + 25), (int)Position.Y - (Sprite.Height / 2), Sprite.Width - 50, Sprite.Height / 2); }
+        }
+
         public Rectangle LeftSideCollisionBox
         {
             get { return new Rectangle((int)Position.X - ((Sprite.Width / 2) + 2), (int)Position.Y - (Sprite.Height / 2) + 15, 2, (Sprite.Height) - 30); }
@@ -34,7 +43,6 @@ namespace MortensKomeback
         #region constructor
         public Surface(GraphicsDeviceManager graphics, Vector2 position, int spriteID)
         {
-            this._graphics = graphics;
             this.position.X = position.X;
             this.position.Y = position.Y;
             this.layer = 0.1f;
@@ -48,26 +56,59 @@ namespace MortensKomeback
 
         public override void LoadContent(ContentManager content)
         {
-            sprites = new Texture2D[6];
-
-            for (int i = 0; i < sprites.Length; i++)
+            
+            if(sprite1 == default)
             {
-                sprites[i] = content.Load<Texture2D>("Sprite\\tile" + (i + 1));
+                sprite1 = content.Load<Texture2D>("Sprite\\dirt_tile1");
+            }
+            if(sprite2 == default)
+            {
+                sprite2 = content.Load<Texture2D>("Sprite\\grass_tile1");
+            }
+            if (sprite3 == default)
+            {
+                sprite3 = content.Load<Texture2D>("Sprite\\cloud5");
+            }
+            if (sprite4 == default)
+            {
+                sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
+            }
+            if (sprite5 == default)
+            {
+                sprite5 = content.Load<Texture2D>("Sprite\\mitre");
             }
 
-            //Choosen sprite
-            this.Sprite = sprites[spriteID - 1];
+            if (spriteID == 1)
+            {
+                this.Sprite = sprite1;
+            }
+            if (spriteID == 2)
+            {
+                this.Sprite = sprite2;
+            }
+            if (spriteID == 3)
+            {
+                this.Sprite = sprite3;
+                spriteEffectIndex = 2;
+            }
+            if (spriteID == 4)
+            {
+                this.Sprite = sprite4;
+                spriteEffectIndex = 2;
+            }
+            if (spriteID == 5)
+            {
+                this.Sprite = sprite5;
+            }
         }
 
 
         public override void OnCollision(GameObject gameObject)
         {
-            //throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
         }
 
         /// <summary>

@@ -13,7 +13,9 @@ namespace MortensKomeback
     internal class Background : GameObject
     {
         #region field
-        private GraphicsDeviceManager _graphics;
+        private static Texture2D sprite1;
+        private static Texture2D sprite2;
+        private int spriteID; //Which sprite is going to be used
 
         #endregion
 
@@ -22,14 +24,15 @@ namespace MortensKomeback
         #endregion
 
         #region constructor
-        public Background(GraphicsDeviceManager graphics)
+        public Background(int spriteID)
         {
-            this._graphics = graphics;
             this.layer = 0f;
             this.scale = 1f;
             this.position.X = 1;
             this.position.Y = 1;
             this.health = 1;
+            this.spriteID = spriteID;
+
         }
 
         #endregion
@@ -41,7 +44,29 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            Sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
+            //Sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
+
+            if (sprite1 == default)
+            {
+                sprite1 = content.Load<Texture2D>("Sprite\\backgroundTEst");
+            }
+            if (sprite2 == default)
+            {
+                sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
+            }
+            
+
+            if (spriteID == 1)
+            {
+                this.Sprite = sprite1;
+            }
+            if (spriteID == 2)
+            {
+                this.Sprite = sprite2;
+                position.X = 200 * 150;
+                position.Y = -512;
+            }
+            
         }
 
         /// <summary>

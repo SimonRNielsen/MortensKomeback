@@ -60,7 +60,7 @@ namespace MortensKomeback
         {
             this.position.X = 0;
             this.position.Y = 0;
-            this.speed = 1000f;
+            this.speed = 400f; //Husk at ændre tilbage til 300f
             this.fps = 15f;
             this.Health = 3;
             this.layer = 0.9f;
@@ -147,7 +147,7 @@ namespace MortensKomeback
                 spriteEffectIndex = 0;
                 Flipped = false;
                 //Move right
-                velocity += new Vector2(+1, 0);
+                velocity += new Vector2(+1, 0); 
             }
             //Normalises the velocity
             if (velocity != Vector2.Zero)
