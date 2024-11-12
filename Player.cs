@@ -94,9 +94,6 @@ namespace MortensKomeback
                 invincible = true;
             }
             Overlay.HealthCount = this.Health;
-            /* if (gameObject is Surface)
-                 this.velocity.Y = 0;
-         */
         }
 
         public override void Update(GameTime gameTime)
