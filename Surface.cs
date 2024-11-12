@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace MortensKomeback
         private int spriteID; //Which sprite is going to be used
         private static Texture2D sprite1;
         private static Texture2D sprite2;
+        private static Texture2D sprite3;
+        private static Texture2D sprite4;
+        private static Texture2D sprite5;
         #endregion
 
         #region properties
@@ -47,6 +51,7 @@ namespace MortensKomeback
 
         public override void LoadContent(ContentManager content)
         {
+            
             if(sprite1 == default)
             {
                 sprite1 = content.Load<Texture2D>("Sprite\\dirt_tile1");
@@ -55,6 +60,19 @@ namespace MortensKomeback
             {
                 sprite2 = content.Load<Texture2D>("Sprite\\grass_tile1");
             }
+            if (sprite3 == default)
+            {
+                sprite3 = content.Load<Texture2D>("Sprite\\cloud5");
+            }
+            if (sprite4 == default)
+            {
+                sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
+            }
+            if (sprite5 == default)
+            {
+                sprite5 = content.Load<Texture2D>("Sprite\\mitre");
+            }
+
             if (spriteID == 1)
             {
                 this.Sprite = sprite1;
@@ -63,9 +81,20 @@ namespace MortensKomeback
             {
                 this.Sprite = sprite2;
             }
-
-            //Choosen sprite
-            this.Sprite = sprites[spriteID - 1];
+            if (spriteID == 3)
+            {
+                this.Sprite = sprite3;
+                spriteEffectIndex = 2;
+            }
+            if (spriteID == 4)
+            {
+                this.Sprite = sprite4;
+                spriteEffectIndex = 2;
+            }
+            if (spriteID == 5)
+            {
+                this.Sprite = sprite5;
+            }
         }
 
 

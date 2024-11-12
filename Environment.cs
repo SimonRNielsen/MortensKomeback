@@ -55,8 +55,9 @@ namespace MortensKomeback
             AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 109, 110);
 
             //Fifth buttom
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight, 2, 124, 225);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 124, 225);
+            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight, 2, 124, 180);
+            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 124, 180);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight + tileHeight, 1, 181, 182);
             #endregion
 
             #region hill
@@ -97,12 +98,10 @@ namespace MortensKomeback
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - tileHeight, 1, 29, 29);
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 29, 29);
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 2), 1, 30, 30);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 3), 2, 30, 30);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 3), 1, 31, 31);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 4), 2, 31, 32);
-            AddSurface((tileWidth * 34), graphics.PreferredBackBufferHeight - (tileHeight * 5), 2); //Tile 34
+            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 3), 2, 30, 31);
+            AddSurface(tileWidth * 33, graphics.PreferredBackBufferHeight - (tileHeight * 5), 4);
 
-            AddSurface((tileWidth * 35), graphics.PreferredBackBufferHeight - (tileHeight * 6), 2); //Tile 35
+            AddSurface((tileWidth * 35), graphics.PreferredBackBufferHeight - (tileHeight * 6), 2); 
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 7), 2, 39, 41);
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 9), 2, 36, 38);
 
@@ -113,18 +112,18 @@ namespace MortensKomeback
             AddSurface(tileWidth * 69, graphics.PreferredBackBufferHeight - tileHeight, 1);
             AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 70, 71);
 
-            AddSurface(tileWidth * 72, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2);
-            AddSurface(tileWidth * 74, graphics.PreferredBackBufferHeight - (tileHeight * 4), 2);
-            AddSurface(tileWidth * 76, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2);
-            AddSurface(tileWidth * 78, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2);
-            AddSurface(tileWidth * 80, graphics.PreferredBackBufferHeight - (tileHeight * 7), 2);
+            AddSurface(tileWidth * 73, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2);
+
+            AddSurface(tileWidth * 76, graphics.PreferredBackBufferHeight - (tileHeight * 5), 4);
+            AddSurface(tileWidth * 79, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2);
+            AddSurface(tileWidth * 82, graphics.PreferredBackBufferHeight - (tileHeight * 7), 2);
 
             AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2, 84, 85);
 
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 9), 2, 84, 85);
-            for (int i = 0; i < 11; i++)
+            AddSurface(tileWidth * 84, graphics.PreferredBackBufferHeight - (tileHeight * 9), 4);
+            for (int i = 0; i < 12; i++)
             {
-                AddSurface(tileWidth * (88 + i * 3), graphics.PreferredBackBufferHeight - (tileHeight * 9), 2);
+                AddSurface(tileWidth * (87 + i * 3), graphics.PreferredBackBufferHeight - (tileHeight * 9), 3);
             }
 
             #endregion
@@ -137,7 +136,7 @@ namespace MortensKomeback
             AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 11), 2, 28, 31);
 
             //Second platform
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2, 55, 56);
+            AddSurface(tileWidth * 54, graphics.PreferredBackBufferHeight - (tileHeight * 5), 4);
 
             AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 1, 59, 66);
             AddSurface(tileWidth * 66, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2);
@@ -187,38 +186,40 @@ namespace MortensKomeback
             AddSurface(tileWidth * 51, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2);
             #endregion
 
-            #region end hill
+            #region obstacles
+            //Mitre
+            AddSurface(tileWidth * 34, graphics.PreferredBackBufferHeight, 5);
+            AddSurface(tileWidth * 139, graphics.PreferredBackBufferHeight, 5);
+            AddSurface(tileWidth * 170, graphics.PreferredBackBufferHeight, 5);
+
+
+            #endregion
+
+            #region stairways to heaven
+            int n = 45;
             for (int i = 0; i < 5; i++)
             {
-                AddSurface(tileWidth * (225 + i), graphics.PreferredBackBufferHeight - (tileHeight * i), 2);
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * i), 1, 227 + i, 232);
+                AddSurface(tileWidth * (225 + i - n), graphics.PreferredBackBufferHeight - (tileHeight * i), 2);
+                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * i), 1, 227 + i - n, 229 + i - n);
             }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2, 231, 232);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2, 233, 237);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2, 231 - n, 232 - n);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2, 233 - n, 237 - n);
 
             for (int i = 0; i < 5; i++)
             {
-                AddSurface(tileWidth * (237 + i), graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 2);
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 1, 239 + i, 244);
+                AddSurface(tileWidth * (237 + i - n), graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 2);
+                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 1, 239 + i - n, 241 + i - n);
             }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 11), 2, 243, 245);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 12), 2, 246, 248);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 11), 2, 198, 200);
+            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 12), 2, 201, 203);
 
-            for (int i = 0; i < 5; i++)
-            {
-                AddSurface(tileWidth * (248 + i), graphics.PreferredBackBufferHeight - (tileHeight * (i + 13)), 2);
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 13)), 1, 250 + i, 255);
-            }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 18), 2, 254, 256);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 19), 2, 257, 267);
+            #endregion
 
-            for (int i = 0; i < 5; i++)
-            {
-                AddSurface(tileWidth * (267 + i), graphics.PreferredBackBufferHeight - (tileHeight * (i + 20)), 2);
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 20)), 1, 250 + i, 255);
-            }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 25), 2, 273, 275);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 26), 2, 276, 300);
+            #region AvSurface
+            AddAvSurface(tileWidth * 99, graphics.PreferredBackBufferHeight + (tileHeight * 1.5f), 1);
+            AddAvSurface(tileWidth * 115, graphics.PreferredBackBufferHeight + (tileHeight * 1.5f), 1);
+
+
             #endregion
         }
         #endregion

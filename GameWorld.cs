@@ -40,8 +40,8 @@ namespace MortensKomeback
             //gameObjects.Add(new Player());
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Overlay());
-            gameObjects.Add(new Background(_graphics));
-            gameObjects.Add(new Background());
+            gameObjects.Add(new Background(1));
+            gameObjects.Add(new Background(2));
             gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
             gameObjects.Add(new KeybindingsOverlay());
             base.Initialize();
@@ -80,9 +80,10 @@ namespace MortensKomeback
 
                     if (gameObject is Player)
                     {
-                        if (other is Enemy || other is Surface || other is Ammo || other is PowerUp)
+                        if (other is Enemy || other is Surface || other is PowerUp)
                         {
                             gameObject.CheckCollision(other);
+                            other.CheckCollision(gameObject);
                         }
                     }
                     else if (gameObject is Enemy)
@@ -90,6 +91,7 @@ namespace MortensKomeback
                         if (other is Surface || other is Ammo)
                         {
                             gameObject.CheckCollision(other);
+                            other.CheckCollision(gameObject);
                         }
                     }
                     else if (gameObject is Ammo)
@@ -97,6 +99,7 @@ namespace MortensKomeback
                         if (other is Surface || other is Enemy)
                         {
                             gameObject.CheckCollision(other);
+                            other.CheckCollision(gameObject);
                         }
                     }
                 }

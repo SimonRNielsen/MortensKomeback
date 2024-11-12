@@ -28,20 +28,21 @@ namespace MortensKomeback
         {
             this.startSprite = numberSprite;
             this.health = 1;
-            this.fps = 0.07f; //Not sure if it's the correkt amount
+            this.fps = 2f; //Not sure if it's the correkt amount
+            this.layer = 0f;
         }
 
         #endregion
 
         #region method
 
-        public override void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content) //Skal have de rigtige sprites
         {
-            sprites = new Texture2D[6];
+            sprites = new Texture2D[4];
 
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("Sprite\\tile" + (i + 1));
+                sprites[i] = content.Load<Texture2D>("Sprite\\avsurfaceILD" + (i + 1));
             }
 
             //Start sprite
