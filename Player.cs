@@ -63,7 +63,7 @@ namespace MortensKomeback
             this.speed = 1000f;
             this.fps = 15f;
             this.Health = 3;
-            this.layer = 1;
+            this.layer = 0.9f;
             this.scale = 1;
             this.sprite = sprite;
             Overlay.HealthCount = this.Health;
@@ -181,6 +181,10 @@ namespace MortensKomeback
                 canJump = true;
             }
             */
+#if DEBUG
+            if (keyState.IsKeyDown(Keys.K))
+                this.health = 0;
+#endif
         }
 
         /// <summary>

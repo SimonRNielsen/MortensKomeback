@@ -39,7 +39,7 @@ namespace MortensKomeback
         /// </summary>
         public CharacterGenerator()
         {
-            this.layer = 1;
+            this.layer = .9f;
             this.health = 1;
             this.origin = new Vector2(0, 0);
             this.scale = 1;
