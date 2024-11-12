@@ -16,6 +16,15 @@ namespace MortensKomeback
         private List<GameObject> gameObjects = new List<GameObject>();
         public static List<GameObject> newGameObjects = new List<GameObject>();
         private static Camera2D camera;
+        public static bool leftMouseButtonClick;
+        public static bool exitGame = false;
+        public static bool removeScreen = false;
+        public static bool spawnOutro = false;
+        private bool mortenLives = true;
+        public static bool win;
+        public static bool loss;
+        public static Vector2 mousePosition;
+        private SpriteFont standardSpriteFont;
 
 #if DEBUG
         public Texture2D collisionTexture;
@@ -35,9 +44,19 @@ namespace MortensKomeback
 
         protected override void Initialize()
         {
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
+            //_graphics.IsFullScreen = true;
+            _graphics.ApplyChanges();
+            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
+
             // TODO: Add your initialization logic here
-            gameObjects.Add(new PowerUp(new Vector2(150, 300), 0));
+
+            gameObjects.Add(new PowerUp(new Vector2(150, 500), 0));
+            gameObjects.Add(new PowerUp(new Vector2(450, 500), 1));
             //gameObjects.Add(new Player());
+            gameObjects.Add(new IntroScreen(Camera.Position));
+            gameObjects.Add(new MousePointer(_graphics));
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Enemy());
             gameObjects.Add(new Overlay());
@@ -46,22 +65,18 @@ namespace MortensKomeback
             gameObjects.Add(new KeybindingsOverlay());
             base.Initialize();
 
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
-            //_graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
 
             // TODO: use this.Content to load your game content here
             foreach (GameObject gameObj in gameObjects)
             { gameObj.LoadContent(Content); }
 #if DEBUG
             collisionTexture = Content.Load<Texture2D>("pixel");
+            standardSpriteFont = Content.Load<SpriteFont>("standardSpriteFont");
 #endif
         }
 
@@ -69,12 +84,37 @@ namespace MortensKomeback
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (exitGame)
+                Exit();
+            if (removeScreen)
+            {
+                foreach (GameObject gameObj in gameObjects)
+                {
+                    if (gameObj is IntroScreen || gameObj is Button)
+                    {
+                        gameObj.Health = 0;
+                    }
+                }
+                removeScreen = false;
+            }
+            var mouseState = Mouse.GetState();
+
+            mousePosition = new Vector2(mouseState.X, mouseState.Y);
+
+            leftMouseButtonClick = mouseState.LeftButton == ButtonState.Pressed;
 
             // TODO: Add your update logic here
+            mortenLives = false;
             foreach (GameObject gameObject in gameObjects)
             {
                 foreach (GameObject other in gameObjects)
                 {
+                    if (gameObject is MousePointer && other is Button)
+                    {
+                        gameObject.CheckCollision(other);
+                        other.CheckCollision(gameObject);
+                    }
+
                     if (gameObject is Player && other is Enemy)
                     {
                         gameObject.CheckCollision(other);
@@ -112,6 +152,14 @@ namespace MortensKomeback
                     }
                 }
                 gameObject.Update(gameTime);
+
+                if (gameObject is Player || gameObject is CharacterGenerator || gameObject is OutroScreen)
+                    mortenLives = true;
+                //if (gameObject is OutroScreen && !spawnOutro)
+                //{
+                //    gameObject.LoadContent(Content);
+                //    spawnOutro = true;
+                //}
             }
             foreach (GameObject newGameObject in newGameObjects)
             {
@@ -121,6 +169,12 @@ namespace MortensKomeback
             newGameObjects.Clear();
 
             gameObjects.RemoveAll(gameObject => gameObject.Health < 1);
+            //spawn Outroscreen
+            if (!mortenLives)
+            {
+                //spawnOutro = true;
+                newGameObjects.Add(new OutroScreen(Camera.Position));
+            }
 
             base.Update(gameTime);
         }
@@ -145,6 +199,10 @@ namespace MortensKomeback
                 }
 #endif
             }
+#if DEBUG
+            _spriteBatch.DrawString(standardSpriteFont, $"{mousePosition.X}\n{mousePosition.Y}", Camera.Position, Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
+
+#endif
 
 
             _spriteBatch.End();
@@ -195,5 +253,6 @@ namespace MortensKomeback
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
         }
 #endif
+
     }
 }

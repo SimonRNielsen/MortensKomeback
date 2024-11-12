@@ -58,12 +58,12 @@ namespace MortensKomeback
         /// <param name="sprite">The sprite of the player character, as chosen in character generator.</param>
         public Player(Texture2D sprite)
         {
-            this.position.X = 10;
-            this.position.Y = 10;
-            this.speed = 500f;
+            this.position.X = 0;
+            this.position.Y = 0;
+            this.speed = 1000f;
             this.fps = 15f;
-            this.Health = 20;
-            this.layer = 1;
+            this.Health = 3;
+            this.layer = 0.9f;
             this.scale = 1;
             this.sprite = sprite;
             Overlay.HealthCount = this.Health;
@@ -86,7 +86,7 @@ namespace MortensKomeback
 
         public override void OnCollision(GameObject gameObject)
         {
-            surfaceContact = true;
+            base.OnCollision(gameObject);
             if (gameObject is Enemy && !invincible)
             {
                 this.Health--;
@@ -94,15 +94,12 @@ namespace MortensKomeback
                 invincible = true;
             }
             Overlay.HealthCount = this.Health;
-           /* if (gameObject is Surface)
-                this.velocity.Y = 0;
-        */
-            }
+        }
 
         public override void Update(GameTime gameTime)
         {
             invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (invincibleTimer>invincibleCooldown)
+            if (invincibleTimer > invincibleCooldown)
             {
                 invincible = false;
             }
@@ -115,17 +112,16 @@ namespace MortensKomeback
             smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
             HandleInput();
             if (smoothJump < jumpingTime)
-                velocity -= new Vector2(0, +8);
-            
+                velocity -= new Vector2(0, +4);
+
             if (surfaceContact)
                 canJump = true;
+            base.Update(gameTime);
             Move(gameTime);
 
 
 
-            GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
-            base.Update(gameTime);
-
+            GameWorld.Camera.Position = this.Position; //"Attaches" The viewport to Morten
         }
 
         /// <summary>
@@ -184,6 +180,10 @@ namespace MortensKomeback
                 canJump = true;
             }
             */
+#if DEBUG
+            if (keyState.IsKeyDown(Keys.K))
+                this.health = 0;
+#endif
         }
 
         /// <summary>

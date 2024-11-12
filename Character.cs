@@ -20,11 +20,20 @@ namespace MortensKomeback
 
         public override void OnCollision(GameObject gameObject)
         {
+            if (gameObject is Surface)
+            {
+                surfaceContact = true;
+                this.velocity.Y = 0;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
             Gravity(gameTime);
+            if (surfaceContact)
+            {
+                surfaceContact = false;
+            }
         }
 
         /// <summary>
@@ -35,20 +44,10 @@ namespace MortensKomeback
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (surfaceContact || position.Y > 500) //|| and after, is because we don't yet have surfaces.
+            if (!(surfaceContact))
             {
-
-                velocity += new Vector2(0, 0);
-
-
-                surfaceContact = false;
-
-            }
-            else
-            {
-                velocity += new Vector2(0, 1);
-                if (velocity.Y >= 0)
-                    position.Y += velocity.Y * 3 * speed * deltaTime;
+                if (velocity.Y == 0)
+                    velocity.Y += 1;
             }
         }
 
