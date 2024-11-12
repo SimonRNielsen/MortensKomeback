@@ -45,7 +45,7 @@ namespace MortensKomeback
             //Move(gameTime);
 
             //Fjende movement
-            Position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Position += direction * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Fjende move pattern
             if (Position.X < 0 || Position.X > 800) //movementbox skal justeres efter ønske
