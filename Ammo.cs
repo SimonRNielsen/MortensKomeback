@@ -41,7 +41,7 @@ namespace MortensKomeback
                 position.X = player.Position.X + (player.Sprite.Width / 2);
                 this.velocity.X = 1;
             }
-            this.speed = 500f;
+            this.Speed = player.Speed + 200f;
             this.layer = 0.9f;
             this.sprites = player.AmmoSprites;
             this.sprite = sprites[ammoSprite];
