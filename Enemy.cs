@@ -23,10 +23,7 @@ namespace MortensKomeback
         private Random rnd = new Random();
         private SpriteEffects spriteEffects;
 
-        private SharpDX.Direct2D1.Transform player;
-        private float distance;
-        public float moveSpeed;
-        public float howClose;
+       
         #endregion
 
 
@@ -35,13 +32,13 @@ namespace MortensKomeback
         /// </summary>
         public Enemy()
         {
-            this.position.X = 2580;
+            this.position.X = 180;
             this.position.Y = 0;
             this.speed = 250;
             this.velocity = new Vector2(1, 0);
             this.fps = 15f;
             this.Health = 1;
-            this.layer = 1;
+            this.layer = 0.8f;
             this.scale = 1;
         }
 
@@ -69,12 +66,17 @@ namespace MortensKomeback
         {
             surfaceContact = false;
             // honkSound.Play();
+
+            if (gameObject is Surface)
+            {
+                surfaceContact = true;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
-            position.X++;
-            if (surfaceContact == true)
+            //position.X++;
+            if (surfaceContact == false)
             {
                 honkSound.Play();
             }
@@ -92,13 +94,11 @@ namespace MortensKomeback
             {
                 spriteEffects = SpriteEffects.None;
             }
-
-            velocity = new Vector2(0, 0);
-
-           
+            velocity = new Vector2(1, 0);
+            
+            base.Update(gameTime);
 
             Move(gameTime);
-            base.Update(gameTime);
             #endregion
 
         }
