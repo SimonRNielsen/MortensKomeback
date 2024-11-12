@@ -60,7 +60,7 @@ namespace MortensKomeback
         {
             this.position.X = 0;
             this.position.Y = 0;
-            this.speed = 300f;
+            this.speed = 1000f;
             this.fps = 15f;
             this.Health = 3;
             this.layer = 1;
@@ -86,7 +86,7 @@ namespace MortensKomeback
 
         public override void OnCollision(GameObject gameObject)
         {
-            surfaceContact = true;
+            base.OnCollision(gameObject);
             if (gameObject is Enemy && !invincible)
             {
                 this.Health--;
@@ -94,15 +94,15 @@ namespace MortensKomeback
                 invincible = true;
             }
             Overlay.HealthCount = this.Health;
-           /* if (gameObject is Surface)
-                this.velocity.Y = 0;
-        */
-            }
+            /* if (gameObject is Surface)
+                 this.velocity.Y = 0;
+         */
+        }
 
         public override void Update(GameTime gameTime)
         {
             invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (invincibleTimer>invincibleCooldown)
+            if (invincibleTimer > invincibleCooldown)
             {
                 invincible = false;
             }
@@ -115,16 +115,16 @@ namespace MortensKomeback
             smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
             HandleInput();
             if (smoothJump < jumpingTime)
-                velocity -= new Vector2(0, +8);
-            
+                velocity -= new Vector2(0, +4);
+
             if (surfaceContact)
                 canJump = true;
+            base.Update(gameTime);
             Move(gameTime);
 
 
 
             GameWorld.Camera.Position = new Vector2(this.Position.X, 0); //"Attaches" The viewport to Morten on the X-axis
-            base.Update(gameTime);
 
         }
 
