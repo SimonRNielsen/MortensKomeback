@@ -112,19 +112,15 @@ namespace MortensKomeback
                         if (this is Enemy)
                         {
                             this.velocity.X -= 2;
-                            this.spriteEffectIndex = 1;
                         }
                     }
 
                     else if (CollisionBox.Intersects((other as Surface).RightSideCollisionBox))
                     {
                         this.position.X = other.Position.X + (other.Sprite.Width/2)+(this.Sprite.Width/2)+1;
-                        this.position.X += 1;
-                        this.velocity.X += 1;
                         if (this is Enemy)
                         {
                             this.velocity.X += 2;
-                            this.spriteEffectIndex = 0;
                         }
                     }
 

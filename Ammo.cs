@@ -76,7 +76,7 @@ namespace MortensKomeback
                         this.sprite = this.sprites[4];
                         this.rotation = 0f;
                     }
-                    else if (gameObject is Enemy)
+                    else if (gameObject is Enemy && !collided)
                     {
                         gameObject.Health--;
                         this.collided = true;

@@ -66,7 +66,7 @@ namespace MortensKomeback
             this.layer = 0.9f;
             this.scale = 1;
             this.sprite = sprite;
-            Overlay.healthCount = this.Health;
+            Overlay.HealthCount = this.Health;
         }
 
 
@@ -93,7 +93,7 @@ namespace MortensKomeback
                 invincibleTimer = 0;
                 invincible = true;
             }
-            Overlay.healthCount = this.Health;
+            Overlay.HealthCount = this.Health;
            /* if (gameObject is Surface)
                 this.velocity.Y = 0;
         */
@@ -199,7 +199,7 @@ namespace MortensKomeback
             if (ammoCount > 0)
             {
                 ammoCount--;
-                Overlay.playerAmmoCount = this.ammoCount;
+                Overlay.PlayerAmmoCount = this.ammoCount;
             }
             GameWorld.newGameObjects.Add(new Ammo(this, ammoHealth, ammoSprite));
         }
@@ -220,7 +220,7 @@ namespace MortensKomeback
             this.ammoSprite = 1;
             this.ammoHealth = 3;
             this.ammoCount += 10;
-            Overlay.playerAmmoCount = this.ammoCount;
+            Overlay.PlayerAmmoCount = this.ammoCount;
         }
 
         #endregion

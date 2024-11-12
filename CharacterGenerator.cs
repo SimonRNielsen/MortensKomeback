@@ -99,10 +99,10 @@ namespace MortensKomeback
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(standardFont, "Press A or D to choose between your Morten!", new Vector2(-420, -350), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, "Press W or S to choose between your weapon!", new Vector2(-420, -300), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, "Press P when you want to start the game", new Vector2(-420, -250), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
-            spriteBatch.DrawString(standardFont, chosenMortenText, new Vector2(-chosenMortenText.Length * 12, sprite.Height / 2 + 10), Color.Bisque, 0f, Vector2.Zero, 3, SpriteEffects.None, 0);
+            spriteBatch.DrawString(standardFont, "Press A or D to choose between your Morten!", new Vector2(-420, -350), Color.Black, 0f, Vector2.Zero, 3, SpriteEffects.None, 0.9f);
+            spriteBatch.DrawString(standardFont, "Press W or S to choose between your weapon!", new Vector2(-420, -300), Color.Black, 0f, Vector2.Zero, 3, SpriteEffects.None, 0.9f);
+            spriteBatch.DrawString(standardFont, "Press P when you want to start the game", new Vector2(-420, -250), Color.Black, 0f, Vector2.Zero, 3, SpriteEffects.None, 0.9f);
+            spriteBatch.DrawString(standardFont, chosenMortenText, new Vector2(-chosenMortenText.Length * 12, sprite.Height / 2 + 10), Color.Black, 0f, Vector2.Zero, 3, SpriteEffects.None, 0.9f);
         }
 
         /// <summary>
