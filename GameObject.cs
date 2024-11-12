@@ -27,7 +27,7 @@ namespace MortensKomeback
         protected int health;
         private int currentIndex;
         protected int spriteEffectIndex;
-        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[2] { SpriteEffects.None, SpriteEffects.FlipHorizontally }; 
+        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[3] { SpriteEffects.None, SpriteEffects.FlipHorizontally, SpriteEffects.FlipVertically }; 
         public static bool leftMouseButtonClick;
         public static Vector2 mousePosition;
         private SpriteFont standardSpriteFont;
