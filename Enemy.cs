@@ -22,9 +22,6 @@ namespace MortensKomeback
         private Vector2 direction;
         private Random rnd = new Random();
         private SpriteEffects spriteEffects;
-        
-
-
         #endregion
 
 
@@ -33,11 +30,11 @@ namespace MortensKomeback
         /// </summary>
         public Enemy()
         {
-            this.position.X = 580;
+            this.position.X = 2580;
             this.position.Y = 0;
             this.speed = 250;
             this.velocity = new Vector2(1, 0);
-            this.fps = 1f;
+            this.fps = 15f;
             this.Health = 1;
             this.layer = 1;
             this.scale = 1;
@@ -51,10 +48,10 @@ namespace MortensKomeback
             sprites = new Texture2D[5];
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("goose" + i);
+                sprites[i] = content.Load<Texture2D>("gooseWalk" + i);
             }
 
-            //set default sprite
+            //Sætter default sprite
             sprite = sprites[0];
 
 
@@ -90,7 +87,14 @@ namespace MortensKomeback
                 spriteEffects = SpriteEffects.None;
             }
 
+            if (Player )
+            {
+
+            }
+
             velocity = new Vector2(0, 0);
+
+           
 
             Move(gameTime);
             base.Update(gameTime);
