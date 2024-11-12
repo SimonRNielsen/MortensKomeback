@@ -79,10 +79,7 @@ namespace MortensKomeback
             Animate(gameTime);
 
 
-            #region 
-            //Fjende movement i stedet for Move()
-            Position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            #region flip enemy
             // Inverter sprite horisontalt, hvis fjenden ændrer retning
             if (velocity.X == 1)
             {
@@ -95,7 +92,7 @@ namespace MortensKomeback
 
             velocity = new Vector2(0, 0);
 
-            //Move(gameTime);
+            Move(gameTime);
             base.Update(gameTime);
             #endregion
 
