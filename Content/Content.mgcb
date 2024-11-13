@@ -320,6 +320,12 @@
 /processorParam:TextureFormat=Compressed
 /build:mortalKombatFont.spritefont
 
+#begin morten_Av.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:morten_Av.wav
+
 #begin morten_sprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -561,6 +567,17 @@
 /build:Sprite/mitre.png
 
 #begin Sprite/Tours_Cathedral_facade.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/Tours_Cathedral_facade.png
+
 #begin standardSpriteFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -578,7 +595,6 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprite/Tours_Cathedral_facade.png
 /build:udkast.png
 
 #begin wallTurkey.png

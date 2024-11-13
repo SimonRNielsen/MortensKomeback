@@ -22,6 +22,7 @@ namespace MortensKomeback
         private Vector2 direction;
         private Random rnd = new Random();
         private SpriteEffects spriteEffects;
+        private bool isHit;
 
        
         #endregion
@@ -41,6 +42,10 @@ namespace MortensKomeback
             this.layer = 0.8f;
             this.scale = 1;
         }
+        /// <summary>
+        /// Property to acces wheter the enemy has already been hit, so collisions are not counted more than once
+        /// </summary>
+        public bool IsHit { get => isHit;}
 
 
         #region Methods
@@ -71,6 +76,13 @@ namespace MortensKomeback
             {
                 surfaceContact = true;
             }
+            if (gameObject is Ammo && !isHit)
+            {
+                honkSound.Play();
+                isHit = true;
+                this.Health--;
+                Overlay.KillCount++;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -92,7 +104,6 @@ namespace MortensKomeback
             }
             velocity = new Vector2(velocity.X, 0); 
             
-            honkSound.Play();
             
             
             base.Update(gameTime);

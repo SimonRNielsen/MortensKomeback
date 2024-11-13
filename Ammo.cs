@@ -78,7 +78,6 @@ namespace MortensKomeback
                     }
                     else if (gameObject is Enemy && !collided)
                     {
-                        gameObject.Health--;
                         this.collided = true;
                         timer = 0f;
                         this.sprite = this.sprites[random.Next(2, 4)];
@@ -93,9 +92,8 @@ namespace MortensKomeback
                     }
 
                 }
-                else if (gameObject is Enemy)
+                else if (gameObject is Enemy && !(gameObject as Enemy).IsHit)
                 {
-                    gameObject.Health--;
                     this.health--;
                 }
                 else if (!collided)
