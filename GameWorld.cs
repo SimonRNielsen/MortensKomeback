@@ -215,7 +215,7 @@ namespace MortensKomeback
 #endif
             }
 #if DEBUG
-            _spriteBatch.DrawString(standardSpriteFont, $"{mouseX}\n{mouseY}", new Vector2(Camera.Position.X, Camera.Position.Y - 400), Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(standardSpriteFont, $"X: {mouseX}\nY: {mouseY}", new Vector2(Camera.Position.X, Camera.Position.Y - 400), Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
 
 #endif
 
