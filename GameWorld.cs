@@ -23,6 +23,7 @@ namespace MortensKomeback
         private bool mortenLives = true;
         public static bool win;
         public static bool loss;
+        public static bool restart = false;
         public static Vector2 mousePosition;
         private SpriteFont standardSpriteFont;
 
@@ -52,8 +53,9 @@ namespace MortensKomeback
 
             // TODO: Add your initialization logic here
 
-            gameObjects.Add(new PowerUp(new Vector2(150, 500), 0));
-            gameObjects.Add(new PowerUp(new Vector2(450, 500), 1));
+            gameObjects.Add(new PowerUp(new Vector2(150, 700), 0));
+            gameObjects.Add(new PowerUp(new Vector2(450, 700), 1));
+            gameObjects.Add(new PowerUp(new Vector2(750, 700), 2));
             //gameObjects.Add(new Player());
             gameObjects.Add(new IntroScreen(Camera.Position));
             gameObjects.Add(new MousePointer(_graphics));
@@ -86,6 +88,8 @@ namespace MortensKomeback
                 Exit();
             if (exitGame)
                 Exit();
+            if (restart)
+                Restart();
             if (removeScreen)
             {
                 foreach (GameObject gameObj in gameObjects)
@@ -116,8 +120,8 @@ namespace MortensKomeback
                     }
 
                     if (gameObject is Player && other is Enemy)
-                    if (gameObject == other) 
-                        continue;
+                        if (gameObject == other)
+                            continue;
 
                     if (gameObject is Player)
                     {
@@ -245,6 +249,13 @@ namespace MortensKomeback
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
         }
 #endif
+        public void Restart()
+        {
+            gameObjects.RemoveAll(gameObject => gameObject.Health > 0);
+            Initialize();
+            restart = false;
+            spawnOutro = false;
+        }
 
     }
 }

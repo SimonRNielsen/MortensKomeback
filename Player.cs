@@ -42,7 +42,7 @@ namespace MortensKomeback
         /// Property to access which direction Morten is facing upon constructing "Ammo"
         /// </summary>
         public bool Flipped { get => flipped; set => flipped = value; }
-
+        
         #endregion
 
         #region Properties
@@ -60,7 +60,7 @@ namespace MortensKomeback
         {
             this.position.X = 0;
             this.position.Y = 0;
-            this.speed = 400f; //Husk at ændre tilbage til 300f
+            this.speed = 1000f; //Husk at ændre tilbage til 300f
             this.fps = 15f;
             this.Health = 3;
             this.layer = 0.9f;
@@ -225,6 +225,12 @@ namespace MortensKomeback
             this.Health--;
             invincibleTimer = 0;
             invincible = true;
+        }
+
+        public void InvulnerablePowerUp()
+        {
+            this.invincible = true;
+            this.invincibleTimer = -4f;
         }
         #endregion
 
