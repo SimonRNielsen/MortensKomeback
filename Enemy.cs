@@ -32,7 +32,7 @@ namespace MortensKomeback
         /// </summary>
         public Enemy()
         {
-            this.position.X = 180;
+            this.position.X = 2580;
             this.position.Y = 0;
             this.speed = 250;
             this.velocity = new Vector2(1, 0);
@@ -75,12 +75,6 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            //position.X++;
-            if (surfaceContact == false)
-            {
-                honkSound.Play();
-            }
-
             Animate(gameTime);
 
             //Fjende movement
@@ -94,9 +88,12 @@ namespace MortensKomeback
             }
             else
             {
-                spriteEffects = SpriteEffects.None;
+                spriteEffectIndex = 0;
             }
-            velocity = new Vector2(1, 0);
+            velocity = new Vector2(velocity.X, 0); 
+            
+            honkSound.Play();
+            
             
             base.Update(gameTime);
 
