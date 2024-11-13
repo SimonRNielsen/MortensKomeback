@@ -229,7 +229,7 @@
 /processorParam:TextureFormat=Color
 /build:gooseWalk3.png;gooseWalk2.png
 
-#begin gooseWalk4.png
+#begin gooseWalk3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -239,7 +239,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:gooseWalk4.png;gooseWalk3.png
+/build:gooseWalk3.png
 
 #begin gooseWalk4.png
 /importer:TextureImporter
