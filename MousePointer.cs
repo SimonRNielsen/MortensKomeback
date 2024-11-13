@@ -6,7 +6,8 @@ namespace MortensKomeback
 {
     internal class MousePointer : GameObject
     {
-        GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager _graphics;
+
         public MousePointer(GraphicsDeviceManager graphics)
         {
             this.health = 9999999;

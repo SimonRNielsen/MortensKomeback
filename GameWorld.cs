@@ -21,6 +21,7 @@ namespace MortensKomeback
         public static bool removeScreen = false;
         public static bool spawnOutro = false;
         private bool mortenLives = true;
+        private bool cameraExists = false;
         public static bool win;
         public static bool loss;
         public static bool restart = false;
@@ -45,11 +46,15 @@ namespace MortensKomeback
 
         protected override void Initialize()
         {
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
-            //_graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();
-            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
+            if (!cameraExists)
+            {
+                _graphics.PreferredBackBufferWidth = 1920;
+                _graphics.PreferredBackBufferHeight = 1080;
+                //_graphics.IsFullScreen = true;
+                _graphics.ApplyChanges();
+                camera = new Camera2D(GraphicsDevice, Vector2.Zero);
+                cameraExists = true;
+            }
 
             // TODO: Add your initialization logic here
 
@@ -57,7 +62,7 @@ namespace MortensKomeback
             gameObjects.Add(new PowerUp(new Vector2(450, 700), 1));
             gameObjects.Add(new PowerUp(new Vector2(750, 700), 2));
             //gameObjects.Add(new Player());
-            gameObjects.Add(new IntroScreen(Camera.Position));
+            gameObjects.Add(new IntroScreen());
             gameObjects.Add(new MousePointer(_graphics));
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Overlay());
