@@ -115,13 +115,13 @@ namespace MortensKomeback
                 }
                 foreach (GameObject other in gameObjects)
                 {
-                    //Only Player, MousePointer, Enemy and Ammo needs to check for collisions, so GameOjects of any other class will now need to complete the loop
-                    if (!((gameObject is Player) || (gameObject is MousePointer) || (gameObject is Enemy) || (gameObject is Ammo)))
+                    //An object should not be able to collide with a member of the same class
+                    if (gameObject == other)
                     {
                         continue;
                     }
-                    //An object should not be able to collide with a member of the same class
-                    if (gameObject == other)
+                    //Only Player, MousePointer, Enemy and Ammo needs to check for collisions, so GameOjects of any other class will now need to complete the loop
+                    if (!((gameObject is Player) || (gameObject is MousePointer) || (gameObject is Enemy) || (gameObject is Ammo)))
                     {
                         continue;
                     }
