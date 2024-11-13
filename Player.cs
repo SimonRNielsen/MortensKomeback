@@ -133,7 +133,19 @@ namespace MortensKomeback
             velocity = Vector2.Zero; //Resets the velocity, so move stops when no keys are pressed
 
             KeyboardState keyState = Keyboard.GetState();//Get the current keyboard state
+            /*
+            if (GameWorld.mouseX < this.position.X)
+            {
+                spriteEffectIndex = 1;
+                flipped = true;
+            }
 
+            if (GameWorld.mouseX > this.position.X)
+            {
+                spriteEffectIndex = 0;
+                flipped = false;
+            }
+            */
             //If a is pressed the player moves left, and the sprite is flipped so it faces left
             if (keyState.IsKeyDown(Keys.A))
             {

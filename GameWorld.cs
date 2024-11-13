@@ -22,8 +22,8 @@ namespace MortensKomeback
         public static bool spawnOutro = false;
         private bool mortenLives = true;
         private bool cameraExists = false;
+        public static float mouseX;
         public static bool win;
-        public static bool loss;
         public static bool restart = false;
         public static Vector2 mousePosition;
         private SpriteFont standardSpriteFont;
@@ -95,6 +95,7 @@ namespace MortensKomeback
                 Exit();
             if (restart)
                 Restart();
+
             if (removeScreen)
             {
                 foreach (GameObject gameObj in gameObjects)
