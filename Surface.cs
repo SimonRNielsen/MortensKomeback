@@ -20,6 +20,7 @@ namespace MortensKomeback
         private static Texture2D sprite3;
         private static Texture2D sprite4;
         private static Texture2D sprite5;
+        //private static Texture2D sprite6;
         #endregion
 
         #region properties
@@ -73,6 +74,10 @@ namespace MortensKomeback
             {
                 sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
             }
+            if (sprite5 == default)
+            {
+                sprite5 = content.Load<Texture2D>("Sprite\\transparentTile");
+            }
             
 
             if (spriteID == 1)
@@ -92,6 +97,10 @@ namespace MortensKomeback
             {
                 this.Sprite = sprite4;
                 spriteEffectIndex = 2;
+            }
+            if (spriteID == 5)
+            {
+                this.Sprite = sprite5;
             }
             
         }

@@ -44,7 +44,36 @@ namespace MortensKomeback
             int grass = 2; //"grass_tile1"
             int cloud5 = 3; //"cloud5"
             int cloud3 = 4; //"cloud3"
+            int trans = 5; //"transparentTile"
 
+            #region bakcground
+            surfaces.Add(new Background(2, 200 * 150, 88));
+
+            int hillSize = 3586;
+            for (int i = 0; i < 10; i++)
+            {
+            surfaces.Add(new Background(1, (hillSize - tileSize)/ 2 + hillSize * i, 1100));
+            }
+
+            //Hidden rum
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    surfaces.Add(new Background(3, tileSize * (124 + i), graphicsHeight - (tileSize * (1 + j))));
+                }
+            }
+
+            //Second platform
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    surfaces.Add(new Background(3, tileSize * (60 + i), graphicsHeight - (tileSize * (6 + j))));
+                }
+            }
+
+            #endregion
 
             #region button
             //First buttom
@@ -68,7 +97,7 @@ namespace MortensKomeback
 
             //Fifth buttom
             AddSurfaces((tileSize), graphicsHeight + tileSize,  grass, 124, 180);
-            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), dirt, 124, 180);
+            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), dirt, 124, 181);
             AddSurfaces(tileSize, graphicsHeight + tileSize, dirt, 181, 182);
             #endregion
 
@@ -203,7 +232,22 @@ namespace MortensKomeback
             #region clouds
             //Different clouds around the map
             AddSurface(tileSize * 35, graphicsHeight - (tileSize * 2), cloud5); //1
-            AddSurface(tileSize * 37, graphicsHeight - (tileSize * 4), cloud5); //2
+            AddSurface(tileSize * 39f, graphicsHeight - (tileSize * 4), cloud5); //2
+            AddSurface(10795, 607, cloud5);
+            AddSurface(11185, 383, cloud5);
+
+            #endregion
+
+            #region Cathedral
+            AddSurface(tileSize * 147, graphicsHeight, grass);
+            AddSurface(30000, 600, cloud5);
+            AddSurface(29404, 360, cloud5);
+            AddSurface(29400, -273, cloud5);
+            AddSurface(30581, 590, cloud5);
+            AddSurface(30667, -400, cloud5);
+            AddSurface(29765, 753, trans);
+            AddSurface(30391, -170, trans);
+            AddSurface(30000, 203, trans);
 
             #endregion
 
@@ -215,15 +259,18 @@ namespace MortensKomeback
                 AddSurfaces(tileSize, graphicsHeight - (tileSize * i), dirt, 227 + i - shorter, 229 + i - shorter);
             }
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  grass, 231 - shorter, 232 - shorter);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5), dirt, 233 - shorter, 234 - shorter);
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  grass, 233 - shorter, 237 - shorter);
 
             for (int i = 0; i < 5; i++)
             {
-                AddSurface(tileSize * (237 + i - shorter), graphicsHeight - (tileSize * (i + 6)), dirt);
+                AddSurface(tileSize * (237 + i - shorter), graphicsHeight - (tileSize * (i + 6)), grass);
                 AddSurfaces(tileSize, graphicsHeight - (tileSize * (i + 6)), dirt, 239 + i - shorter, 241 + i - shorter);
             }
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 11),  grass, 198, 200);
-            AddSurfaces(tileSize, graphicsHeight - (tileSize * 12),  grass, 201, 203);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 12),  grass, 201, 215);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 11), dirt, 201, 215);
+
 
             #endregion
 
@@ -244,7 +291,7 @@ namespace MortensKomeback
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
-        /// <param name="spriteId">The sprite of the Surface</param>
+        /// <param name="spriteId">The sprite of the Surface</param>p
         private void AddSurface(float x, float y, int spriteId)
         {
             surfaces.Add(Surface.Create(_graphics, x, y, spriteId));

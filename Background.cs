@@ -15,6 +15,7 @@ namespace MortensKomeback
         #region field
         private static Texture2D sprite1;
         private static Texture2D sprite2;
+        private static Texture2D sprite3;
         private int spriteID; //Which sprite is going to be used
 
         #endregion
@@ -24,12 +25,12 @@ namespace MortensKomeback
         #endregion
 
         #region constructor
-        public Background(int spriteID)
+        public Background(int spriteID, int xPosition, int yPosition)
         {
             this.layer = 0f;
             this.scale = 1f;
-            this.position.X = 1;
-            this.position.Y = 1;
+            this.position.X = xPosition;
+            this.position.Y = yPosition;
             this.health = 1;
             this.spriteID = spriteID;
 
@@ -52,19 +53,25 @@ namespace MortensKomeback
             {
                 sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
             }
+            if (sprite3 == default)
+            {
+                sprite3 = content.Load<Texture2D>("Sprite\\dirt_tile1_background");
+            }
             
 
             if (spriteID == 1)
             {
                 this.Sprite = sprite1;
-                position.Y = 1100;
-                position.X = 200 * 30;
             }
             if (spriteID == 2)
             {
                 this.Sprite = sprite2;
-                position.X = 200 * 150;
-                position.Y = 88;
+                this.layer = 0.01f;
+            }
+            if (spriteID == 3)
+            {
+                this.Sprite = sprite3;
+                this.layer = 0.92f; //0.01 higher than PowerUp layer 
             }
             
         }

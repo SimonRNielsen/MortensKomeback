@@ -62,14 +62,23 @@ namespace MortensKomeback
             gameObjects.Add(new PowerUp(new Vector2(150, 700), 0));
             gameObjects.Add(new PowerUp(new Vector2(450, 700), 1));
             gameObjects.Add(new PowerUp(new Vector2(750, 700), 2));
+
+            gameObjects.Add(new PowerUp(new Vector2(24871, 858), 1)); //Hidden
+            gameObjects.Add(new PowerUp(new Vector2(12345, -490), 0)); //Hidden
+            #region Power Up Cathedral
+            gameObjects.Add(new PowerUp(new Vector2(30003, -103), 0));
+            gameObjects.Add(new PowerUp(new Vector2(29983, 533), 0));
+            gameObjects.Add(new PowerUp(new Vector2(29740, -797), 2));
+            gameObjects.Add(new PowerUp(new Vector2(30280, -810), 2));
+            #endregion
+
             //gameObjects.Add(new Player());
             gameObjects.Add(new IntroScreen());
             gameObjects.Add(new MousePointer(_graphics));
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Enemy());
             gameObjects.Add(new Overlay());
-            gameObjects.Add(new Background(1));
-            gameObjects.Add(new Background(2));
+            
             gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
             gameObjects.Add(new KeybindingsOverlay());
             base.Initialize();
