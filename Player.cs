@@ -88,10 +88,11 @@ namespace MortensKomeback
         {
             base.OnCollision(gameObject);
             if (gameObject is Enemy && !invincible)
+                TakeDamage();
+            if (gameObject is AvSurface && !invincible)
             {
-                this.Health--;
-                invincibleTimer = 0;
-                invincible = true;
+                TakeDamage();
+                Jump();
             }
             Overlay.HealthCount = this.Health;
         }
@@ -219,6 +220,12 @@ namespace MortensKomeback
             Overlay.PlayerAmmoCount = this.ammoCount;
         }
 
+        public void TakeDamage()
+        {
+            this.Health--;
+            invincibleTimer = 0;
+            invincible = true;
+        }
         #endregion
 
     }
