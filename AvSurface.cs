@@ -36,7 +36,7 @@ namespace MortensKomeback
             this.startSprite = numberSprite;
             this.health = 1;
             this.fps = 2f; //Not sure if it's the correkt amount
-            this.layer = 0f;
+            this.layer = 0.1f;
         }
 
         #endregion

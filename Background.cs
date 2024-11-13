@@ -44,11 +44,9 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            //Sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
-
             if (sprite1 == default)
             {
-                sprite1 = content.Load<Texture2D>("Sprite\\backgroundTEst");
+                sprite1 = content.Load<Texture2D>("Sprite\\hills_small");
             }
             if (sprite2 == default)
             {
@@ -59,6 +57,8 @@ namespace MortensKomeback
             if (spriteID == 1)
             {
                 this.Sprite = sprite1;
+                position.Y = 1100;
+                position.X = 200 * 30;
             }
             if (spriteID == 2)
             {
