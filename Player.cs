@@ -28,7 +28,7 @@ namespace MortensKomeback
         private int ammoCount = 0;
         private float smoothJump = 0.21f;
         private float jumpingTime = 0.2f;
-        private float invincibleCooldown = 1f; //Used to make player invincible after damaging collison
+        private float invincibleCooldown = 2f; //Used to make player invincible after damaging collison
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
 
@@ -242,7 +242,7 @@ namespace MortensKomeback
         public void InvulnerablePowerUp()
         {
             this.invincible = true;
-            this.invincibleTimer = -4f;
+            this.invincibleTimer = -13f;
         }
         #endregion
 
