@@ -20,6 +20,13 @@ namespace MortensKomeback
         #endregion
 
         #region properties
+        /// <summary>
+        /// The collisionbox is set lower than CollisionBox at Surface because the collision is happing at the midt flame
+        /// </summary>
+        public override Rectangle CollisionBox
+        {
+            get { return new Rectangle((int)(Position.X - (Sprite.Width / 2) + 25), (int)Position.Y + (Sprite.Height/4), Sprite.Width - 50, Sprite.Height / 2); }
+        }
 
         #endregion
 
@@ -36,7 +43,7 @@ namespace MortensKomeback
 
         #region method
 
-        public override void LoadContent(ContentManager content) //Skal have de rigtige sprites
+        public override void LoadContent(ContentManager content) 
         {
             sprites = new Texture2D[4];
 

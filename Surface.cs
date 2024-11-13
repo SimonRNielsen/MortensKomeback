@@ -73,10 +73,7 @@ namespace MortensKomeback
             {
                 sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
             }
-            if (sprite5 == default)
-            {
-                sprite5 = content.Load<Texture2D>("Sprite\\mitre");
-            }
+            
 
             if (spriteID == 1)
             {
@@ -96,10 +93,7 @@ namespace MortensKomeback
                 this.Sprite = sprite4;
                 spriteEffectIndex = 2;
             }
-            if (spriteID == 5)
-            {
-                this.Sprite = sprite5;
-            }
+            
         }
 
 

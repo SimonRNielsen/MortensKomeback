@@ -16,8 +16,11 @@ namespace MortensKomeback
         private GraphicsDeviceManager _graphics;
         private List<GameObject> surfaces = new List<GameObject>();
 
-        private int tileHeight = 199;
-        private int tileWidth = 199;
+        /// <summary>
+        /// The Environment is build up of the tile/sprites "dirt_tile1" and "grass_tile1" which the size is 200x200 pixel. 
+        /// For the tiles is overlapping they are placed 1 over eachother
+        /// </summary>
+        private int tileSize = 199;
 
 
         #endregion
@@ -34,190 +37,196 @@ namespace MortensKomeback
         /// <param name="graphics"></param>
         public Environment(GraphicsDeviceManager graphics)
         {
+            int graphicsHeight = graphics.PreferredBackBufferHeight;
+
+            //
+            int grass = 1;
+            int dirt = 2;
+            int cloud5 = 3;
+            int cloud3 = 4;
+
+
             #region button
             //First buttom
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight , 2, 1, 31); // Græstop på jorden (Morten spawner på den rigtige overflade)
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 1, 31); // Jordbund
+            AddSurfaces((tileSize), graphicsHeight + tileSize ,  dirt, 1, 31); // Græstop på jorden (Morten spawner på den rigtige overflade)
+            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), grass, 1, 31); // Jordbund
 
             //Second buttom
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight, 2, 34, 49);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 34, 49);
+            AddSurfaces((tileSize), graphicsHeight + tileSize,  dirt, 34, 49);
+            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), grass, 34, 49);
 
             //Third buttom
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight, 2, 52, 91);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 52, 91);
+            AddSurfaces((tileSize), graphicsHeight + tileSize,  dirt, 52, 91);
+            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), grass, 52, 91);
 
             //Forth buttom
             for (int i = -1; i < 3; i++)
             {
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight + (tileHeight * i), 1, 109, 110);
+                AddSurfaces(tileSize, graphicsHeight + (tileSize * i), grass, 109, 110);
             }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 109, 110);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 2),  dirt, 109, 110);
 
             //Fifth buttom
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + tileHeight, 2, 124, 180);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight + (tileHeight * 2), 1, 124, 180);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight + tileHeight, 1, 181, 182);
+            AddSurfaces((tileSize), graphicsHeight + tileSize,  dirt, 124, 180);
+            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), grass, 124, 180);
+            AddSurfaces(tileSize, graphicsHeight + tileSize, grass, 181, 182);
             #endregion
 
             #region hill
             //First hill
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight, 2, 13, 14);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight, 1, 15, 17);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - tileHeight, 2, 15, 17);
+            AddSurfaces((tileSize), graphicsHeight,  dirt, 13, 14);
+            AddSurfaces((tileSize), graphicsHeight, grass, 15, 17);
+            AddSurfaces((tileSize), graphicsHeight - tileSize,  dirt, 15, 17);
 
             //Secong hill
-            AddSurface(tileWidth * 86, graphics.PreferredBackBufferHeight, 2);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight, 1, 88, 91);
-            AddSurface(tileWidth * 87, graphics.PreferredBackBufferHeight - tileHeight, 2);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - tileHeight, 1, 89, 91);
-            AddSurface(tileWidth * 88, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 1, 90, 91);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2, 90, 92);
+            AddSurface(tileSize * 86, graphicsHeight, grass);
+            AddSurfaces(tileSize, graphicsHeight, grass, 88, 91);
+            AddSurface(tileSize * 87, graphicsHeight - tileSize, grass);
+            AddSurfaces(tileSize, graphicsHeight - tileSize, grass, 89, 91);
+            AddSurface(tileSize * 88, graphicsHeight - (tileSize * 2), grass);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 2), grass, 90, 91);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 3),  dirt, 90, 92);
 
             //Third hill
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight, 1, 124, 128); //
+            AddSurfaces(tileSize, graphicsHeight, grass, 124, 128); //
             for (int i = 1; i < 5; i++)
             {
-                AddSurface(tileWidth * 127, graphics.PreferredBackBufferHeight - (tileHeight * i), 1);
+                AddSurface(tileSize * 127, graphicsHeight - (tileSize * i), dirt);
             }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 1, 125, 127);
-            AddSurface(tileWidth * 127, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2);
-            AddSurface(tileWidth * 123, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 6), 1, 125, 127);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 7), 2, 125, 127);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 131, 133);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5), grass, 125, 127);
+            AddSurface(tileSize * 127, graphicsHeight - (tileSize * 5), grass);
+            AddSurface(tileSize * 123, graphicsHeight - (tileSize * 6), grass);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6), grass, 125, 127);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 7),  dirt, 125, 127);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 2),  dirt, 131, 133);
 
             #endregion
 
             #region stairs
             //First stairs
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight, 2, 26, 27);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight, 1, 28, 29);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - tileHeight, 2, 28, 28);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - tileHeight, 1, 29, 29);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 29, 29);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 2), 1, 30, 30);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 3), 2, 30, 31);
-            AddSurface(tileWidth * 33, graphics.PreferredBackBufferHeight - (tileHeight * 5), 4);
+            AddSurfaces((tileSize), graphicsHeight,  dirt, 26, 27);
+            AddSurfaces((tileSize), graphicsHeight, grass, 28, 29);
+            AddSurfaces((tileSize), graphicsHeight - tileSize,  dirt, 28, 28);
+            AddSurfaces((tileSize), graphicsHeight - tileSize, grass, 29, 29);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 2),  dirt, 29, 29);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 2), grass, 30, 30);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 3),  dirt, 30, 31);
+            AddSurface(tileSize * 33, graphicsHeight - (tileSize * 5), cloud3);
 
-            AddSurface((tileWidth * 35), graphics.PreferredBackBufferHeight - (tileHeight * 6), 2); 
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 7), 2, 39, 41);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 9), 2, 36, 38);
+            AddSurface((tileSize * 35), graphicsHeight - (tileSize * 6), grass); 
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 7),  dirt, 39, 41);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 9),  dirt, 36, 38);
 
             //Second stairs
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight, 2, 60 ,66);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight, 1, 67, 70);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - tileHeight, 2, 67, 69);
-            AddSurface(tileWidth * 69, graphics.PreferredBackBufferHeight - tileHeight, 1);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 70, 71);
+            AddSurfaces(tileSize, graphicsHeight,  dirt, 60 ,66);
+            AddSurfaces(tileSize, graphicsHeight, grass, 67, 70);
+            AddSurfaces(tileSize, graphicsHeight - tileSize,  dirt, 67, 69);
+            AddSurface(tileSize * 69, graphicsHeight - tileSize, dirt);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 2),  dirt, 70, 71);
 
-            AddSurface(tileWidth * 73, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2);
+            AddSurface(tileSize * 73, graphicsHeight - (tileSize * 3), grass);
 
-            AddSurface(tileWidth * 76, graphics.PreferredBackBufferHeight - (tileHeight * 5), 4);
-            AddSurface(tileWidth * 79, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2);
-            AddSurface(tileWidth * 82, graphics.PreferredBackBufferHeight - (tileHeight * 7), 2);
+            AddSurface(tileSize * 76, graphicsHeight - (tileSize * 5), cloud3);
+            AddSurface(tileSize * 79, graphicsHeight - (tileSize * 6), dirt);
+            AddSurface(tileSize * 82, graphicsHeight - (tileSize * 7), dirt);
 
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2, 84, 85);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 3),  dirt, 84, 85);
 
-            AddSurface(tileWidth * 84, graphics.PreferredBackBufferHeight - (tileHeight * 9), 4);
+            AddSurface(tileSize * 84, graphicsHeight - (tileSize * 9), cloud3);
             for (int i = 0; i < 12; i++)
             {
-                AddSurface(tileWidth * (87 + i * 3), graphics.PreferredBackBufferHeight - (tileHeight * 9), 3);
+                AddSurface(tileSize * (87 + i * 3), graphicsHeight - (tileSize * 9), cloud5);
             }
 
             #endregion
 
             #region platform
             //First platform
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 10), 2, 26, 27);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 10), 1, 28, 31);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 10), 2, 32, 33);
-            AddSurfaces((tileWidth), graphics.PreferredBackBufferHeight - (tileHeight * 11), 2, 28, 31);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 10),  dirt, 26, 27);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 10), grass, 28, 31);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 10),  dirt, 32, 33);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 11),  dirt, 28, 31);
 
             //Second platform
-            AddSurface(tileWidth * 54, graphics.PreferredBackBufferHeight - (tileHeight * 5), 4);
+            AddSurface(tileSize * 54, graphicsHeight - (tileSize * 5), cloud5);
 
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 1, 59, 66);
-            AddSurface(tileWidth * 66, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2);
-            AddSurface(tileWidth * 58, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2);
-            AddSurface(tileWidth * 59, graphics.PreferredBackBufferHeight - (tileHeight * 6), 1);
-            AddSurface(tileWidth * 59, graphics.PreferredBackBufferHeight - (tileHeight * 6), 1);
-            AddSurface(tileWidth * 65, graphics.PreferredBackBufferHeight - (tileHeight * 6), 1);
-            AddSurface(tileWidth * 59, graphics.PreferredBackBufferHeight - (tileHeight * 7), 2);
-            AddSurface(tileWidth * 65, graphics.PreferredBackBufferHeight - (tileHeight * 7), 2);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5), grass, 59, 66);
+            AddSurface(tileSize * 66, graphicsHeight - (tileSize * 5), grass);
+            AddSurface(tileSize * 58, graphicsHeight - (tileSize * 6), grass);
+            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 6), dirt);
+            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 6), dirt);
+            AddSurface(tileSize * 65, graphicsHeight - (tileSize * 6), dirt);
+            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 7), grass);
+            AddSurface(tileSize * 65, graphicsHeight - (tileSize * 7), grass);
 
             //Third platforms
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2, 95, 99);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2, 102, 103);
-            AddSurface(tileWidth * 105, graphics.PreferredBackBufferHeight - tileHeight, 2);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 3),  dirt, 95, 99);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 2),  dirt, 102, 103);
+            AddSurface(tileSize * 105, graphicsHeight - tileSize, grass);
 
             for (int i = 0; i < 5; i++)
             {
-                AddSurface(tileWidth * (111 + i * 3), graphics.PreferredBackBufferHeight - tileHeight, 2);
+                AddSurface(tileSize * (111 + i * 3), graphicsHeight - tileSize, grass);
             }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 4), 2, 113, 114);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2, 116, 117);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2, 120, 121);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 4),  dirt, 113, 114);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  dirt, 116, 117);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  dirt, 120, 121);
 
 
             #endregion
 
             #region pillar
             //1
-            AddSurface(tileWidth * 40, graphics.PreferredBackBufferHeight, 1);
-            AddSurface(tileWidth * 40, graphics.PreferredBackBufferHeight - tileHeight, 2);
+            AddSurface(tileSize * 40, graphicsHeight, dirt);
+            AddSurface(tileSize * 40, graphicsHeight - tileSize, grass);
 
             //2
-            AddSurface(tileWidth * 44, graphics.PreferredBackBufferHeight - (tileHeight * 2), 1);
-            AddSurface(tileWidth * 44, graphics.PreferredBackBufferHeight - (tileHeight * 3), 2);
+            AddSurface(tileSize * 44, graphicsHeight - (tileSize * 2), dirt);
+            AddSurface(tileSize * 44, graphicsHeight - (tileSize * 3), grass);
 
             //3
             for (int i = 0; i < 4; i++)
             {
-                AddSurface(tileWidth * 48, graphics.PreferredBackBufferHeight - (tileHeight * i), 1);
+                AddSurface(tileSize * 48, graphicsHeight - (tileSize * i), dirt);
             }
-            AddSurface(tileWidth * 48, graphics.PreferredBackBufferHeight - (tileHeight * 4), 2);
+            AddSurface(tileSize * 48, graphicsHeight - (tileSize * 4), grass);
 
             //4
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight, 1, 52, 53);
-            AddSurface(tileWidth * 51, graphics.PreferredBackBufferHeight - tileHeight, 1);
-            AddSurface(tileWidth * 52, graphics.PreferredBackBufferHeight - tileHeight, 2);
-            AddSurface(tileWidth * 51, graphics.PreferredBackBufferHeight - (tileHeight * 2), 2);
+            AddSurfaces(tileSize, graphicsHeight, grass, 52, 53);
+            AddSurface(tileSize * 51, graphicsHeight - tileSize, dirt);
+            AddSurface(tileSize * 52, graphicsHeight - tileSize, grass);
+            AddSurface(tileSize * 51, graphicsHeight - (tileSize * 2), grass);
             #endregion
 
             #region obstacles
-            //Mitre
-            AddSurface(tileWidth * 34, graphics.PreferredBackBufferHeight, 5);
-            AddSurface(tileWidth * 139, graphics.PreferredBackBufferHeight, 5);
-            AddSurface(tileWidth * 170, graphics.PreferredBackBufferHeight, 5);
-
-
+           
             #endregion
 
             #region stairways to heaven
-            int n = 45;
+            int shorter = 45;
             for (int i = 0; i < 5; i++)
             {
-                AddSurface(tileWidth * (225 + i - n), graphics.PreferredBackBufferHeight - (tileHeight * i), 2);
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * i), 1, 227 + i - n, 229 + i - n);
+                AddSurface(tileSize * (225 + i - shorter), graphicsHeight - (tileSize * i), 2);
+                AddSurfaces(tileSize, graphicsHeight - (tileSize * i), grass, 227 + i - shorter, 229 + i - shorter);
             }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 5), 2, 231 - n, 232 - n);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 6), 2, 233 - n, 237 - n);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  dirt, 231 - shorter, 232 - shorter);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  dirt, 233 - shorter, 237 - shorter);
 
             for (int i = 0; i < 5; i++)
             {
-                AddSurface(tileWidth * (237 + i - n), graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 2);
-                AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * (i + 6)), 1, 239 + i - n, 241 + i - n);
+                AddSurface(tileSize * (237 + i - shorter), graphicsHeight - (tileSize * (i + 6)), grass);
+                AddSurfaces(tileSize, graphicsHeight - (tileSize * (i + 6)), grass, 239 + i - shorter, 241 + i - shorter);
             }
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 11), 2, 198, 200);
-            AddSurfaces(tileWidth, graphics.PreferredBackBufferHeight - (tileHeight * 12), 2, 201, 203);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 11),  dirt, 198, 200);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 12),  dirt, 201, 203);
 
             #endregion
 
             #region AvSurface
-            AddAvSurface(tileWidth * 99, graphics.PreferredBackBufferHeight + (tileHeight * 1.5f), 1);
-            AddAvSurface(tileWidth * 115, graphics.PreferredBackBufferHeight + (tileHeight * 1.5f), 1);
+            AddAvSurface(tileSize * 30, graphicsHeight + (tileSize * 1.5f));
+            AddAvSurface(tileSize * 47, graphicsHeight + (tileSize * 1.5f));
+            AddAvSurface(tileSize * 99, graphicsHeight + (tileSize * 1.5f));
+            AddAvSurface(tileSize * 115, graphicsHeight + (tileSize * 1.5f));
 
 
             #endregion
@@ -257,8 +266,7 @@ namespace MortensKomeback
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
-        /// <param name="spriteId">The sprite of the AvSurface</param>
-        private void AddAvSurface(float x, float y, int spriteId)
+        private void AddAvSurface(float x, float y)
         {
             surfaces.Add(AvSurface.Create(_graphics, x, y));
         }
