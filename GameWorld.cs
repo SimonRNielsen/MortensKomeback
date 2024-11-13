@@ -23,6 +23,7 @@ namespace MortensKomeback
         private bool mortenLives = true;
         private bool cameraExists = false;
         public static float mouseX;
+        public static float mouseY;
         public static bool win;
         public static bool restart = false;
         public static Vector2 mousePosition;
@@ -214,7 +215,7 @@ namespace MortensKomeback
 #endif
             }
 #if DEBUG
-            _spriteBatch.DrawString(standardSpriteFont, $"{mousePosition.X}\n{mousePosition.Y}", Camera.Position, Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(standardSpriteFont, $"{mouseX}\n{mouseY}", new Vector2(Camera.Position.X, Camera.Position.Y - 400), Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
 
 #endif
 

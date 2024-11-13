@@ -35,7 +35,7 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             GameWorld.mouseX = (int)(GameWorld.mousePosition.X / GameWorld.Camera.Zoom) - (int)((float)_graphics.PreferredBackBufferWidth / 2 / GameWorld.Camera.Zoom) + (int)GameWorld.Camera.Position.X;
-            //GameWorld.mouseY = (int)(GameWorld.mousePosition.Y / GameWorld.Camera.Zoom) - (int)((float)_graphics.PreferredBackBufferHeight / 2 / GameWorld.Camera.Zoom) + 20 + (int)GameWorld.Camera.Position.Y;
+            GameWorld.mouseY = (int)(GameWorld.mousePosition.Y / GameWorld.Camera.Zoom) - (int)((float)_graphics.PreferredBackBufferHeight / 2 / GameWorld.Camera.Zoom) + 20 + (int)GameWorld.Camera.Position.Y;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
