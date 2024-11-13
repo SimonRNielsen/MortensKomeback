@@ -69,7 +69,7 @@ namespace MortensKomeback
                 if (this.health == 1)
                 {
 
-                    if (gameObject is Surface)
+                    if (gameObject is Surface && !collided)
                     {
                         this.collided = true;
                         timer = 0f;
@@ -98,7 +98,7 @@ namespace MortensKomeback
                     gameObject.Health--;
                     this.health--;
                 }
-                else
+                else if (!collided)
                 {
                     this.collided = true;
                     timer = 0f;
@@ -152,9 +152,11 @@ namespace MortensKomeback
 
             }
 
+            
+            
             if (collided && timer > collisionTimer)
             {
-                this.Health--;
+                this.Health = 0;
             }
             if (this.position.Y > 5000)
             {

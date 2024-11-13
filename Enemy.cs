@@ -6,6 +6,7 @@ using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,49 +15,94 @@ namespace MortensKomeback
     internal class Enemy : Character
     {
         #region fields
-        private SoundEffect honkSound;
-        //private SoundEffect takeDamageSound;
         private List<Texture2D> spriteEnemy = new List<Texture2D>();
-        //private string[] spriteEnemy = new string[] { "goose1", "goose2", "goose3", "goose4", "goose5" };
-        private Vector2 direction; //?
+        private SoundEffect takeDamageSound;
+        private SoundEffect honkSound;
+        private bool flipped = false;
+        private Vector2 direction;
+        private Random rnd = new Random();
+        private SpriteEffects spriteEffects;
+
+       
         #endregion
+
+
+        /// <summary>
+        /// enemy constructor
+        /// </summary>
+        public Enemy()
+        {
+            this.position.X = 2580;
+            this.position.Y = 0;
+            this.speed = 250;
+            this.velocity = new Vector2(1, 0);
+            this.fps = 15f;
+            this.Health = 1;
+            this.layer = 0.8f;
+            this.scale = 1;
+        }
 
 
         #region Methods
         public override void LoadContent(ContentManager content)
         {
-            //Indlæs animation frames
-            spriteEnemy.Add(content.Load<Texture2D>("goose3"));
-            spriteEnemy.Add(content.Load<Texture2D>("goose4"));
-            spriteEnemy.Add(content.Load<Texture2D>("goose5"));
-            
+            //Loader sprites til animation
+            sprites = new Texture2D[5];
+            for (int i = 0; i < sprites.Length; i++)
+            {
+                sprites[i] = content.Load<Texture2D>("gooseWalk" + i);
+            }
 
-            //Indlæs Lyd
-            honkSound = content.Load<SoundEffect>("gooseSound");
+            //Sætter default sprite
+            sprite = sprites[0];
+
+
+            //Indlæs honk Lyd
+            honkSound = content.Load<SoundEffect>("gooseSound_cut");
+
         }
 
         public override void OnCollision(GameObject gameObject)
         {
+            surfaceContact = false;
+            // honkSound.Play();
 
+            if (gameObject is Surface)
+            {
+                surfaceContact = true;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
-            //Move(gameTime);
+            Animate(gameTime);
 
             //Fjende movement
             Position += direction * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            //Fjende move pattern
-            if (Position.X < 0 || Position.X > 800) //movementbox skal justeres efter ønske
+            #region flip enemy
+            // Inverter sprite horisontalt, hvis fjenden ændrer retning
+            if (velocity.X == 1)
             {
-                direction.X *= -1; //Skifter retning
-                honkSound.Play(); //Honk lyd ved retning-skift
+                spriteEffectIndex = 1;
             }
-
-
+            else
+            {
+                spriteEffectIndex = 0;
+            }
+            velocity = new Vector2(velocity.X, 0); 
+            
+            honkSound.Play();
+            
+            
             base.Update(gameTime);
+
+            Move(gameTime);
+            #endregion
+
         }
+
+
 
         #endregion
     }

@@ -28,7 +28,7 @@ namespace MortensKomeback
         private int ammoCount = 0;
         private float smoothJump = 0.21f;
         private float jumpingTime = 0.2f;
-        private float invincibleCooldown = 1f; //Used to make player invincible after damaging collison
+        private float invincibleCooldown = 2f; //Used to make player invincible after damaging collison
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
 
@@ -42,7 +42,7 @@ namespace MortensKomeback
         /// Property to access which direction Morten is facing upon constructing "Ammo"
         /// </summary>
         public bool Flipped { get => flipped; set => flipped = value; }
-
+        
         #endregion
 
         #region Properties
@@ -133,7 +133,19 @@ namespace MortensKomeback
             velocity = Vector2.Zero; //Resets the velocity, so move stops when no keys are pressed
 
             KeyboardState keyState = Keyboard.GetState();//Get the current keyboard state
+            /*
+            if (GameWorld.mouseX < this.position.X)
+            {
+                spriteEffectIndex = 1;
+                flipped = true;
+            }
 
+            if (GameWorld.mouseX > this.position.X)
+            {
+                spriteEffectIndex = 0;
+                flipped = false;
+            }
+            */
             //If a is pressed the player moves left, and the sprite is flipped so it faces left
             if (keyState.IsKeyDown(Keys.A))
             {
@@ -225,6 +237,12 @@ namespace MortensKomeback
             this.Health--;
             invincibleTimer = 0;
             invincible = true;
+        }
+
+        public void InvulnerablePowerUp()
+        {
+            this.invincible = true;
+            this.invincibleTimer = -13f;
         }
         #endregion
 

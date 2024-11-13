@@ -9,9 +9,9 @@ namespace MortensKomeback
         private Texture2D buttonSprite;
         private SpriteFont spriteFont;
 
-        public IntroScreen(Vector2 placement)
+        public IntroScreen()
         {
-            this.position = placement;
+            this.position = Vector2.Zero;
             this.health = 9999;
             this.layer = 0.99f;
             this.scale = 1.7f;
