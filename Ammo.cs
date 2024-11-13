@@ -98,7 +98,7 @@ namespace MortensKomeback
                     gameObject.Health--;
                     this.health--;
                 }
-                else
+                else if (!collided)
                 {
                     this.collided = true;
                     timer = 0f;
@@ -156,7 +156,7 @@ namespace MortensKomeback
             
             if (collided && timer > collisionTimer)
             {
-                this.Health--;
+                this.Health = 0;
             }
             if (this.position.Y > 5000)
             {
