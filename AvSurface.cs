@@ -21,11 +21,11 @@ namespace MortensKomeback
 
         #region properties
         /// <summary>
-        /// The collisionbox is set lower than CollisionBox at Surface because the collision is happing at the midt flame
+        /// The collisionbox is set lower than CollisionBox at Surface because the collision is happ
         /// </summary>
         public override Rectangle CollisionBox
         {
-            get { return new Rectangle((int)(Position.X - (Sprite.Width / 2) + 25), (int)Position.Y + (Sprite.Height/4), Sprite.Width - 50, Sprite.Height / 2); }
+            get { return new Rectangle((int)(Position.X - (Sprite.Width / 2) + 25), (int)Position.Y , Sprite.Width - 50, Sprite.Height / 2); }
         }
 
         #endregion

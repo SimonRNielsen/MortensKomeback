@@ -39,17 +39,17 @@ namespace MortensKomeback
         {
             int graphicsHeight = graphics.PreferredBackBufferHeight;
 
-            //
-            int grass = 1;
-            int dirt = 2;
-            int cloud5 = 3;
-            int cloud3 = 4;
+            //The following ints is refurring to the differents sprites 
+            int grass = 1; //"grass_tile1"
+            int dirt = 2; //"dirt_tile1"
+            int cloud5 = 3; //"cloud5"
+            int cloud3 = 4; //"cloud3"
 
 
             #region button
             //First buttom
-            AddSurfaces((tileSize), graphicsHeight + tileSize ,  dirt, 1, 31); // Græstop på jorden (Morten spawner på den rigtige overflade)
-            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), grass, 1, 31); // Jordbund
+            AddSurfaces((tileSize), graphicsHeight + tileSize ,  dirt, 1, 31); 
+            AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), grass, 1, 31); 
 
             //Second buttom
             AddSurfaces((tileSize), graphicsHeight + tileSize,  dirt, 34, 49);
