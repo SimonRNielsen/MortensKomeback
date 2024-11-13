@@ -187,6 +187,12 @@
 /processorParam:Quality=Best
 /build:gooseSound_cut.wav
 
+#begin gooseSound_Short.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gooseSound_Short.wav
+
 #begin gooseSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

@@ -63,7 +63,7 @@ namespace MortensKomeback
 
 
             //Indlæs honk Lyd
-            honkSound = content.Load<SoundEffect>("gooseSound_cut");
+            honkSound = content.Load<SoundEffect>("gooseSound_Short");
 
         }
 
