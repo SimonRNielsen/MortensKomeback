@@ -65,6 +65,7 @@ namespace MortensKomeback
             gameObjects.Add(new IntroScreen());
             gameObjects.Add(new MousePointer(_graphics));
             gameObjects.Add(new CharacterGenerator());
+            gameObjects.Add(new Enemy());
             gameObjects.Add(new Overlay());
             gameObjects.Add(new Background(1));
             gameObjects.Add(new Background(2));
@@ -117,17 +118,28 @@ namespace MortensKomeback
             mortenLives = false;
             foreach (GameObject gameObject in gameObjects)
             {
+                //Surface don't need to run Update() unless they are AvSurface, so this if, makes them continue to save resources.
+                if ((gameObject is Surface) && !(gameObject is AvSurface))
+                {
+                    continue;
+                }
                 foreach (GameObject other in gameObjects)
                 {
+                    //An object should not be able to collide with a member of the same class
+                    if (gameObject == other)
+                    {
+                        continue;
+                    }
+                    //Only Player, MousePointer, Enemy and Ammo needs to check for collisions, so GameOjects of any other class will now need to complete the loop
+                    if (!((gameObject is Player) || (gameObject is MousePointer) || (gameObject is Enemy) || (gameObject is Ammo)))
+                    {
+                        continue;
+                    }
                     if (gameObject is MousePointer && other is Button)
                     {
                         gameObject.CheckCollision(other);
                         other.CheckCollision(gameObject);
                     }
-
-                    if (gameObject is Player && other is Enemy)
-                        if (gameObject == other)
-                            continue;
 
                     if (gameObject is Player)
                     {

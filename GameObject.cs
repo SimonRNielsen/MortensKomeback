@@ -130,5 +130,10 @@ namespace MortensKomeback
             }
 
         }
+
+        protected static object FindGameObjectWithTag(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

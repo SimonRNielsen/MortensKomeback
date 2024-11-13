@@ -64,7 +64,7 @@ namespace MortensKomeback
             {
                 this.Sprite = sprite2;
                 position.X = 200 * 150;
-                position.Y = -512;
+                position.Y = 88;
             }
             
         }
