@@ -39,13 +39,13 @@ namespace MortensKomeback
             int graphicsHeight = graphics.PreferredBackBufferHeight;
 
             //The following ints is refurring to the differents sprites 
-            int dirt = 1;  //"dirt_tile1"
-            int grass = 2; //"grass_tile1"
-            int cloud5 = 3; //"cloud5"
-            int cloud3 = 4; //"cloud3"
-            int trans = 5; //"transparentTile"
-            int table = 6; //"table"
-            int wallTurkey = 7; //"wallTurkey"
+            int dirt = 0;  //"dirt_tile1"
+            int grass = 1; //"grass_tile1"
+            int cloud5 = 2; //"cloud5"
+            int cloud3 = 3; //"cloud3"
+            int trans = 4; //"transparentTile"
+            int table = 5; //"table"
+            int wallTurkey = 6; //"wallTurkey"
 
             #region BACKGROUND
             //Cathedral

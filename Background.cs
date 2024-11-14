@@ -49,6 +49,16 @@ namespace MortensKomeback
             //The choosen sprite
             this.Sprite = sprites[spriteID - 1];
 
+            //
+            if (spriteID == 2)
+            {
+                this.layer = 0.1f;
+            }
+
+            if (spriteID == 3)
+            {
+                this.layer = 0.93f;
+            }
 
             backgroundMusic = content.Load<Song>("Midnight_Tale");
             MediaPlayer.Play(backgroundMusic);

@@ -34,7 +34,7 @@ namespace MortensKomeback
         {
             this.position.X = position.X;
             this.position.Y = position.Y;
-            this.layer = 0.2f;
+            this.layer = 0.3f;
             this.spriteID = spriteID;
             this.health = 1;
         }
@@ -55,9 +55,9 @@ namespace MortensKomeback
             sprites[5] = content.Load<Texture2D>("Sprite\\table");
             sprites[6] = content.Load<Texture2D>("wallTurkey");
             
-            this.Sprite = sprites[spriteID - 1];
+            this.Sprite = sprites[spriteID];
 
-            if (spriteID == 3 || spriteID == 4)
+            if (spriteID == 3 || spriteID == 2)
             {
                 spriteEffectIndex = 2; //FlipVertically
             }
