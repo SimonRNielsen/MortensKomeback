@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,6 +11,7 @@ namespace MortensKomeback
 
         private int powerUpType;
         Random random = new Random();
+        SoundEffect powerUpSound;
 
         /// <summary>
         /// Powerup Creator
@@ -40,7 +42,7 @@ namespace MortensKomeback
             this.sprites[1] = content.Load<Texture2D>("wallTurkey");
             this.sprite = sprites[powerUpType];
             this.position.Y -= sprite.Height / 2;
-
+            powerUpSound = content.Load<SoundEffect>("powerUp_Sound");
         }
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace MortensKomeback
 
             if (gameObject is Player)
             {
-
+                powerUpSound.Play();
                 this.health--;
 
                 if (powerUpType == 0)

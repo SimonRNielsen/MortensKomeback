@@ -23,6 +23,8 @@ namespace MortensKomeback
         private Random rnd = new Random();
         private SpriteEffects spriteEffects;
         private bool isHit;
+        private float honkCountdown = 1f;
+        private float honkTimer; 
 
        
         #endregion
@@ -83,6 +85,11 @@ namespace MortensKomeback
                 this.Health--;
                 Overlay.KillCount++;
             }
+            if (gameObject is Player && (honkTimer > honkCountdown))
+            {
+                honkSound.Play();
+                honkTimer = 0f;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -109,6 +116,9 @@ namespace MortensKomeback
             base.Update(gameTime);
 
             Move(gameTime);
+
+            honkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             #endregion
 
         }

@@ -32,6 +32,9 @@ namespace MortensKomeback
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
         private SoundEffect avSound;
+        private SoundEffect walkSound;
+        private float walkCooldown = 0.3f;
+        private float walkTimer;
 
 
         /// <summary>
@@ -85,6 +88,7 @@ namespace MortensKomeback
             AmmoSprites[4] = content.Load<Texture2D>("groundegg2");
             avSound = content.Load<SoundEffect>("morten_Av");
             shootSound = content.Load<SoundEffect>("shootSound");
+            walkSound = content.Load<SoundEffect>("walk");
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -107,6 +111,7 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            walkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (invincibleTimer > invincibleCooldown)
             {
                 invincible = false;
@@ -146,6 +151,11 @@ namespace MortensKomeback
             {
                 Flipped = true;
                 spriteEffectIndex = 1;
+                if(walkTimer > walkCooldown)
+                {
+                    walkSound.Play();
+                    walkTimer = 0;
+                }
                 //Move left
                 velocity += new Vector2(-1, 0);
             }
@@ -154,6 +164,11 @@ namespace MortensKomeback
             {
                 spriteEffectIndex = 0;
                 Flipped = false;
+                if (walkTimer > walkCooldown)
+                {
+                    walkSound.Play();
+                    walkTimer = 0;
+                }
                 //Move right
                 velocity += new Vector2(+1, 0);
             }

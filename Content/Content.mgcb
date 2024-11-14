@@ -452,6 +452,12 @@
 /processorParam:TextureFormat=Color
 /build:pixel.png
 
+#begin powerUp_Sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:powerUp_Sound.wav
+
 #begin shootSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -608,6 +614,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:udkast.png
+
+#begin walk.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:walk.wav
 
 #begin wallTurkey.png
 /importer:TextureImporter
