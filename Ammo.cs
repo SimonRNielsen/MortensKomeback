@@ -47,6 +47,7 @@ namespace MortensKomeback
             this.layer = 0.9f;
             this.sprites = player.AmmoSprites;
             this.sprite = sprites[ammoSprite];
+            this.deathSoundEffect = player.AmmoSound; 
         }
 
         #endregion
@@ -78,10 +79,10 @@ namespace MortensKomeback
                         timer = 0f;
                         this.sprite = this.sprites[4];
                         this.rotation = 0f;
+                        this.deathSoundEffect.Play();
                     }
                     else if (gameObject is Enemy && !collided)
                     {
-                        gameObject.Health--;
                         this.collided = true;
                         timer = 0f;
                         this.sprite = this.sprites[random.Next(2, 4)];
@@ -93,13 +94,14 @@ namespace MortensKomeback
                         {
                             this.rotation = -0.25f;
                         }
+                        this.deathSoundEffect.Play();
                     }
 
                 }
-                else if (gameObject is Enemy)
+                else if (gameObject is Enemy && !((gameObject as Enemy).IsHit))
                 {
-                    gameObject.Health--;
                     this.health--;
+                    this.deathSoundEffect.Play();
                 }
                 else if (!collided)
                 {
@@ -107,6 +109,7 @@ namespace MortensKomeback
                     timer = 0f;
                     this.sprite = this.sprites[4];
                     this.rotation = 0f;
+                    this.deathSoundEffect.Play();
                 }
             }
             /*

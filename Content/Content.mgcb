@@ -109,6 +109,12 @@
 /processorParam:TextureFormat=Color
 /build:egg2.png
 
+#begin eggSmash_Sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:eggSmash_Sound.wav
+
 #begin goose0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -186,6 +192,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:gooseSound_cut.wav
+
+#begin gooseSound_Short.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gooseSound_Short.wav
 
 #begin gooseSound.wav
 /importer:WavImporter
@@ -325,12 +337,24 @@
 /processorParam:TextureFormat=Color
 /build:laserGreen16.png;testAmmo.png
 
+#begin Midnight_Tale.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Midnight_Tale.mp3
+
 #begin mortalKombatFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:mortalKombatFont.spritefont
+
+#begin morten_Av.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:morten_Av.wav
 
 #begin morten_sprite.png
 /importer:TextureImporter
@@ -451,6 +475,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:pixel.png
+
+#begin powerUp_Sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:powerUp_Sound.wav
+
+#begin shootSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shootSound.wav
 
 #begin Sprite/avsurfaceILD1.png
 /importer:TextureImporter
@@ -602,6 +638,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:udkast.png
+
+#begin walkSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:walkSound.wav
+
+#begin walkSound2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:walkSound2.wav
 
 #begin wallTurkey.png
 /importer:TextureImporter

@@ -32,6 +32,13 @@ namespace MortensKomeback
         private float invincibleCooldown = 2f; //Used to make player invincible after damaging collison
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
+        private SoundEffect avSound;
+        private SoundEffect[] walkSounds;
+        private SoundEffect walkSound;
+        private float walkCooldown = 0.4f;
+        private float walkTimer;
+        private SoundEffect ammoSound;
+
 
 
         /// <summary>
@@ -43,6 +50,7 @@ namespace MortensKomeback
         /// Property to access which direction Morten is facing upon constructing "Ammo"
         /// </summary>
         public bool Flipped { get => flipped; set => flipped = value; }
+        public SoundEffect AmmoSound { get => ammoSound; private set => ammoSound = value; }
 
         #endregion
 
@@ -83,6 +91,14 @@ namespace MortensKomeback
             AmmoSprites[2] = content.Load<Texture2D>("groundegg0");
             AmmoSprites[3] = content.Load<Texture2D>("groundegg1");
             AmmoSprites[4] = content.Load<Texture2D>("groundegg2");
+            avSound = content.Load<SoundEffect>("morten_Av");
+            shootSound = content.Load<SoundEffect>("shootSound");
+            walkSounds = new SoundEffect[2];
+            walkSounds[0] = content.Load<SoundEffect>("walkSound");
+            walkSounds[1] = content.Load<SoundEffect>("walkSound2");
+            walkSound = walkSounds[0];
+            AmmoSound = content.Load<SoundEffect>("eggSmash_Sound");
+
             mitre = content.Load<Texture2D>("Sprite\\mitre");
         }
 
@@ -90,10 +106,14 @@ namespace MortensKomeback
         {
             base.OnCollision(gameObject);
             if (gameObject is Enemy && !invincible)
+            {
                 TakeDamage();
+                avSound.Play();
+            }
             if (gameObject is AvSurface && !invincible)
             {
                 TakeDamage();
+                avSound.Play();
                 Jump();
             }
             Overlay.HealthCount = this.Health;
@@ -102,6 +122,7 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            walkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             mitretimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -157,6 +178,7 @@ namespace MortensKomeback
             {
                 Flipped = true;
                 spriteEffectIndex = 1;
+                WalkSound();
                 //Move left
                 velocity += new Vector2(-1, 0);
             }
@@ -165,6 +187,7 @@ namespace MortensKomeback
             {
                 spriteEffectIndex = 0;
                 Flipped = false;
+                WalkSound();
                 //Move right
                 velocity += new Vector2(+1, 0);
             }
@@ -210,6 +233,7 @@ namespace MortensKomeback
         /// </summary>
         private void Shoot()
         {
+            shootSound.Play();
             //If ammo count (special ammo) is available it will be used, and therefore one subtracted from the count here. 
             if (ammoCount > 0)
             {
@@ -246,6 +270,23 @@ namespace MortensKomeback
             this.Health--;
             invincibleTimer = 0;
             invincible = true;
+        }
+
+        private void WalkSound()
+        {
+            if (walkTimer > walkCooldown && surfaceContact)
+            {
+                walkSound.Play();
+                walkTimer = 0;
+                if (walkSound == walkSounds[0])
+                {
+                    walkSound = walkSounds[1];
+                }
+                else if (walkSound == walkSounds[1])
+                {
+                    walkSound = walkSounds[0];
+                }
+            }
         }
 
         /// <summary>
