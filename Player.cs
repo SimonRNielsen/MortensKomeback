@@ -28,7 +28,7 @@ namespace MortensKomeback
         private int ammoCount = 0;
         private float smoothJump = 0.21f;
         private float jumpingTime = 0.2f;
-        private float invincibleCooldown = 1f; //Used to make player invincible after damaging collison
+        private float invincibleCooldown = 2f; //Used to make player invincible after damaging collison
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
         private SoundEffect avSound;
@@ -68,7 +68,7 @@ namespace MortensKomeback
         {
             this.position.X = 0;
             this.position.Y = 0;
-            this.speed = 1000f; //Husk at ændre tilbage til 300f
+            this.speed = 400f; //Husk at ændre tilbage til 300f
             this.fps = 15f;
             this.Health = 3;
             this.layer = 0.9f;
@@ -154,7 +154,19 @@ namespace MortensKomeback
             velocity = Vector2.Zero; //Resets the velocity, so move stops when no keys are pressed
 
             KeyboardState keyState = Keyboard.GetState();//Get the current keyboard state
+            /*
+            if (GameWorld.mouseX < this.position.X)
+            {
+                spriteEffectIndex = 1;
+                flipped = true;
+            }
 
+            if (GameWorld.mouseX > this.position.X)
+            {
+                spriteEffectIndex = 0;
+                flipped = false;
+            }
+            */
             //If a is pressed the player moves left, and the sprite is flipped so it faces left
             if (keyState.IsKeyDown(Keys.A))
             {
@@ -266,6 +278,12 @@ namespace MortensKomeback
                     walkSound = walkSounds[0];
                 }
             }
+        }
+
+        public void InvulnerablePowerUp()
+        {
+            this.invincible = true;
+            this.invincibleTimer = -13f;
         }
         #endregion
 

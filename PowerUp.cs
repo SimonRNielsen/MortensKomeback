@@ -10,6 +10,9 @@ namespace MortensKomeback
     {
 
         private int powerUpType;
+        private bool attach = false;
+        private float duration = 5f;
+        private float timer;
         Random random = new Random();
         SoundEffect powerUpSound;
 
@@ -21,12 +24,12 @@ namespace MortensKomeback
         public PowerUp(Vector2 placement, int type)
         {
 
-            if (type > 1)
-                type = random.Next(0, 2);
+            if (type > 2)
+                type = random.Next(0, 3);
             this.powerUpType = type;
             this.position = placement;
             this.health = 1;
-            this.layer = 0.2f;
+            this.layer = 0.91f;
 
         }
 
@@ -37,9 +40,10 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
 
-            sprites = new Texture2D[2];
+            sprites = new Texture2D[3];
             this.sprites[0] = content.Load<Texture2D>("egg2");
             this.sprites[1] = content.Load<Texture2D>("wallTurkey");
+            this.sprites[2] = content.Load<Texture2D>("Sprite\\mitre");
             this.sprite = sprites[powerUpType];
             this.position.Y -= sprite.Height / 2;
             powerUpSound = content.Load<SoundEffect>("powerUp_Sound");
@@ -59,15 +63,23 @@ namespace MortensKomeback
 
                 if (powerUpType == 0)
                 {
+                    this.health--;
                     (gameObject as Player).OverPowered();
                 }
 
                 if (powerUpType == 1)
                 {
+                    this.health--;
                     if (gameObject.Health < 3)
                     {
                         gameObject.Health++;
                     }
+                }
+
+                if (powerUpType == 2 && !attach)
+                {
+                    (gameObject as Player).InvulnerablePowerUp();
+                    this.attach = true;
                 }
 
             }
@@ -76,7 +88,16 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
+            if (this.powerUpType == 2 && attach)
+            {
+                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                this.position.X = GameWorld.Camera.Position.X - 12;
+                this.position.Y = GameWorld.Camera.Position.Y - 150;
+                if (timer >= duration)
+                {
+                    this.health--;
+                }
+            }
         }
     }
 }

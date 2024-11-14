@@ -87,6 +87,8 @@ namespace MortensKomeback
         /// <param name="gameTime">GameTime, given by GameWorld</param>
         public override void Update(GameTime gameTime)
         {
+            GameWorld.Camera.Position = this.Position;
+
             HandleInput();
             SetChosenMortenText();
         }
