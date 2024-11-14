@@ -488,6 +488,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprite/avsurfaceILD4.png
 
+#begin Sprite/chair.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/chair.png
+
 #begin Sprite/cloud3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -548,18 +560,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprite/glorie2.png
 
-#begin Sprite/glorie2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprite/glorie2.png
-
 #begin Sprite/grass_tile1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -607,6 +607,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprite/mitre.png
+
+#begin Sprite/table.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/table.png
 
 #begin Sprite/Tours_Cathedral_facade.png
 /importer:TextureImporter
