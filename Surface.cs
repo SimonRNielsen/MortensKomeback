@@ -8,13 +8,7 @@ namespace MortensKomeback
     {
         #region field
         private int spriteID; //Which sprite is going to be used
-        private static Texture2D sprite1;
-        private static Texture2D sprite2;
-        private static Texture2D sprite3;
-        private static Texture2D sprite4;
-        private static Texture2D sprite5;
-        private static Texture2D sprite6;
-        private static Texture2D sprite7;
+
         #endregion
 
         #region properties
@@ -51,44 +45,21 @@ namespace MortensKomeback
 
         public override void LoadContent(ContentManager content)
         {
+            sprites = new Texture2D[7];
+
+            sprites[0] = content.Load<Texture2D>("Sprite\\dirt_tile1");
+            sprites[1] = content.Load<Texture2D>("Sprite\\grass_tile1");
+            sprites[2] = content.Load<Texture2D>("Sprite\\cloud5");
+            sprites[3] = content.Load<Texture2D>("Sprite\\cloud3");
+            sprites[4] = content.Load<Texture2D>("Sprite\\transparentTile");
+            sprites[5] = content.Load<Texture2D>("Sprite\\table");
+            sprites[6] = content.Load<Texture2D>("wallTurkey");
             
-            sprite1 = content.Load<Texture2D>("Sprite\\dirt_tile1");
-            sprite2 = content.Load<Texture2D>("Sprite\\grass_tile1");
-            sprite3 = content.Load<Texture2D>("Sprite\\cloud5");
-            sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
-            sprite5 = content.Load<Texture2D>("Sprite\\transparentTile");
-            sprite6 = content.Load<Texture2D>("Sprite\\table");
-            sprite7 = content.Load<Texture2D>("wallTurkey");
-            
-            if (spriteID == 1)
+            this.Sprite = sprites[spriteID - 1];
+
+            if (spriteID == 3 || spriteID == 4)
             {
-                this.Sprite = sprite1;
-            }
-            if (spriteID == 2)
-            {
-                this.Sprite = sprite2;
-            }
-            if (spriteID == 3)
-            {
-                this.Sprite = sprite3;
                 spriteEffectIndex = 2; //FlipVertically
-            }
-            if (spriteID == 4)
-            {
-                this.Sprite = sprite4;
-                spriteEffectIndex = 2; //FlipVertically
-            }
-            if (spriteID == 5)
-            {
-                this.Sprite = sprite5;
-            }
-            if (spriteID == 6)
-            {
-                this.Sprite = sprite6;
-            }
-            if (spriteID == 7)
-            {
-                this.Sprite = sprite7;
             }
         }
 

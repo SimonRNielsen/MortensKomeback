@@ -2,17 +2,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using SharpDX.Direct3D9;
 
 namespace MortensKomeback
 {
     internal class Background : GameObject
     {
         #region field
-        private static Texture2D sprite1;
-        private static Texture2D sprite2;
-        private static Texture2D sprite3;
-        private static Texture2D sprite4;
-        private static Texture2D sprite5;
         private int spriteID; //Which sprite is going to be used
         private Song backgroundMusic;
 
@@ -42,34 +38,17 @@ namespace MortensKomeback
         /// <param name="content">A ContentManager</param>
         public override void LoadContent(ContentManager content)
         {
-            sprite1 = content.Load<Texture2D>("Sprite\\hills_small");
-            sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
-            sprite3 = content.Load<Texture2D>("Sprite\\dirt_tile1_background");
-            sprite4 = content.Load<Texture2D>("Sprite\\glorie2");
-            sprite5 = content.Load<Texture2D>("Sprite\\chair");
+            sprites = new Texture2D[5];
+
+            sprites[0] = content.Load<Texture2D>("Sprite\\hills_small");
+            sprites[1] = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
+            sprites[2] = content.Load<Texture2D>("Sprite\\dirt_tile1_background");
+            sprites[3] = content.Load<Texture2D>("Sprite\\glorie2");
+            sprites[4] = content.Load<Texture2D>("Sprite\\chair");
             
-            if (spriteID == 1)
-            {
-                this.Sprite = sprite1;
-            }
-            if (spriteID == 2)
-            {
-                this.Sprite = sprite2;
-                this.layer = 0.01f;
-            }
-            if (spriteID == 3)
-            {
-                this.Sprite = sprite3;
-                this.layer = 0.92f; //0.01 higher than PowerUp layer 
-            }
-            if (spriteID == 4)
-            {
-                this.Sprite = sprite4;
-            }
-            if (spriteID == 5)
-            {
-                this.Sprite = sprite5;
-            }
+            //The choosen sprite
+            this.Sprite = sprites[spriteID - 1];
+
 
             backgroundMusic = content.Load<Song>("Midnight_Tale");
             MediaPlayer.Play(backgroundMusic);
