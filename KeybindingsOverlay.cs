@@ -21,11 +21,11 @@ namespace MortensKomeback
         private bool pressHAllowed = true;
 
         #endregion
+        #region Constructor
         /// <summary>
         /// Constructor for the KeybindingsOverlay. Should be used when the game is initialised. 
         /// Sets the essentiel attributes for the KeybindinOverlay to be shown properly. 
         /// </summary>
-        #region Constructor
         public KeybindingsOverlay()
         {
             this.health = 1;

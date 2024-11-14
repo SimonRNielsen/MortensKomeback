@@ -22,6 +22,9 @@ namespace MortensKomeback
         private Vector2 direction;
         private Random rnd = new Random();
         private SpriteEffects spriteEffects;
+        private bool isHit;
+        private float honkCountdown = 1f;
+        private float honkTimer; 
 
        
         #endregion
@@ -40,7 +43,12 @@ namespace MortensKomeback
             this.Health = 1;
             this.layer = 0.8f;
             this.scale = 1;
+            this.IsHit = false;
         }
+        /// <summary>
+        /// Property to acces wheter the enemy has already been hit, so collisions are not counted more than once
+        /// </summary>
+        public bool IsHit { get => isHit; set => isHit = value; }
 
 
         #region Methods
@@ -58,7 +66,7 @@ namespace MortensKomeback
 
 
             //Indlæs honk Lyd
-            honkSound = content.Load<SoundEffect>("gooseSound_cut");
+            honkSound = content.Load<SoundEffect>("gooseSound_Short");
 
         }
 
@@ -70,6 +78,17 @@ namespace MortensKomeback
             if (gameObject is Surface)
             {
                 surfaceContact = true;
+            }
+            if (gameObject is Ammo && !isHit)
+            {
+                honkSound.Play();
+                this.Health--;
+                Overlay.KillCount++;
+            }
+            if (gameObject is Player && (honkTimer > honkCountdown))
+            {
+                honkSound.Play();
+                honkTimer = 0f;
             }
         }
 
@@ -92,12 +111,14 @@ namespace MortensKomeback
             }
             velocity = new Vector2(velocity.X, 0); 
             
-            honkSound.Play();
             
             
             base.Update(gameTime);
 
             Move(gameTime);
+
+            honkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             #endregion
 
         }

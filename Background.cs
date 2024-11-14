@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
+using Microsoft.Xna.Framework.Media;
 
 namespace MortensKomeback
 {
@@ -19,6 +20,7 @@ namespace MortensKomeback
         private static Texture2D sprite4;
         private static Texture2D sprite5;
         private int spriteID; //Which sprite is going to be used
+        private Song backgroundMusic;
 
         #endregion
 
@@ -35,7 +37,6 @@ namespace MortensKomeback
             this.position.Y = yPosition;
             this.health = 1;
             this.spriteID = spriteID;
-
         }
 
         #endregion
@@ -75,7 +76,11 @@ namespace MortensKomeback
             {
                 this.Sprite = sprite5;
             }
-            
+
+            backgroundMusic = content.Load<Song>("Midnight_Tale");
+            MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.2f;
         }
 
         /// <summary>

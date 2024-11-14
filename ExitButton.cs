@@ -5,7 +5,22 @@ namespace MortensKomeback
 {
     internal class ExitButton : Button
     {
+        #region Fields
 
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Constructor for placing ExitButton
+        /// </summary>
+        /// <param name="sprite">Gets sprite externally</param>
+        /// <param name="pos">Gets position externally</param>
+        /// <param name="font">Gets font externally</param>
         public ExitButton(Texture2D sprite, Vector2 pos, SpriteFont font)
         {
             this.sprite = sprite;
@@ -16,8 +31,14 @@ namespace MortensKomeback
             this.buttonText = "Exit";
         }
 
-        
+        #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Determines interaction with MousePointer/Mouse
+        /// </summary>
+        /// <param name="gameObject">MousePointer CollisionBox</param>
         public override void OnCollision(GameObject gameObject)
         {
             if (gameObject is MousePointer)
@@ -26,5 +47,6 @@ namespace MortensKomeback
                 GameWorld.exitGame = true;
         }
 
+        #endregion
     }
 }

@@ -1,16 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
     public class GameWorld : Game
     {
+        #region Fields
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private List<GameObject> gameObjects = new List<GameObject>();
@@ -32,11 +30,18 @@ namespace MortensKomeback
 #if DEBUG
         public Texture2D collisionTexture;
 #endif
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Property to get/set the position of the camera, in this case relative to the players position
         /// </summary>
         public static Camera2D Camera { get => camera; set => camera = value; }
+
+        #endregion
+
+        #region Constructor
 
         public GameWorld()
         {
@@ -44,6 +49,10 @@ namespace MortensKomeback
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
+
+        #endregion
+
+        #region Methods
 
         protected override void Initialize()
         {
@@ -58,10 +67,11 @@ namespace MortensKomeback
             }
 
             // TODO: Add your initialization logic here
-
+#if DEBUG
             gameObjects.Add(new PowerUp(new Vector2(150, 700), 0));
             gameObjects.Add(new PowerUp(new Vector2(450, 700), 1));
             gameObjects.Add(new PowerUp(new Vector2(750, 700), 2));
+#endif
 
             gameObjects.Add(new PowerUp(new Vector2(5655, -1385), 0)); //Over first platform 
             gameObjects.Add(new PowerUp(new Vector2(24871, 850), 1)); //Hidden
@@ -286,5 +296,6 @@ namespace MortensKomeback
             spawnOutro = false;
         }
 
+        #endregion
     }
 }

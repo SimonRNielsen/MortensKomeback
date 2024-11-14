@@ -3,11 +3,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
@@ -18,21 +13,37 @@ namespace MortensKomeback
     {
         #region Fields
         private Texture2D[] ammoSprites;
+        private Texture2D mitre;
         private SoundEffect shootSound;
         private SoundEffect takeDamageSound;
         private bool canShoot = true;
         private bool canJump = false;
         private bool flipped = false;
+        private bool mitreOn = false;
         private int ammoHealth = 1;
         private int ammoSprite = 0;
         private int ammoCount = 0;
+        private float spriteXDisplacement;
+        private float spriteYDisplacement;
+        private float mitretimer;
+        private float mitreOnTime = 15f;
         private float smoothJump = 0.21f;
         private float jumpingTime = 0.2f;
         private float invincibleCooldown = 2f; //Used to make player invincible after damaging collison
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
+        private SoundEffect avSound;
+        private SoundEffect[] walkSounds;
+        private SoundEffect walkSound;
+        private float walkCooldown = 0.4f;
+        private float walkTimer;
+        private SoundEffect ammoSound;
 
 
+
+        #endregion
+
+        #region Properties
         /// <summary>
         /// Property to access the sprites upon constructing "Ammo"
         /// </summary>
@@ -42,10 +53,8 @@ namespace MortensKomeback
         /// Property to access which direction Morten is facing upon constructing "Ammo"
         /// </summary>
         public bool Flipped { get => flipped; set => flipped = value; }
-        
-        #endregion
+        public SoundEffect AmmoSound { get => ammoSound; private set => ammoSound = value; }
 
-        #region Properties
         #endregion
 
 
@@ -82,16 +91,29 @@ namespace MortensKomeback
             AmmoSprites[2] = content.Load<Texture2D>("groundegg0");
             AmmoSprites[3] = content.Load<Texture2D>("groundegg1");
             AmmoSprites[4] = content.Load<Texture2D>("groundegg2");
+            avSound = content.Load<SoundEffect>("morten_Av");
+            shootSound = content.Load<SoundEffect>("shootSound");
+            walkSounds = new SoundEffect[2];
+            walkSounds[0] = content.Load<SoundEffect>("walkSound");
+            walkSounds[1] = content.Load<SoundEffect>("walkSound2");
+            walkSound = walkSounds[0];
+            AmmoSound = content.Load<SoundEffect>("eggSmash_Sound");
+
+            mitre = content.Load<Texture2D>("Sprite\\mitre");
         }
 
         public override void OnCollision(GameObject gameObject)
         {
             base.OnCollision(gameObject);
             if (gameObject is Enemy && !invincible)
+            {
                 TakeDamage();
+                avSound.Play();
+            }
             if (gameObject is AvSurface && !invincible)
             {
                 TakeDamage();
+                avSound.Play();
                 Jump();
             }
             Overlay.HealthCount = this.Health;
@@ -100,6 +122,12 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            walkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            mitretimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (mitretimer >= mitreOnTime)
+                mitreOn = false;
 
             if ( this.position.X > 39700)
             {
@@ -117,7 +145,6 @@ namespace MortensKomeback
                 this.ammoHealth = 1;
                 this.ammoSprite = 0;
             }
-            smoothJump += (float)gameTime.ElapsedGameTime.TotalSeconds;
             HandleInput();
             if (smoothJump < jumpingTime)
                 velocity -= new Vector2(0, +4);
@@ -140,7 +167,7 @@ namespace MortensKomeback
             velocity = Vector2.Zero; //Resets the velocity, so move stops when no keys are pressed
 
             KeyboardState keyState = Keyboard.GetState();//Get the current keyboard state
-            /*
+            /* (Successful experiment to use mouse position on screen to determine which way player is facing
             if (GameWorld.mouseX < this.position.X)
             {
                 spriteEffectIndex = 1;
@@ -158,6 +185,7 @@ namespace MortensKomeback
             {
                 Flipped = true;
                 spriteEffectIndex = 1;
+                WalkSound();
                 //Move left
                 velocity += new Vector2(-1, 0);
             }
@@ -166,8 +194,9 @@ namespace MortensKomeback
             {
                 spriteEffectIndex = 0;
                 Flipped = false;
+                WalkSound();
                 //Move right
-                velocity += new Vector2(+1, 0); 
+                velocity += new Vector2(+1, 0);
             }
             //Normalises the velocity
             if (velocity != Vector2.Zero)
@@ -211,6 +240,7 @@ namespace MortensKomeback
         /// </summary>
         private void Shoot()
         {
+            shootSound.Play();
             //If ammo count (special ammo) is available it will be used, and therefore one subtracted from the count here. 
             if (ammoCount > 0)
             {
@@ -239,6 +269,9 @@ namespace MortensKomeback
             Overlay.PlayerAmmoCount = this.ammoCount;
         }
 
+        /// <summary>
+        /// Handles the players damage taken and sets and resets an invulnerabilty timer so time has to pass until player can take damage again
+        /// </summary>
         public void TakeDamage()
         {
             this.Health--;
@@ -246,10 +279,59 @@ namespace MortensKomeback
             invincible = true;
         }
 
+        /// <summary>
+        /// Plays a walking sound for the player. Uses a timer, and switches between two sounds, for a natural sounding walk. 
+        /// </summary>
+        private void WalkSound()
+        {
+            if (walkTimer > walkCooldown && surfaceContact)
+            {
+                walkSound.Play();
+                walkTimer = 0;
+                if (walkSound == walkSounds[0])
+                {
+                    walkSound = walkSounds[1];
+                }
+                else if (walkSound == walkSounds[1])
+                {
+                    walkSound = walkSounds[0];
+                }
+            }
+        }
+
+        /// <summary>
+        /// Makes player invulnerable for a set duration of time (invincibleTimer*-1 + invincibleCooldown seconds) and enables player character to draw the mitre sprite on its "head"
+        /// </summary>
         public void InvulnerablePowerUp()
         {
             this.invincible = true;
             this.invincibleTimer = -13f;
+            mitreOn = true;
+            mitretimer = 0f;
+        }
+
+        /// <summary>
+        /// Overrides draw to enable player to draw the "mitre" while invulnerable
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Sprite, Position, null, Color.White, rotation, new Vector2(Sprite.Width / 2, Sprite.Height / 2), scale, objectSpriteEffects[spriteEffectIndex], layer);
+
+            if (mitreOn)
+            {
+                spriteYDisplacement = 95;
+                if (flipped)
+                {
+                    spriteXDisplacement = 73;
+                }
+                else
+                {
+                    spriteXDisplacement = 23;
+                }
+
+                spriteBatch.Draw(mitre, new Vector2(position.X + spriteXDisplacement, position.Y - spriteYDisplacement), null, Color.White, rotation, new Vector2(Sprite.Width / 2, Sprite.Height / 2), scale, objectSpriteEffects[spriteEffectIndex], layer);
+            }
         }
         #endregion
 

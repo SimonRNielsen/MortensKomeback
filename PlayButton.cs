@@ -1,12 +1,26 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
 
 namespace MortensKomeback
 {
     internal class PlayButton : Button
     {
+        #region Fields
 
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Constructor for placing PlayButton
+        /// </summary>
+        /// <param name="sprite">Gets sprite externally</param>
+        /// <param name="pos">Gets position externally</param>
+        /// <param name="font">Gets font externally</param>
         public PlayButton(Texture2D sprite, Vector2 pos, SpriteFont font)
         {
             this.sprite = sprite;
@@ -17,6 +31,14 @@ namespace MortensKomeback
             this.buttonText = "Play";
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Determines interaction with MousePointer/Mouse
+        /// </summary>
+        /// <param name="gameObject">MousePointer CollisionBox</param>
         public override void OnCollision(GameObject gameObject)
         {
             if (gameObject is MousePointer)
@@ -25,5 +47,6 @@ namespace MortensKomeback
                 GameWorld.removeScreen = true;
         }
 
+        #endregion
     }
 }
