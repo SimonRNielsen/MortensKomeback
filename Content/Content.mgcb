@@ -325,6 +325,18 @@
 /processorParam:TextureFormat=Color
 /build:gooseWalk2.png;gooseWalk1.png
 
+#begin gooseWalk2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gooseWalk2.png
+
 #begin gooseWalk3.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -433,6 +445,18 @@
 /processorParam:TextureFormat=Color
 /build:heartSprite.png
 
+#begin introScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:introScreen.png
+
 #begin laserGreen16.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -444,6 +468,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:laserGreen16.png;testAmmo.png
+
+#begin looseScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:looseScreen.png
 
 #begin Midnight_Tale.mp3
 /importer:Mp3Importer
@@ -938,4 +974,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:wallTurkey.png
+
+#begin winScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:winScreen.png
 

@@ -37,7 +37,7 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            this.sprite = content.Load<Texture2D>("udkast");
+            this.sprite = content.Load<Texture2D>("introScreen");
             spriteFont = content.Load<SpriteFont>("mortalKombatFont");
             buttonSprite = content.Load<Texture2D>("button");
             GameWorld.newGameObjects.Add(new PlayButton(buttonSprite, new Vector2(position.X - 400, position.Y + 300), spriteFont));
