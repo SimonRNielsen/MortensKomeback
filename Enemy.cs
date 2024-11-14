@@ -2,13 +2,8 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MortensKomeback
 {
@@ -24,7 +19,9 @@ namespace MortensKomeback
         private Texture2D[] normalSprites;
         private bool isHit;
         private float honkCountdown = 1f;
-        private float honkTimer; 
+        private float honkTimer;
+        private SoundEffect honkSound;
+        private bool isAggro = false;
 
         private static Vector2 playerPosition;
 
@@ -50,7 +47,7 @@ namespace MortensKomeback
         /// </summary>
         public Enemy()
         {
-            this.position.X = 2080;
+            this.position.X = 1000;
             this.position.Y = 0;
             this.speed = 250;
             this.velocity = new Vector2(1, 0);
@@ -87,14 +84,12 @@ namespace MortensKomeback
             //Indlæs honk Lyd
             honkSound = content.Load<SoundEffect>("gooseSound_Short");
             //loader aggro animation 
-            aggroSprite = new Texture2D[7];
+            aggroSprite = new Texture2D[7]; //sæt til 7
             for (int i = 0; i < aggroSprite.Length; i++)
             {
                 aggroSprite[i] = content.Load<Texture2D>("aggro" + i);
             }
 
-            //////////Sætter default sprite
-            //////////sprite = aggroSprite[0];
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -121,11 +116,6 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
-            
-
-            //Fjende movement
-           // Position += direction * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             #region flip enemy
             // Inverter sprite horisontalt, hvis fjenden ændrer retning
             if (velocity.X == 1)
@@ -139,11 +129,17 @@ namespace MortensKomeback
 
             distanceToPlayer = CalculateDistanceToPLayer(PlayerPosition);
 
-            if (distanceToPlayer < 1500f)
+            if (distanceToPlayer <= 1000f)
             {
                 speed = 500;
                 sprite = aggroSprite[0];
                 sprites = aggroSprite;
+
+                if (!isAggro)
+                {
+                    position.Y -= 20;
+                    isAggro = true;
+                }
             }
             else
             {
@@ -151,6 +147,7 @@ namespace MortensKomeback
                 sprite = sprites[0];
                 sprites = new Texture2D[normalSprites.Length];
                 sprites = normalSprites;
+                isAggro = false;
             }
 
             velocity = new Vector2(velocity.X, 0); 
@@ -163,8 +160,6 @@ namespace MortensKomeback
             honkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             #endregion
-
-            
         }
 
       
