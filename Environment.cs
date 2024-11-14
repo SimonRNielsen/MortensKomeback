@@ -47,8 +47,7 @@ namespace MortensKomeback
             int cloud5 = 3; //"cloud5"
             int cloud3 = 4; //"cloud3"
             int trans = 5; //"transparentTile"
-            int chair = 6; //"chair"
-            int table = 7; //"table"
+            int table = 6; //"table"
 
             #region bakcground
             //Cathedral
@@ -71,20 +70,25 @@ namespace MortensKomeback
                 }
             }
 
+            //First platform
+            surfaces.Add(new Background(4, 5655, -1485));
+
             //Second platform
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    surfaces.Add(new Background(3, tileSize * (60 + i), graphicsHeight - (tileSize * (6 + j))));
+                    surfaces.Add(new Background(3, tileSize * (60 + i), graphicsHeight - (tileSize * (7 + j))));
                 }
             }
 
+            //Chair in stairway to heaven
+            surfaces.Add(new Background(5, tileSize * 201, graphicsHeight - (tileSize * 14) + 120));
             #endregion
 
             #region button
             //Collision against the start of the course so the player can go outside the start of the course
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
             AddSurface(-tileSize, graphicsHeight - (tileSize * i), trans);
                 i++; //The tiles needs to be one tile apart
@@ -110,9 +114,9 @@ namespace MortensKomeback
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 2),  grass, 109, 110);
 
             //Fifth buttom
-            AddSurfaces((tileSize), graphicsHeight + tileSize,  grass, 124, 180);
+            AddSurfaces((tileSize), graphicsHeight + tileSize,  grass, 124, 179);
             AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), dirt, 124, 181);
-            AddSurfaces(tileSize, graphicsHeight + tileSize, dirt, 181, 182);
+            AddSurfaces(tileSize, graphicsHeight + tileSize, dirt, 180, 182);
             #endregion
 
             #region hill
@@ -158,7 +162,7 @@ namespace MortensKomeback
 
             AddSurface((tileSize * 35), graphicsHeight - (tileSize * 6), cloud5); 
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 7),  grass, 39, 41);
-            AddSurfaces((tileSize), graphicsHeight - (tileSize * 9),  grass, 36, 38);
+            AddSurfaces((tileSize), graphicsHeight - (tileSize * 9),  grass, 36, 37);
 
             //Second stairs
             AddSurfaces(tileSize, graphicsHeight,  grass, 60 ,66);
@@ -185,22 +189,22 @@ namespace MortensKomeback
 
             #region platform
             //First platform
-            AddSurfaces((tileSize), graphicsHeight - (tileSize * 10),  grass, 26, 27);
+            //AddSurfaces((tileSize), graphicsHeight - (tileSize * 10),  grass, 26, 27);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 10), dirt, 28, 31);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 10),  grass, 32, 33);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 11),  grass, 28, 31);
 
             //Second platform
-            AddSurface(tileSize * 54, graphicsHeight - (tileSize * 5), cloud5);
+            AddSurface(tileSize * 55, graphicsHeight - (tileSize * 5), cloud5);
 
-            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5), dirt, 59, 66);
-            AddSurface(tileSize * 66, graphicsHeight - (tileSize * 5), grass);
-            AddSurface(tileSize * 58, graphicsHeight - (tileSize * 6), grass);
-            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 6), dirt);
-            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 6), dirt);
-            AddSurface(tileSize * 65, graphicsHeight - (tileSize * 6), dirt);
-            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 7), grass);
-            AddSurface(tileSize * 65, graphicsHeight - (tileSize * 7), grass);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6), dirt, 59, 66);
+            AddSurface(tileSize * 66, graphicsHeight - (tileSize * 6), grass);
+            AddSurface(tileSize * 58, graphicsHeight - (tileSize * 7), grass);
+            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 7), dirt);
+            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 7), dirt);
+            AddSurface(tileSize * 65, graphicsHeight - (tileSize * 7), dirt);
+            AddSurface(tileSize * 59, graphicsHeight - (tileSize * 8), grass);
+            AddSurface(tileSize * 65, graphicsHeight - (tileSize * 8), grass);
 
             //Third platforms
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 3),  grass, 95, 99);
@@ -211,7 +215,7 @@ namespace MortensKomeback
             {
                 AddSurface(tileSize * (111 + i * 3), graphicsHeight - tileSize, grass);
             }
-            AddSurfaces(tileSize, graphicsHeight - (tileSize * 4),  grass, 112, 114);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  grass, 112, 113);
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  grass, 116, 117);
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  grass, 120, 121);
 
@@ -245,11 +249,13 @@ namespace MortensKomeback
 
             #region clouds
             //Different clouds around the map
-            AddSurface(tileSize * 35, graphicsHeight - (tileSize * 2), cloud5); //1
+            AddSurface(tileSize * 36, graphicsHeight - (tileSize * 2), cloud5); //1
             AddSurface(tileSize * 39f, graphicsHeight - (tileSize * 4), cloud5); //2
-            AddSurface(11795, 607, cloud5);
+            AddSurface(10295, 320, cloud5);
             AddSurface(11185, 383, cloud5);
             AddSurface(13499, 185, cloud5);
+            AddSurface(9121, 78, cloud5);
+            AddSurface(21341, 120, cloud5);
 
 
             #endregion
@@ -258,7 +264,7 @@ namespace MortensKomeback
             AddSurface(tileSize * 147, graphicsHeight, grass);
             AddSurface(30000, 600, cloud5);
             AddSurface(29404, 360, cloud5);
-            AddSurface(29400, -273, cloud5);
+            AddSurface(29550, -273, cloud5);
             AddSurface(30581, 590, cloud5);
             AddSurface(30667, -400, cloud5);
             AddSurface(29765, 753, trans);
@@ -269,14 +275,20 @@ namespace MortensKomeback
 
             #region stairways to heaven
             int shorter = 45;
-            for (int i = 0; i < 5; i++)
+
+            //AddSurfaces(tileSize, graphicsHeight - (tileSize), grass, 225, 229);
+            AddSurface(tileSize * 179, graphicsHeight, grass);
+            AddSurfaces(tileSize, graphicsHeight, dirt, 181, 184);
+
+            AddSurface(tileSize * 180, graphicsHeight - tileSize, grass);
+            for (int i = 1; i < 5; i++)
             {
-                AddSurface(tileSize * (225 + i - shorter), graphicsHeight - (tileSize * i), 2);
+                AddSurface(tileSize * (225 + i - shorter), graphicsHeight - (tileSize * i), grass);
                 AddSurfaces(tileSize, graphicsHeight - (tileSize * i), dirt, 227 + i - shorter, 229 + i - shorter);
             }
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  grass, 231 - shorter, 232 - shorter);
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 5), dirt, 233 - shorter, 238 - shorter);
-            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  grass, 233 - shorter, 240 - shorter);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  grass, 233 - shorter, 238 - shorter);
 
             for (int i = 0; i < 5; i++)
             {
@@ -288,10 +300,9 @@ namespace MortensKomeback
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 11), dirt, 201, 210);
 
             //End chair and table - the last supper
-            AddSurface(tileSize * 202, graphicsHeight - (tileSize * 13), chair);
-            AddSurface(tileSize * 204 + 343, graphicsHeight - (tileSize * 13), table);
-            AddSurface(tileSize * 204 + 343, graphicsHeight - (tileSize * 14.5f), trans);
-            AddSurface(tileSize * 204 + 343, graphicsHeight - (tileSize * 16.5f), trans);
+            AddSurface(tileSize * 203 + 343, graphicsHeight - (tileSize * 13), table);
+            AddSurface(tileSize * 203 + 343, graphicsHeight - (tileSize * 14.5f), trans);
+            AddSurface(tileSize * 203 + 343, graphicsHeight - (tileSize * 16.5f), trans);
 
 
             #endregion

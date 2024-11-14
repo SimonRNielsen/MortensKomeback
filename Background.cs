@@ -17,6 +17,7 @@ namespace MortensKomeback
         private static Texture2D sprite2;
         private static Texture2D sprite3;
         private static Texture2D sprite4;
+        private static Texture2D sprite5;
         private int spriteID; //Which sprite is going to be used
 
         #endregion
@@ -49,11 +50,8 @@ namespace MortensKomeback
             sprite1 = content.Load<Texture2D>("Sprite\\hills_small");
             sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
             sprite3 = content.Load<Texture2D>("Sprite\\dirt_tile1_background");
-            if (sprite4 == default)
-            {
             sprite4 = content.Load<Texture2D>("Sprite\\glorie2");
-
-            }
+            sprite5 = content.Load<Texture2D>("Sprite\\chair");
             
             if (spriteID == 1)
             {
@@ -72,6 +70,10 @@ namespace MortensKomeback
             if (spriteID == 4)
             {
                 this.Sprite = sprite4;
+            }
+            if (spriteID == 5)
+            {
+                this.Sprite = sprite5;
             }
             
         }

@@ -60,7 +60,7 @@ namespace MortensKomeback
         {
             this.position.X = 0;
             this.position.Y = 0;
-            this.speed = 600f; //Husk at ændre tilbage til 300f
+            this.speed = 650f; //Husk at ændre tilbage til 300f
             this.fps = 15f;
             this.Health = 3;
             this.layer = 0.9f;
