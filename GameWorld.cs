@@ -63,10 +63,10 @@ namespace MortensKomeback
             gameObjects.Add(new PowerUp(new Vector2(450, 700), 1));
             gameObjects.Add(new PowerUp(new Vector2(750, 700), 2));
 
-            gameObjects.Add(new PowerUp(new Vector2(24871, 858), 1)); //Hidden
-            gameObjects.Add(new PowerUp(new Vector2(12345, -490), 0)); //Hidden
+            gameObjects.Add(new PowerUp(new Vector2(24871, 850), 1)); //Over a hiddden area
+            gameObjects.Add(new PowerUp(new Vector2(12345, -490), 1)); //Hidden
             #region Power Up Cathedral
-            gameObjects.Add(new PowerUp(new Vector2(30003, -103), 0));
+            gameObjects.Add(new PowerUp(new Vector2(30003, -103), 1));
             gameObjects.Add(new PowerUp(new Vector2(29983, 533), 0));
             gameObjects.Add(new PowerUp(new Vector2(29740, -797), 2));
             gameObjects.Add(new PowerUp(new Vector2(30280, -810), 2));

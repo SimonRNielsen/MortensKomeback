@@ -76,6 +76,13 @@ namespace MortensKomeback
             #endregion
 
             #region button
+            //Collision against the start of the course so the player can go outside the start of the course
+            for (int i = 0; i < 5; i++)
+            {
+            AddSurface(-tileSize, graphicsHeight - (tileSize * i), grass);
+                i++; //The tiles needs to be one tile apart
+            }
+            
             //First buttom
             AddSurfaces((tileSize), graphicsHeight + tileSize ,  grass, 1, 31); 
             AddSurfaces((tileSize), graphicsHeight + (tileSize * 2), dirt, 1, 31); 
