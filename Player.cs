@@ -272,6 +272,9 @@ namespace MortensKomeback
             invincible = true;
         }
 
+        /// <summary>
+        /// Plays a walking sound for the player. Uses a timer, and switches between two sounds, for a natural sounding walk. 
+        /// </summary>
         private void WalkSound()
         {
             if (walkTimer > walkCooldown && surfaceContact)
