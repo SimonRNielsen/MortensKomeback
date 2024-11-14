@@ -41,6 +41,9 @@ namespace MortensKomeback
 
 
 
+        #endregion
+
+        #region Properties
         /// <summary>
         /// Property to access the sprites upon constructing "Ammo"
         /// </summary>
@@ -52,9 +55,6 @@ namespace MortensKomeback
         public bool Flipped { get => flipped; set => flipped = value; }
         public SoundEffect AmmoSound { get => ammoSound; private set => ammoSound = value; }
 
-        #endregion
-
-        #region Properties
         #endregion
 
 

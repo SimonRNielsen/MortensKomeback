@@ -43,11 +43,12 @@ namespace MortensKomeback
             this.Health = 1;
             this.layer = 0.8f;
             this.scale = 1;
+            this.IsHit = false;
         }
         /// <summary>
         /// Property to acces wheter the enemy has already been hit, so collisions are not counted more than once
         /// </summary>
-        public bool IsHit { get => isHit;}
+        public bool IsHit { get => isHit; set => isHit = value; }
 
 
         #region Methods
@@ -81,7 +82,6 @@ namespace MortensKomeback
             if (gameObject is Ammo && !isHit)
             {
                 honkSound.Play();
-                isHit = true;
                 this.Health--;
                 Overlay.KillCount++;
             }

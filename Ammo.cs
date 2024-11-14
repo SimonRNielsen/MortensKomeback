@@ -102,6 +102,7 @@ namespace MortensKomeback
                 {
                     this.health--;
                     this.deathSoundEffect.Play();
+                    (gameObject as Enemy).IsHit = true;
                 }
                 else if (!collided)
                 {
