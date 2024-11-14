@@ -32,7 +32,6 @@ namespace MortensKomeback
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
         private SoundEffect avSound;
-        private SoundEffect walkSound;
 
 
         /// <summary>
@@ -85,6 +84,7 @@ namespace MortensKomeback
             AmmoSprites[3] = content.Load<Texture2D>("groundegg1");
             AmmoSprites[4] = content.Load<Texture2D>("groundegg2");
             avSound = content.Load<SoundEffect>("morten_Av");
+            shootSound = content.Load<SoundEffect>("shootSound");
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -199,6 +199,7 @@ namespace MortensKomeback
         /// </summary>
         private void Shoot()
         {
+            shootSound.Play();
             //If ammo count (special ammo) is available it will be used, and therefore one subtracted from the count here. 
             if (ammoCount > 0)
             {

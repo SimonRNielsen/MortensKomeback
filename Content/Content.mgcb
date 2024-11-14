@@ -452,6 +452,12 @@
 /processorParam:TextureFormat=Color
 /build:pixel.png
 
+#begin shootSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shootSound.wav
+
 #begin Sprite/avsurfaceILD1.png
 /importer:TextureImporter
 /processor:TextureProcessor
