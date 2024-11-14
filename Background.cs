@@ -16,6 +16,7 @@ namespace MortensKomeback
         private static Texture2D sprite1;
         private static Texture2D sprite2;
         private static Texture2D sprite3;
+        private static Texture2D sprite4;
         private int spriteID; //Which sprite is going to be used
 
         #endregion
@@ -45,20 +46,15 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            if (sprite1 == default)
+            sprite1 = content.Load<Texture2D>("Sprite\\hills_small");
+            sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
+            sprite3 = content.Load<Texture2D>("Sprite\\dirt_tile1_background");
+            if (sprite4 == default)
             {
-                sprite1 = content.Load<Texture2D>("Sprite\\hills_small");
-            }
-            if (sprite2 == default)
-            {
-                sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
-            }
-            if (sprite3 == default)
-            {
-                sprite3 = content.Load<Texture2D>("Sprite\\dirt_tile1_background");
+            sprite4 = content.Load<Texture2D>("Sprite\\glorie2");
+
             }
             
-
             if (spriteID == 1)
             {
                 this.Sprite = sprite1;
@@ -72,6 +68,10 @@ namespace MortensKomeback
             {
                 this.Sprite = sprite3;
                 this.layer = 0.92f; //0.01 higher than PowerUp layer 
+            }
+            if (spriteID == 4)
+            {
+                this.Sprite = sprite4;
             }
             
         }

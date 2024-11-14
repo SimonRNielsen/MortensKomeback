@@ -47,12 +47,15 @@ namespace MortensKomeback
             int trans = 5; //"transparentTile"
 
             #region bakcground
+            //Cathedral
             surfaces.Add(new Background(2, 200 * 150, 88));
+            surfaces.Add(new Background(4, 30003, -300));  //Glorie over the cathedral
 
+            //Hills
             int hillSize = 3586;
             for (int i = 0; i < 10; i++)
             {
-            surfaces.Add(new Background(1, (hillSize - tileSize)/ 2 + hillSize * i, 1100));
+            surfaces.Add(new Background(1, (hillSize - tileSize)/ 2 + hillSize * i, 1090));
             }
 
             //Hidden rum
@@ -79,7 +82,7 @@ namespace MortensKomeback
             //Collision against the start of the course so the player can go outside the start of the course
             for (int i = 0; i < 5; i++)
             {
-            AddSurface(-tileSize, graphicsHeight - (tileSize * i), grass);
+            AddSurface(-tileSize, graphicsHeight - (tileSize * i), trans);
                 i++; //The tiles needs to be one tile apart
             }
             
@@ -162,7 +165,7 @@ namespace MortensKomeback
 
             AddSurface(tileSize * 73, graphicsHeight - (tileSize * 3), cloud5);
 
-            AddSurface(tileSize * 76, graphicsHeight - (tileSize * 5), cloud3);
+            AddSurface(tileSize * 75, graphicsHeight - (tileSize * 5), cloud3);
             AddSurface(tileSize * 79, graphicsHeight - (tileSize * 6), grass);
             AddSurface(tileSize * 82, graphicsHeight - (tileSize * 7), grass);
 
@@ -266,8 +269,8 @@ namespace MortensKomeback
                 AddSurfaces(tileSize, graphicsHeight - (tileSize * i), dirt, 227 + i - shorter, 229 + i - shorter);
             }
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  grass, 231 - shorter, 232 - shorter);
-            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5), dirt, 233 - shorter, 234 - shorter);
-            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  grass, 233 - shorter, 237 - shorter);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 5), dirt, 233 - shorter, 238 - shorter);
+            AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  grass, 233 - shorter, 240 - shorter);
 
             for (int i = 0; i < 5; i++)
             {
