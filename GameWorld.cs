@@ -67,10 +67,11 @@ namespace MortensKomeback
             }
 
             // TODO: Add your initialization logic here
-
+#if DEBUG
             gameObjects.Add(new PowerUp(new Vector2(150, 700), 0));
             gameObjects.Add(new PowerUp(new Vector2(450, 700), 1));
             gameObjects.Add(new PowerUp(new Vector2(750, 700), 2));
+#endif
             //gameObjects.Add(new Player());
             gameObjects.Add(new IntroScreen());
             gameObjects.Add(new MousePointer(_graphics));
