@@ -31,12 +31,12 @@ namespace MortensKomeback
         public Texture2D collisionTexture;
 #endif
         #endregion
-        /// <summary>
-        /// Property to get/set the position of the camera, in this case relative to the players position
-        /// </summary>
 
         #region Properties
 
+        /// <summary>
+        /// Property to get/set the position of the camera, in this case relative to the players position
+        /// </summary>
         public static Camera2D Camera { get => camera; set => camera = value; }
 
         #endregion
