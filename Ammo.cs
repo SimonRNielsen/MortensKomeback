@@ -31,7 +31,7 @@ namespace MortensKomeback
         public Ammo(Player player, int ammoHealth, int ammoSprite)
         {
             this.Health = ammoHealth;
-            position.Y = player.Position.Y + 20;
+            position.Y = player.Position.Y + 2;
             if (player.Flipped)
             {
                 position.X = player.Position.X - (player.Sprite.Width / 2);
