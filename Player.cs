@@ -32,9 +32,12 @@ namespace MortensKomeback
         private float invincibleTimer; //Used with invincible timer, and set when Update() is called, and reset upon damagin collision
         private bool invincible = false; //Used to make player invincible after damaging collison
         private SoundEffect avSound;
+        private SoundEffect[] walkSounds;
         private SoundEffect walkSound;
-        private float walkCooldown = 0.3f;
+        private float walkCooldown = 0.4f;
         private float walkTimer;
+        private SoundEffect ammoSound;
+
 
 
         /// <summary>
@@ -46,6 +49,7 @@ namespace MortensKomeback
         /// Property to access which direction Morten is facing upon constructing "Ammo"
         /// </summary>
         public bool Flipped { get => flipped; set => flipped = value; }
+        public SoundEffect AmmoSound { get => ammoSound; private set => ammoSound = value; }
 
         #endregion
 
@@ -88,7 +92,12 @@ namespace MortensKomeback
             AmmoSprites[4] = content.Load<Texture2D>("groundegg2");
             avSound = content.Load<SoundEffect>("morten_Av");
             shootSound = content.Load<SoundEffect>("shootSound");
-            walkSound = content.Load<SoundEffect>("walk");
+            walkSounds = new SoundEffect[2];
+            walkSounds[0] = content.Load<SoundEffect>("walkSound");
+            walkSounds[1] = content.Load<SoundEffect>("walkSound2");
+            walkSound = walkSounds[0];
+            AmmoSound = content.Load<SoundEffect>("eggSmash_Sound");
+
         }
 
         public override void OnCollision(GameObject gameObject)
@@ -151,11 +160,7 @@ namespace MortensKomeback
             {
                 Flipped = true;
                 spriteEffectIndex = 1;
-                if(walkTimer > walkCooldown)
-                {
-                    walkSound.Play();
-                    walkTimer = 0;
-                }
+                WalkSound();
                 //Move left
                 velocity += new Vector2(-1, 0);
             }
@@ -164,11 +169,7 @@ namespace MortensKomeback
             {
                 spriteEffectIndex = 0;
                 Flipped = false;
-                if (walkTimer > walkCooldown)
-                {
-                    walkSound.Play();
-                    walkTimer = 0;
-                }
+                WalkSound();
                 //Move right
                 velocity += new Vector2(+1, 0);
             }
@@ -248,6 +249,23 @@ namespace MortensKomeback
             this.Health--;
             invincibleTimer = 0;
             invincible = true;
+        }
+
+        private void WalkSound()
+        {
+            if (walkTimer > walkCooldown && surfaceContact)
+            {
+                walkSound.Play();
+                walkTimer = 0;
+                if (walkSound == walkSounds[0])
+                {
+                    walkSound = walkSounds[1];
+                }
+                else if (walkSound == walkSounds[1])
+                {
+                    walkSound = walkSounds[0];
+                }
+            }
         }
         #endregion
 

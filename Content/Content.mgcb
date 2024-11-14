@@ -109,6 +109,12 @@
 /processorParam:TextureFormat=Color
 /build:egg2.png
 
+#begin eggSmash_Sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:eggSmash_Sound.wav
+
 #begin goose0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -318,6 +324,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:laserGreen16.png;testAmmo.png
+
+#begin Midnight_Tale.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Midnight_Tale.mp3
 
 #begin mortalKombatFont.spritefont
 /importer:FontDescriptionImporter
@@ -615,11 +627,17 @@
 /processorParam:TextureFormat=Color
 /build:udkast.png
 
-#begin walk.wav
+#begin walkSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:walk.wav
+/build:walkSound.wav
+
+#begin walkSound2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:walkSound2.wav
 
 #begin wallTurkey.png
 /importer:TextureImporter
