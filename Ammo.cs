@@ -17,9 +17,11 @@ namespace MortensKomeback
         #endregion
 
         #region Property
+
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Constructor for "spawning" eggs that Morten shoots with his sling
         /// </summary>
@@ -46,6 +48,7 @@ namespace MortensKomeback
             this.sprites = player.AmmoSprites;
             this.sprite = sprites[ammoSprite];
         }
+
         #endregion
 
         #region Methods
@@ -164,6 +167,7 @@ namespace MortensKomeback
             }
 
         }
+
         #endregion
     }
 }
