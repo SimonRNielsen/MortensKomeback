@@ -129,7 +129,7 @@ namespace MortensKomeback
             if (mitretimer >= mitreOnTime)
                 mitreOn = false;
 
-            if ( this.position.X > 39700)
+            if ( this.position.X > 40100)
             {
                 this.health = 0;
                 GameWorld.win = true;
