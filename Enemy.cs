@@ -22,25 +22,22 @@ namespace MortensKomeback
         private float honkTimer;
         private SoundEffect honkSound;
         private bool isAggro = false;
-
         private static Vector2 playerPosition;
-
-        public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
-
-
-        /// <summary>
-        /// Calculates distances from enemy to player
-        /// </summary>
-        /// <param name="playerPosition"></param> current position of player
-        /// <returns>the distance to player as a float</returns> 
-        public float CalculateDistanceToPLayer(Vector2 playerPosition)
-        {
-            return Vector2.Distance(this.position, playerPosition);
-
-        }
-
         #endregion
 
+        #region properties
+        /// <summary>
+        /// Property to get players position to enemy
+        /// </summary>
+        public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+
+        /// <summary>
+        /// Property to acces wheter the enemy has already been hit, so collisions are not counted more than once
+        /// </summary>
+        public bool IsHit { get => isHit; set => isHit = value; }
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// enemy constructor
@@ -58,17 +55,22 @@ namespace MortensKomeback
             this.IsHit = false;
         }
         /// <summary>
-        /// Property to acces wheter the enemy has already been hit, so collisions are not counted more than once
+        /// Calculates distances from enemy to player
         /// </summary>
-        public bool IsHit { get => isHit; set => isHit = value; }
+        /// <param name="playerPosition"></param> current position of player
+        /// <returns>the distance to player as a float</returns> 
+        public float CalculateDistanceToPLayer(Vector2 playerPosition)
+        {
+            return Vector2.Distance(this.position, playerPosition);
+
+        }
 
 
-        #region Methods
         public override void LoadContent(ContentManager content)
         {
             //Loader sprites til animation
-            sprites = new Texture2D[5];
-            normalSprites = new Texture2D[5];
+            sprites = new Texture2D[7];
+            normalSprites = new Texture2D[7];
             for (int i = 0; i < sprites.Length; i++)
             {
                 normalSprites[i] = content.Load<Texture2D>("gooseWalk" + i);
@@ -99,7 +101,6 @@ namespace MortensKomeback
             if (gameObject is Surface)
             {
                 surfaceContact = true;
-                //honkSound.Play();
             }
             if (gameObject is Ammo && !isHit)
             {
@@ -127,6 +128,7 @@ namespace MortensKomeback
                 spriteEffectIndex = 0;
             }
 
+            //We find distance to player, and set "aggro"
             distanceToPlayer = CalculateDistanceToPLayer(PlayerPosition);
 
             if (distanceToPlayer <= 1000f)
@@ -150,6 +152,7 @@ namespace MortensKomeback
                 isAggro = false;
             }
 
+            //counter gravity
             velocity = new Vector2(velocity.X, 0); 
             
             base.Update(gameTime);
