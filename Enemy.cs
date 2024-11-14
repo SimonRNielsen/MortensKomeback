@@ -15,15 +15,30 @@ namespace MortensKomeback
     internal class Enemy : Character
     {
         #region fields
-        private List<Texture2D> spriteEnemy = new List<Texture2D>();
-        private SoundEffect takeDamageSound;
-        private SoundEffect honkSound;
         private bool flipped = false;
         private Vector2 direction;
         private Random rnd = new Random();
         private SpriteEffects spriteEffects;
+        protected float distanceToPlayer;
+        private Texture2D[] aggroSprite;
+        private Texture2D[] normalSprites;
 
-       
+        private static Vector2 playerPosition;
+
+        public static Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+
+
+        /// <summary>
+        /// Calculates distances from enemy to player
+        /// </summary>
+        /// <param name="playerPosition"></param> current position of player
+        /// <returns>the distance to player as a float</returns> 
+        public float CalculateDistanceToPLayer(Vector2 playerPosition)
+        {
+            return Vector2.Distance(this.position, playerPosition);
+
+        }
+
         #endregion
 
 
@@ -32,7 +47,7 @@ namespace MortensKomeback
         /// </summary>
         public Enemy()
         {
-            this.position.X = 2580;
+            this.position.X = 2080;
             this.position.Y = 0;
             this.speed = 250;
             this.velocity = new Vector2(1, 0);
@@ -48,37 +63,48 @@ namespace MortensKomeback
         {
             //Loader sprites til animation
             sprites = new Texture2D[5];
+            normalSprites = new Texture2D[5];
             for (int i = 0; i < sprites.Length; i++)
             {
-                sprites[i] = content.Load<Texture2D>("gooseWalk" + i);
+                normalSprites[i] = content.Load<Texture2D>("gooseWalk" + i);
             }
 
             //Sætter default sprite
+            sprites = normalSprites;
             sprite = sprites[0];
+            ////Indlæs honk Lyd
+            //honkSound = content.Load<SoundEffect>("gooseSound_cut");
 
+            //loader aggro animation 
+            aggroSprite = new Texture2D[7];
+            for (int i = 0; i < aggroSprite.Length; i++)
+            {
+                aggroSprite[i] = content.Load<Texture2D>("aggro" + i);
+            }
 
-            //Indlæs honk Lyd
-            honkSound = content.Load<SoundEffect>("gooseSound_cut");
-
+            //////////Sætter default sprite
+            //////////sprite = aggroSprite[0];
         }
 
         public override void OnCollision(GameObject gameObject)
         {
             surfaceContact = false;
-            // honkSound.Play();
 
             if (gameObject is Surface)
             {
                 surfaceContact = true;
+                //honkSound.Play();
             }
+
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            Animate(gameTime);
+            
 
             //Fjende movement
-            Position += direction * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+           // Position += direction * Speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             #region flip enemy
             // Inverter sprite horisontalt, hvis fjenden ændrer retning
@@ -90,20 +116,35 @@ namespace MortensKomeback
             {
                 spriteEffectIndex = 0;
             }
+
+            distanceToPlayer = CalculateDistanceToPLayer(PlayerPosition);
+
+            if (distanceToPlayer < 1500f)
+            {
+                speed = 500;
+                sprite = aggroSprite[0];
+                sprites = aggroSprite;
+            }
+            else
+            {
+                speed = 200;
+                sprite = sprites[0];
+                sprites = new Texture2D[normalSprites.Length];
+                sprites = normalSprites;
+            }
+
             velocity = new Vector2(velocity.X, 0); 
-            
-            honkSound.Play();
-            
             
             base.Update(gameTime);
 
+            Animate(gameTime);
             Move(gameTime);
             #endregion
 
+            
         }
 
-
-
+      
         #endregion
     }
 }

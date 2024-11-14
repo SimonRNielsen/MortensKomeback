@@ -56,16 +56,17 @@ namespace MortensKomeback
         /// case in which a new Player should be spawned.
         /// </summary>
         /// <param name="sprite">The sprite of the player character, as chosen in character generator.</param>
-        public Player(Texture2D sprite)
+        public Player(Texture2D sprite, Texture2D[] sprites)
         {
             this.position.X = 0;
             this.position.Y = 0;
-            this.speed = 400f; //Husk at ændre tilbage til 300f
+            this.speed = 1000f; //Husk at ændre tilbage til 300f
             this.fps = 15f;
             this.Health = 3;
             this.layer = 0.9f;
             this.scale = 1;
             this.sprite = sprite;
+            this.sprites = sprites;
             Overlay.HealthCount = this.Health;
         }
 
@@ -75,6 +76,7 @@ namespace MortensKomeback
         #region Methods
         public override void LoadContent(ContentManager content)
         {
+
             //Sprites for the Ammo class to pull upon being "constructed" by Morten
             AmmoSprites = new Texture2D[5];
             AmmoSprites[0] = content.Load<Texture2D>("egg1");
@@ -121,8 +123,13 @@ namespace MortensKomeback
             Move(gameTime);
 
 
+            GameWorld.Camera.Position = this.Position; //"Attaches" The viewport to Morten'
+            if (velocity.X > 0 || velocity.X < 0 )
+            {
+            Animate(gameTime);
+            }
 
-            GameWorld.Camera.Position = this.Position; //"Attaches" The viewport to Morten
+            Enemy.PlayerPosition = this.position;
         }
 
         /// <summary>
