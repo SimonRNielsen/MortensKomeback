@@ -1,13 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
@@ -21,6 +14,7 @@ namespace MortensKomeback
         private static Texture2D sprite4;
         private static Texture2D sprite5;
         private static Texture2D sprite6;
+        private static Texture2D sprite7;
         #endregion
 
         #region properties
@@ -64,6 +58,7 @@ namespace MortensKomeback
             sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
             sprite5 = content.Load<Texture2D>("Sprite\\transparentTile");
             sprite6 = content.Load<Texture2D>("Sprite\\table");
+            sprite7 = content.Load<Texture2D>("wallTurkey");
             
             if (spriteID == 1)
             {
@@ -76,12 +71,12 @@ namespace MortensKomeback
             if (spriteID == 3)
             {
                 this.Sprite = sprite3;
-                spriteEffectIndex = 2;
+                spriteEffectIndex = 2; //FlipVertically
             }
             if (spriteID == 4)
             {
                 this.Sprite = sprite4;
-                spriteEffectIndex = 2;
+                spriteEffectIndex = 2; //FlipVertically
             }
             if (spriteID == 5)
             {
@@ -91,21 +86,27 @@ namespace MortensKomeback
             {
                 this.Sprite = sprite6;
             }
+            if (spriteID == 7)
+            {
+                this.Sprite = sprite7;
+            }
         }
 
 
         public override void OnCollision(GameObject gameObject)
         {
+            //Nothing is happening to the Surface when it's colliding 
         }
 
         public override void Update(GameTime gameTime)
         {
+            //Nothing is updating
         }
 
         /// <summary>
         /// It's used to create a surface in Environment
         /// </summary>
-        /// <param name="graphics"></param>
+        /// <param name="graphics">A GraphicsDeviceManager</param>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <param name="spriteId">Whice sprite is going to be showed</param>
@@ -114,8 +115,6 @@ namespace MortensKomeback
         {
             return new Surface(graphics, new Vector2(x, y), spriteId);
         }
-
-
         #endregion
     }
 }

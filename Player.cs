@@ -232,6 +232,11 @@ namespace MortensKomeback
 #if DEBUG
             if (keyState.IsKeyDown(Keys.K))
                 this.health = 0;
+
+            if (keyState.IsKeyDown(Keys.T))
+            {
+                this.position = new Vector2(38000, -1000);
+            }
 #endif
         }
 
