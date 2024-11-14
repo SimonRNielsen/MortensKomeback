@@ -1,13 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework;
-using System;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
-using System.Reflection.Metadata;
 
 namespace MortensKomeback
 {
@@ -16,6 +8,10 @@ namespace MortensKomeback
         //Environment is the layout for the level and not a GameObject 
         #region field
         private GraphicsDeviceManager _graphics;
+
+        /// <summary>
+        /// A fuld list of all the Surface, Background and AvSurface 
+        /// </summary>
         private List<GameObject> surfaces = new List<GameObject>();
 
         /// <summary>
@@ -24,7 +20,8 @@ namespace MortensKomeback
         /// </summary>
         private int tileSize = 199;
 
-
+        // The inspiration for the Environment can be seen in this Miro board link
+        // https://miro.com/app/board/uXjVLKhNNJg=/?share_link_id=239188251143
         #endregion
 
         #region properties
@@ -36,20 +33,21 @@ namespace MortensKomeback
         /// <summary>
         /// Construction the Environment of all the surfaces and backgroud
         /// </summary>
-        /// <param name="graphics"></param>
+        /// <param name="graphics">A GraphicsDeviceManager</param>
         public Environment(GraphicsDeviceManager graphics)
         {
             int graphicsHeight = graphics.PreferredBackBufferHeight;
 
             //The following ints is refurring to the differents sprites 
-            int dirt = 1;  //"dirt_tile1"
-            int grass = 2; //"grass_tile1"
-            int cloud5 = 3; //"cloud5"
-            int cloud3 = 4; //"cloud3"
-            int trans = 5; //"transparentTile"
-            int table = 6; //"table"
+            int dirt = 0;  //"dirt_tile1"
+            int grass = 1; //"grass_tile1"
+            int cloud5 = 2; //"cloud5"
+            int cloud3 = 3; //"cloud3"
+            int trans = 4; //"transparentTile"
+            int table = 5; //"table"
+            int wallTurkey = 6; //"wallTurkey"
 
-            #region bakcground
+            #region BACKGROUND
             //Cathedral
             surfaces.Add(new Background(2, 200 * 150, 88));
             surfaces.Add(new Background(4, 30003, -300));  //Glorie over the cathedral
@@ -86,7 +84,7 @@ namespace MortensKomeback
             surfaces.Add(new Background(5, tileSize * 201, graphicsHeight - (tileSize * 14) + 120));
             #endregion
 
-            #region button
+            #region BUTTON
             //Collision against the start of the course so the player can go outside the start of the course
             for (int i = 0; i < 7; i++)
             {
@@ -119,7 +117,7 @@ namespace MortensKomeback
             AddSurfaces(tileSize, graphicsHeight + tileSize, dirt, 180, 182);
             #endregion
 
-            #region hill
+            #region HILL
             //First hill
             AddSurfaces((tileSize), graphicsHeight,  grass, 13, 14);
             AddSurfaces((tileSize), graphicsHeight, dirt, 15, 17);
@@ -135,7 +133,7 @@ namespace MortensKomeback
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 3),  grass, 90, 92);
 
             //Third hill
-            AddSurfaces(tileSize, graphicsHeight, dirt, 124, 128); //
+            AddSurfaces(tileSize, graphicsHeight, dirt, 124, 128); 
             for (int i = 1; i < 5; i++)
             {
                 AddSurface(tileSize * 127, graphicsHeight - (tileSize * i), dirt);
@@ -149,7 +147,7 @@ namespace MortensKomeback
 
             #endregion
 
-            #region stairs
+            #region STAIRS
             //First stairs
             AddSurfaces((tileSize), graphicsHeight,  grass, 26, 27);
             AddSurfaces((tileSize), graphicsHeight, dirt, 28, 29);
@@ -187,9 +185,8 @@ namespace MortensKomeback
 
             #endregion
 
-            #region platform
+            #region PLATFORM
             //First platform
-            //AddSurfaces((tileSize), graphicsHeight - (tileSize * 10),  grass, 26, 27);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 10), dirt, 28, 31);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 10),  grass, 32, 33);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 11),  grass, 28, 31);
@@ -218,11 +215,9 @@ namespace MortensKomeback
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  grass, 112, 113);
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 5),  grass, 116, 117);
             AddSurfaces(tileSize, graphicsHeight - (tileSize * 6),  grass, 120, 121);
-
-
             #endregion
 
-            #region pillar
+            #region PILLAR
             //1
             AddSurface(tileSize * 40, graphicsHeight, dirt);
             AddSurface(tileSize * 40, graphicsHeight - tileSize, grass);
@@ -231,7 +226,6 @@ namespace MortensKomeback
             AddSurface(tileSize * 44, graphicsHeight - (tileSize * 2), dirt);
             AddSurface(tileSize * 44, graphicsHeight - (tileSize * 3), grass);
             AddSurface(tileSize * 43, graphicsHeight - (tileSize * 2), grass);
-
 
             //3
             for (int i = 0; i < 4; i++)
@@ -247,7 +241,7 @@ namespace MortensKomeback
             AddSurface(tileSize * 51, graphicsHeight - (tileSize * 2), grass);
             #endregion
 
-            #region clouds
+            #region CLOUDS
             //Different clouds around the map
             AddSurface(tileSize * 36, graphicsHeight - (tileSize * 2), cloud5); //1
             AddSurface(tileSize * 39f, graphicsHeight - (tileSize * 4), cloud5); //2
@@ -256,11 +250,9 @@ namespace MortensKomeback
             AddSurface(13499, 185, cloud5);
             AddSurface(9121, 78, cloud5);
             AddSurface(21341, 120, cloud5);
-
-
             #endregion
 
-            #region Cathedral
+            #region CATHEDRAL
             AddSurface(tileSize * 147, graphicsHeight, grass);
             AddSurface(30000, 600, cloud5);
             AddSurface(29404, 360, cloud5);
@@ -273,10 +265,9 @@ namespace MortensKomeback
 
             #endregion
 
-            #region stairways to heaven
-            int shorter = 45;
+            #region STAIRWAYS TO HEAVEN
+            int shorter = 45; //To begin with I made the course 45 tiles longer. It didn't made sens to make it so big so I minus it with 45
 
-            //AddSurfaces(tileSize, graphicsHeight - (tileSize), grass, 225, 229);
             AddSurface(tileSize * 179, graphicsHeight, grass);
             AddSurfaces(tileSize, graphicsHeight, dirt, 181, 184);
 
@@ -304,23 +295,26 @@ namespace MortensKomeback
             AddSurface(tileSize * 203 + 343, graphicsHeight - (tileSize * 14.5f), trans);
             AddSurface(tileSize * 203 + 343, graphicsHeight - (tileSize * 16.5f), trans);
 
-
+            //Spawn killed geess
+            for (int i = 0; i < 5; i++)
+            {
+                AddSurface(40300 + (tileSize * i) + 50, graphicsHeight - (tileSize * 14) + 53, wallTurkey);
+            }
+            
             #endregion
 
-            #region AvSurface
+            #region AVSURFACE
             AddAvSurface(tileSize * 30, graphicsHeight + (tileSize * 1.5f));
             AddAvSurface(tileSize * 47, graphicsHeight + (tileSize * 1.5f));
             AddAvSurface(tileSize * 99, graphicsHeight + (tileSize * 1.5f));
             AddAvSurface(tileSize * 115, graphicsHeight + (tileSize * 1.5f));
-
-
             #endregion
         }
         #endregion
 
         #region method
         /// <summary>
-        /// Adding one Surface
+        /// Adding a Surface
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
@@ -331,7 +325,7 @@ namespace MortensKomeback
         }
 
         /// <summary>
-        /// Adding multipel Surfac
+        /// Adding multipel Surface
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
@@ -347,7 +341,7 @@ namespace MortensKomeback
         }
 
         /// <summary>
-        /// Adding one AvSurface
+        /// Adding an AvSurface
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>

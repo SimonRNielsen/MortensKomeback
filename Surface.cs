@@ -1,13 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
@@ -15,12 +8,7 @@ namespace MortensKomeback
     {
         #region field
         private int spriteID; //Which sprite is going to be used
-        private static Texture2D sprite1;
-        private static Texture2D sprite2;
-        private static Texture2D sprite3;
-        private static Texture2D sprite4;
-        private static Texture2D sprite5;
-        private static Texture2D sprite6;
+
         #endregion
 
         #region properties
@@ -46,7 +34,7 @@ namespace MortensKomeback
         {
             this.position.X = position.X;
             this.position.Y = position.Y;
-            this.layer = 0.2f;
+            this.layer = 0.3f;
             this.spriteID = spriteID;
             this.health = 1;
         }
@@ -57,55 +45,39 @@ namespace MortensKomeback
 
         public override void LoadContent(ContentManager content)
         {
+            sprites = new Texture2D[7];
+
+            sprites[0] = content.Load<Texture2D>("Sprite\\dirt_tile1");
+            sprites[1] = content.Load<Texture2D>("Sprite\\grass_tile1");
+            sprites[2] = content.Load<Texture2D>("Sprite\\cloud5");
+            sprites[3] = content.Load<Texture2D>("Sprite\\cloud3");
+            sprites[4] = content.Load<Texture2D>("Sprite\\transparentTile");
+            sprites[5] = content.Load<Texture2D>("Sprite\\table");
+            sprites[6] = content.Load<Texture2D>("wallTurkey");
             
-            sprite1 = content.Load<Texture2D>("Sprite\\dirt_tile1");
-            sprite2 = content.Load<Texture2D>("Sprite\\grass_tile1");
-            sprite3 = content.Load<Texture2D>("Sprite\\cloud5");
-            sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
-            sprite5 = content.Load<Texture2D>("Sprite\\transparentTile");
-            sprite6 = content.Load<Texture2D>("Sprite\\table");
-            
-            if (spriteID == 1)
+            this.Sprite = sprites[spriteID];
+
+            if (spriteID == 3 || spriteID == 2)
             {
-                this.Sprite = sprite1;
-            }
-            if (spriteID == 2)
-            {
-                this.Sprite = sprite2;
-            }
-            if (spriteID == 3)
-            {
-                this.Sprite = sprite3;
-                spriteEffectIndex = 2;
-            }
-            if (spriteID == 4)
-            {
-                this.Sprite = sprite4;
-                spriteEffectIndex = 2;
-            }
-            if (spriteID == 5)
-            {
-                this.Sprite = sprite5;
-            }
-            if (spriteID == 6)
-            {
-                this.Sprite = sprite6;
+                spriteEffectIndex = 2; //FlipVertically
             }
         }
 
 
         public override void OnCollision(GameObject gameObject)
         {
+            //Nothing is happening to the Surface when it's colliding 
         }
 
         public override void Update(GameTime gameTime)
         {
+            //Nothing is updating
         }
 
         /// <summary>
         /// It's used to create a surface in Environment
         /// </summary>
-        /// <param name="graphics"></param>
+        /// <param name="graphics">A GraphicsDeviceManager</param>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <param name="spriteId">Whice sprite is going to be showed</param>
@@ -114,8 +86,6 @@ namespace MortensKomeback
         {
             return new Surface(graphics, new Vector2(x, y), spriteId);
         }
-
-
         #endregion
     }
 }

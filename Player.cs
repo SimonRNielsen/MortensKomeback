@@ -23,6 +23,7 @@ namespace MortensKomeback
         private int ammoHealth = 1;
         private int ammoSprite = 0;
         private int ammoCount = 0;
+        private int mortenSkinType;
         private float spriteXDisplacement;
         private float spriteYDisplacement;
         private float mitretimer;
@@ -65,7 +66,7 @@ namespace MortensKomeback
         /// case in which a new Player should be spawned.
         /// </summary>
         /// <param name="sprite">The sprite of the player character, as chosen in character generator.</param>
-        public Player(Texture2D sprite, Texture2D[] sprites)
+        public Player(Texture2D sprite, Texture2D[] sprites, int mortenSkin)
         {
             this.position.X = 0;
             this.position.Y = 0;
@@ -77,6 +78,7 @@ namespace MortensKomeback
             this.sprite = sprite;
             this.sprites = sprites;
             Overlay.HealthCount = this.Health;
+            this.mortenSkinType = mortenSkin;
         }
 
 
@@ -131,7 +133,7 @@ namespace MortensKomeback
             if (mitretimer >= mitreOnTime)
                 mitreOn = false;
 
-            if ( this.position.X > 40100)
+            if (this.position.X > 40100)
             {
                 this.health = 0;
                 GameWorld.win = true;
@@ -158,9 +160,9 @@ namespace MortensKomeback
 
 
             GameWorld.Camera.Position = this.Position; //"Attaches" The viewport to Morten'
-            if (velocity.X > 0 || velocity.X < 0 )
+            if (velocity.X > 0 || velocity.X < 0)
             {
-            Animate(gameTime);
+                Animate(gameTime);
             }
 
             Enemy.PlayerPosition = this.position;
@@ -239,6 +241,11 @@ namespace MortensKomeback
 #if DEBUG
             if (keyState.IsKeyDown(Keys.K))
                 this.health = 0;
+
+            if (keyState.IsKeyDown(Keys.T))
+            {
+                this.position = new Vector2(38000, -1000);
+            }
 #endif
         }
 
@@ -327,14 +334,31 @@ namespace MortensKomeback
 
             if (mitreOn)
             {
-                spriteYDisplacement = 95;
-                if (flipped)
+
+                switch (mortenSkinType)
                 {
-                    spriteXDisplacement = 73;
-                }
-                else
-                {
-                    spriteXDisplacement = 23;
+                    case 0:
+                        spriteYDisplacement = 95;
+                        if (flipped)
+                        {
+                            spriteXDisplacement = 73;
+                        }
+                        else
+                        {
+                            spriteXDisplacement = 23;
+                        }
+                        break;
+                    case 1:
+                        spriteYDisplacement = 100;
+                        if (flipped)
+                        {
+                            spriteXDisplacement = 63;
+                        }
+                        else
+                        {
+                            spriteXDisplacement = 3;
+                        }
+                        break;
                 }
 
                 spriteBatch.Draw(mitre, new Vector2(position.X + spriteXDisplacement, position.Y - spriteYDisplacement), null, Color.White, rotation, new Vector2(Sprite.Width / 2, Sprite.Height / 2), scale, objectSpriteEffects[spriteEffectIndex], layer);

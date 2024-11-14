@@ -37,8 +37,8 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
             sprites = new Texture2D[2];
-            sprites[0] = content.Load<Texture2D>("udkast"); //Loss
-            sprites[1] = content.Load<Texture2D>("udkast"); //Win
+            sprites[0] = content.Load<Texture2D>("looseScreen"); //Loss
+            sprites[1] = content.Load<Texture2D>("winScreen"); //Win
 
             if (GameWorld.win == true)
             {

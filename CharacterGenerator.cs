@@ -19,6 +19,7 @@ namespace MortensKomeback
     {
         #region Fields
         private int spriteIndex = 0;
+        private int mortenSkinType;
         private SpriteFont standardFont;
         //A text that is drawn under the character to show which character is currently chosen. Set in SetChosenMortenText() method. 
         private string chosenMortenText;
@@ -136,7 +137,7 @@ namespace MortensKomeback
         private void AddPlayer()
         {
             sprites = loadedSprites[this.sprite.Name];
-            GameWorld.newGameObjects.Add(new Player(this.sprite, sprites));
+            GameWorld.newGameObjects.Add(new Player(this.sprite, sprites, mortenSkinType));
         }
         /// <summary>
         /// Handles the input from the player. 
@@ -230,12 +231,15 @@ namespace MortensKomeback
             {
                 case 0:
                     chosenMortenText = "Munke Morten";
+                    mortenSkinType = 1;
                     break;
                 case 1:
                     chosenMortenText = "Undercover Morten";
+                    mortenSkinType = 0;
                     break;
                 case 2:
                     chosenMortenText = "Green! Undercover Morten";
+                    mortenSkinType = 0;
                     break;
             }
         }

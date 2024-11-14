@@ -1,12 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
@@ -21,7 +15,7 @@ namespace MortensKomeback
 
         #region properties
         /// <summary>
-        /// The collisionbox is set lower than CollisionBox at Surface because the collision is happ
+        /// The collisionbox is set lower than CollisionBox at Surface because the collision is happing midt flame
         /// </summary>
         public override Rectangle CollisionBox
         {
@@ -35,8 +29,8 @@ namespace MortensKomeback
         {
             this.startSprite = numberSprite;
             this.health = 1;
-            this.fps = 2f; //Not sure if it's the correkt amount
-            this.layer = 0.1f;
+            this.fps = 2f; 
+            this.layer = 0.11f;
         }
 
         #endregion
@@ -59,13 +53,13 @@ namespace MortensKomeback
 
         public override void OnCollision(GameObject gameObject)
         {
-            //throw new NotImplementedException();
+            //Nothing is happening to the AvSurface when it's colliding 
         }
 
         /// <summary>
         /// Updating AvSurface with Animation
         /// </summary>
-        /// <param name="gameTime"></param>
+        /// <param name="gameTime">A GameTime</param>
         public override void Update(GameTime gameTime)
         {
             Animate(gameTime);
@@ -74,7 +68,7 @@ namespace MortensKomeback
         /// <summary>
         /// It's used to create a AvSurface in Environment
         /// </summary>
-        /// <param name="graphics"></param>
+        /// <param name="graphics">A colliding</param>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <returns></returns>
