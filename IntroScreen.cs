@@ -6,8 +6,18 @@ namespace MortensKomeback
 {
     internal class IntroScreen : GameObject
     {
+        #region Fields
+
         private Texture2D buttonSprite;
         private SpriteFont spriteFont;
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Constructor
 
         public IntroScreen()
         {
@@ -17,7 +27,14 @@ namespace MortensKomeback
             this.scale = 1.7f;
         }
 
+        #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Loads sprites and font for buttons and itself
+        /// </summary>
+        /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
             this.sprite = content.Load<Texture2D>("udkast");
@@ -37,6 +54,6 @@ namespace MortensKomeback
             //
         }
 
-        
+        #endregion
     }
 }

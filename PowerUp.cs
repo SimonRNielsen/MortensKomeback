@@ -7,12 +7,18 @@ namespace MortensKomeback
 {
     internal class PowerUp : GameObject
     {
+        #region Fields
 
         private int powerUpType;
-        private bool attach = false;
-        private float duration = 5f;
-        private float timer;
         Random random = new Random();
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         /// Powerup Creator
@@ -30,6 +36,10 @@ namespace MortensKomeback
             this.layer = 0.91f;
 
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Loads sprites for powerups
@@ -73,28 +83,25 @@ namespace MortensKomeback
                     }
                 }
 
-                if (powerUpType == 2 && !attach)
+                if (powerUpType == 2)
                 {
                     (gameObject as Player).InvulnerablePowerUp();
-                    this.attach = true;
-                }
-
-            }
-
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            if (this.powerUpType == 2 && attach)
-            {
-                timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                this.position.X = GameWorld.Camera.Position.X - 12;
-                this.position.Y = GameWorld.Camera.Position.Y - 150;
-                if (timer >= duration)
-                {
                     this.health--;
                 }
+
             }
+
         }
+
+        /// <summary>
+        /// Unused for PowerUps
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public override void Update(GameTime gameTime)
+        {
+            
+        }
+
+        #endregion
     }
 }
