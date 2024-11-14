@@ -20,6 +20,7 @@ namespace MortensKomeback
         private static Texture2D sprite3;
         private static Texture2D sprite4;
         private static Texture2D sprite5;
+        private static Texture2D sprite6;
         #endregion
 
         #region properties
@@ -45,7 +46,7 @@ namespace MortensKomeback
         {
             this.position.X = position.X;
             this.position.Y = position.Y;
-            this.layer = 0.1f;
+            this.layer = 0.2f;
             this.spriteID = spriteID;
             this.health = 1;
         }
@@ -57,27 +58,13 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
             
-            if(sprite1 == default)
-            {
-                sprite1 = content.Load<Texture2D>("Sprite\\dirt_tile1");
-            }
-            if(sprite2 == default)
-            {
-                sprite2 = content.Load<Texture2D>("Sprite\\grass_tile1");
-            }
-            if (sprite3 == default)
-            {
-                sprite3 = content.Load<Texture2D>("Sprite\\cloud5");
-            }
-            if (sprite4 == default)
-            {
-                sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
-            }
-            if (sprite5 == default)
-            {
-                sprite5 = content.Load<Texture2D>("Sprite\\mitre");
-            }
-
+            sprite1 = content.Load<Texture2D>("Sprite\\dirt_tile1");
+            sprite2 = content.Load<Texture2D>("Sprite\\grass_tile1");
+            sprite3 = content.Load<Texture2D>("Sprite\\cloud5");
+            sprite4 = content.Load<Texture2D>("Sprite\\cloud3");
+            sprite5 = content.Load<Texture2D>("Sprite\\transparentTile");
+            sprite6 = content.Load<Texture2D>("Sprite\\table");
+            
             if (spriteID == 1)
             {
                 this.Sprite = sprite1;
@@ -99,6 +86,10 @@ namespace MortensKomeback
             if (spriteID == 5)
             {
                 this.Sprite = sprite5;
+            }
+            if (spriteID == 6)
+            {
+                this.Sprite = sprite6;
             }
         }
 

@@ -6,8 +6,19 @@ namespace MortensKomeback
 {
     internal class OutroScreen : GameObject
     {
+        #region Fields
+
         private Texture2D buttonSprite;
         private SpriteFont spriteFont;
+
+        #endregion
+
+        #region Properties
+
+        #endregion
+
+        #region Constructor
+
         public OutroScreen(Vector2 placement)
         {
             this.position = placement;
@@ -16,9 +27,27 @@ namespace MortensKomeback
             this.scale = 1.7f;
         }
 
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Loads sprites and font for buttons and itself
+        /// </summary>
+        /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            this.sprite = content.Load<Texture2D>("udkast");
+            sprites = new Texture2D[2];
+            sprites[0] = content.Load<Texture2D>("udkast"); //Loss
+            sprites[1] = content.Load<Texture2D>("udkast"); //Win
+
+            if (GameWorld.win == true)
+            {
+                GameWorld.win = false;
+                this.sprite = sprites[1];
+            }
+            else
+                this.sprite = sprites[0];
+
             spriteFont = content.Load<SpriteFont>("mortalKombatFont");
             buttonSprite = content.Load<Texture2D>("button");
         }
@@ -28,12 +57,20 @@ namespace MortensKomeback
             //
         }
 
+        /// <summary>
+        /// Spawns buttons after creating the screen to avoid list being changed while being read
+        /// </summary>
+        /// <param name="gameTime"></param>
         public override void Update(GameTime gameTime)
         {
             if (!GameWorld.spawnOutro)
-                GameWorld.newGameObjects.Add(new ExitButton(buttonSprite, new Vector2(position.X, position.Y + 300), spriteFont));
-            GameWorld.spawnOutro = true;
-
+            {
+                GameWorld.newGameObjects.Add(new ExitButton(buttonSprite, new Vector2(position.X + 300, position.Y + 300), spriteFont));
+                GameWorld.newGameObjects.Add(new RestartButton(buttonSprite, new Vector2(position.X - 300, position.Y + 300), spriteFont));
+                GameWorld.spawnOutro = true;
+            }
         }
+
+        #endregion
     }
 }

@@ -17,9 +17,11 @@ namespace MortensKomeback
         #endregion
 
         #region Property
+
         #endregion
 
         #region Constructor
+
         /// <summary>
         /// Constructor for "spawning" eggs that Morten shoots with his sling
         /// </summary>
@@ -45,7 +47,9 @@ namespace MortensKomeback
             this.layer = 0.9f;
             this.sprites = player.AmmoSprites;
             this.sprite = sprites[ammoSprite];
+            this.deathSoundEffect = player.AmmoSound; 
         }
+
         #endregion
 
         #region Methods
@@ -69,16 +73,16 @@ namespace MortensKomeback
                 if (this.health == 1)
                 {
 
-                    if (gameObject is Surface)
+                    if (gameObject is Surface && !collided)
                     {
                         this.collided = true;
                         timer = 0f;
                         this.sprite = this.sprites[4];
                         this.rotation = 0f;
+                        this.deathSoundEffect.Play();
                     }
                     else if (gameObject is Enemy && !collided)
                     {
-                        gameObject.Health--;
                         this.collided = true;
                         timer = 0f;
                         this.sprite = this.sprites[random.Next(2, 4)];
@@ -90,20 +94,23 @@ namespace MortensKomeback
                         {
                             this.rotation = -0.25f;
                         }
+                        this.deathSoundEffect.Play();
                     }
 
                 }
-                else if (gameObject is Enemy)
+                else if (gameObject is Enemy && !((gameObject as Enemy).IsHit))
                 {
-                    gameObject.Health--;
                     this.health--;
+                    this.deathSoundEffect.Play();
+                    (gameObject as Enemy).IsHit = true;
                 }
-                else
+                else if (!collided)
                 {
                     this.collided = true;
                     timer = 0f;
                     this.sprite = this.sprites[4];
                     this.rotation = 0f;
+                    this.deathSoundEffect.Play();
                 }
             }
             /*
@@ -152,9 +159,11 @@ namespace MortensKomeback
 
             }
 
+            
+            
             if (collided && timer > collisionTimer)
             {
-                this.Health--;
+                this.Health = 0;
             }
             if (this.position.Y > 5000)
             {
@@ -162,6 +171,7 @@ namespace MortensKomeback
             }
 
         }
+
         #endregion
     }
 }

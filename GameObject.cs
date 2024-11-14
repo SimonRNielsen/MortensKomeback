@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -12,6 +7,8 @@ namespace MortensKomeback
 {
     public abstract class GameObject
     {
+        #region Fields
+
         protected Texture2D sprite;
         protected Texture2D[] sprites;
         protected Vector2 position;
@@ -27,11 +24,14 @@ namespace MortensKomeback
         protected int health;
         private int currentIndex;
         protected int spriteEffectIndex;
-        private SpriteEffects[] objectSpriteEffects = new SpriteEffects[3] { SpriteEffects.None, SpriteEffects.FlipHorizontally, SpriteEffects.FlipVertically }; 
+        protected SpriteEffects[] objectSpriteEffects = new SpriteEffects[3] { SpriteEffects.None, SpriteEffects.FlipHorizontally, SpriteEffects.FlipVertically }; 
         public static bool leftMouseButtonClick;
         public static Vector2 mousePosition;
         private SpriteFont standardSpriteFont;
 
+        #endregion
+
+        #region Properties
 
         public virtual Rectangle CollisionBox
         {
@@ -44,6 +44,14 @@ namespace MortensKomeback
 
         public int Health { get => health; set => health = value; }
         public float Speed { get => speed;set => speed = value; }
+
+        #endregion
+
+        #region Constructor
+        //Can't be constructed
+        #endregion
+
+        #region Methods
 
         public abstract void OnCollision(GameObject gameObject);
 
@@ -75,19 +83,10 @@ namespace MortensKomeback
             }
         }
 
-
         protected void Move(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             position += ((velocity * Speed) * deltaTime);
-        }
-
-
-        public bool IsColliding(GameObject other)
-        {
-            bool isColliding = false;
-
-            return isColliding;
         }
 
         /// <summary>
@@ -131,9 +130,7 @@ namespace MortensKomeback
 
         }
 
-        protected static object FindGameObjectWithTag(string v)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
+
     }
 }

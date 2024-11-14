@@ -22,6 +22,9 @@ namespace MortensKomeback
         protected float distanceToPlayer;
         private Texture2D[] aggroSprite;
         private Texture2D[] normalSprites;
+        private bool isHit;
+        private float honkCountdown = 1f;
+        private float honkTimer; 
 
         private static Vector2 playerPosition;
 
@@ -55,7 +58,12 @@ namespace MortensKomeback
             this.Health = 1;
             this.layer = 0.8f;
             this.scale = 1;
+            this.IsHit = false;
         }
+        /// <summary>
+        /// Property to acces wheter the enemy has already been hit, so collisions are not counted more than once
+        /// </summary>
+        public bool IsHit { get => isHit; set => isHit = value; }
 
 
         #region Methods
@@ -75,6 +83,9 @@ namespace MortensKomeback
             ////Indlæs honk Lyd
             //honkSound = content.Load<SoundEffect>("gooseSound_cut");
 
+
+            //Indlæs honk Lyd
+            honkSound = content.Load<SoundEffect>("gooseSound_Short");
             //loader aggro animation 
             aggroSprite = new Texture2D[7];
             for (int i = 0; i < aggroSprite.Length; i++)
@@ -95,8 +106,17 @@ namespace MortensKomeback
                 surfaceContact = true;
                 //honkSound.Play();
             }
-
-
+            if (gameObject is Ammo && !isHit)
+            {
+                honkSound.Play();
+                this.Health--;
+                Overlay.KillCount++;
+            }
+            if (gameObject is Player && (honkTimer > honkCountdown))
+            {
+                honkSound.Play();
+                honkTimer = 0f;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -139,6 +159,9 @@ namespace MortensKomeback
 
             Animate(gameTime);
             Move(gameTime);
+
+            honkTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             #endregion
 
             

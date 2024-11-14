@@ -21,7 +21,6 @@ namespace MortensKomeback
         private Texture2D[] ammoSprites;
         private static int healthCount;
         private static int playerAmmoCount;
-        //Count players kills. Is public static, so it can be affected by other classes, like the an enemy when it is killed.
         private static int killCount;
         private Vector2 ammoPosition;
         private Vector2 killsPosition;

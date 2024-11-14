@@ -109,6 +109,8 @@ namespace MortensKomeback
         /// <param name="gameTime">GameTime, given by GameWorld</param>
         public override void Update(GameTime gameTime)
         {
+            GameWorld.Camera.Position = this.Position;
+
             HandleInput();
             SetChosenMortenText();
         }
@@ -148,46 +150,57 @@ namespace MortensKomeback
             if (keyState.IsKeyDown(Keys.A) && pressWASDAllowed)
             {
                 pressWASDAllowed = false;
-                if (mortenIndex.Y > 0)
-                {
+               
                     mortenIndex.Y--;
+                if (mortenIndex.Y <0 )
+                {
+                    mortenIndex.Y = (mortenSprites.GetLength(1) - 1);
+                }
                     sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
                     // SetChosenMortenText();
-                }
+                
             }
             //If d is pressed the current sprite is changed.Only changes between the places in the twodimensional mortneSprites array, where the outfit is different
             if (keyState.IsKeyDown(Keys.D) && pressWASDAllowed)
             {
                 pressWASDAllowed = false;
-                if (mortenIndex.Y < mortenSprites.GetLength(1) - 1)
-                {
                     mortenIndex.Y++;
+                if (mortenIndex.Y > mortenSprites.GetLength(1) - 1)
+                {
+                    mortenIndex.Y = 0;
+                }
                     sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
                     // SetChosenMortenText();
-                }
+                
             }
 
             //If w is pressed, the current sprite is changed. Only changes between the places in the twodimensional mortneSprites array, where the weapon is different
             if (keyState.IsKeyDown(Keys.W) && pressWASDAllowed)
             {
                 pressWASDAllowed = false;
-                if (mortenIndex.X > 0)
+
+                mortenIndex.X--;
+                if (mortenIndex.X < 0)
                 {
-                    mortenIndex.X--;
+                    mortenIndex.X = (mortenSprites.GetLength(0) - 1);
+                }
                     sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
                     // SetChosenMortenText();
-                }
+                
             }
             //If w is pressed, the current sprite is changed. Only changes between the places in the twodimensional mortneSprites array, where the weapon is different
             if (keyState.IsKeyDown(Keys.S) && pressWASDAllowed)
             {
                 pressWASDAllowed = false;
-                if (mortenIndex.X < mortenSprites.GetLength(0) - 1)
-                {
+                
                     mortenIndex.X++;
-                    sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
-                    // SetChosenMortenText();
+                if (mortenIndex.X > mortenSprites.GetLength(0) - 1)
+                {
+                    mortenIndex.X = 0;
                 }
+                sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
+                    // SetChosenMortenText();
+                
             }
 
             if (keyState.IsKeyUp(Keys.A) && keyState.IsKeyUp(Keys.D) && keyState.IsKeyUp(Keys.W) && keyState.IsKeyUp(Keys.S))

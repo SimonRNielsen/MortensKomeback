@@ -5,8 +5,14 @@ namespace MortensKomeback
 {
     public class Camera2D
     {
+        #region Fields
+
         private Vector2 position = new Vector2();
         private readonly GraphicsDevice _graphicsDevice;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Property to access the posi
@@ -27,6 +33,10 @@ namespace MortensKomeback
         /// </summary>
         public float Rotation { get; set; }
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         /// Constructor for the camera viewport
         /// </summary>
@@ -39,6 +49,10 @@ namespace MortensKomeback
             Zoom = 0.6f; // 0.6f /Skal ændres tilbage - Rikke har sat den forkert
             Rotation = 0.0f;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Transforms the cameraviewport to return value
@@ -53,5 +67,7 @@ namespace MortensKomeback
                    Matrix.CreateScale(Zoom, Zoom, 1) *
                    Matrix.CreateTranslation(screenCenter);
         }
+
+        #endregion
     }
 }

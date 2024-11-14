@@ -205,6 +205,12 @@
 /processorParam:TextureFormat=Color
 /build:egg2.png
 
+#begin eggSmash_Sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:eggSmash_Sound.wav
+
 #begin goose0.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -283,6 +289,12 @@
 /processorParam:Quality=Best
 /build:gooseSound_cut.wav
 
+#begin gooseSound_Short.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:gooseSound_Short.wav
+
 #begin gooseSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -323,7 +335,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:gooseWalk3.png;gooseWalk2.png
+/build:gooseWalk3.png
 
 #begin gooseWalk4.png
 /importer:TextureImporter
@@ -335,7 +347,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:gooseWalk4.png;gooseWalk3.png
+/build:gooseWalk4.png
 
 #begin grass_tile1.png
 /importer:TextureImporter
@@ -409,12 +421,24 @@
 /processorParam:TextureFormat=Color
 /build:laserGreen16.png;testAmmo.png
 
+#begin Midnight_Tale.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Midnight_Tale.mp3
+
 #begin mortalKombatFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:mortalKombatFont.spritefont
+
+#begin morten_Av.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:morten_Av.wav
 
 #begin morten_sprite.png
 /importer:TextureImporter
@@ -584,6 +608,18 @@
 /processorParam:TextureFormat=Color
 /build:pixel.png
 
+#begin powerUp_Sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:powerUp_Sound.wav
+
+#begin shootSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:shootSound.wav
+
 #begin Sprite/avsurfaceILD1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -632,7 +668,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprite/avsurfaceILD4.png
 
-#begin Sprite/backgroundTEst.png
+#begin Sprite/chair.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -642,7 +678,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprite/backgroundTEst.png
+/build:Sprite/chair.png
+
+#begin Sprite/chair.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/chair.png
 
 #begin Sprite/cloud3.png
 /importer:TextureImporter
@@ -668,6 +716,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprite/cloud5.png
 
+#begin Sprite/dirt_tile1_background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/dirt_tile1_background.png
+
 #begin Sprite/dirt_tile1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -679,6 +739,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprite/dirt_tile1.png
+
+#begin Sprite/glorie2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/glorie2.png
 
 #begin Sprite/grass_tile1.png
 /importer:TextureImporter
@@ -692,6 +764,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprite/grass_tile1.png
 
+#begin Sprite/hills_small.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/hills_small.png
+
+#begin Sprite/hills.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/hills.png
+
 #begin Sprite/mitre.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -704,6 +800,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprite/mitre.png
 
+#begin Sprite/table.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/table.png
+
 #begin Sprite/Tours_Cathedral_facade.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -715,6 +823,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprite/Tours_Cathedral_facade.png
+
+#begin Sprite/transparentTile.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprite/transparentTile.png
 
 #begin standardSpriteFont.spritefont
 /importer:FontDescriptionImporter
@@ -782,6 +902,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:underCoverMortenSling3.png
+
+#begin walkSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:walkSound.wav
+
+#begin walkSound2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:walkSound2.wav
 
 #begin wallTurkey.png
 /importer:TextureImporter

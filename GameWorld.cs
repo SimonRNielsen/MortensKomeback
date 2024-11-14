@@ -1,16 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MortensKomeback
 {
     public class GameWorld : Game
     {
+        #region Fields
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private List<GameObject> gameObjects = new List<GameObject>();
@@ -21,19 +19,29 @@ namespace MortensKomeback
         public static bool removeScreen = false;
         public static bool spawnOutro = false;
         private bool mortenLives = true;
+        private bool cameraExists = false;
+        public static float mouseX;
+        public static float mouseY;
         public static bool win;
-        public static bool loss;
+        public static bool restart = false;
         public static Vector2 mousePosition;
         private SpriteFont standardSpriteFont;
 
 #if DEBUG
         public Texture2D collisionTexture;
 #endif
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Property to get/set the position of the camera, in this case relative to the players position
         /// </summary>
         public static Camera2D Camera { get => camera; set => camera = value; }
+
+        #endregion
+
+        #region Constructor
 
         public GameWorld()
         {
@@ -42,26 +50,46 @@ namespace MortensKomeback
             IsMouseVisible = true;
         }
 
+        #endregion
+
+        #region Methods
+
         protected override void Initialize()
         {
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
-            //_graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();
-            camera = new Camera2D(GraphicsDevice, Vector2.Zero);
+            if (!cameraExists)
+            {
+                _graphics.PreferredBackBufferWidth = 1920;
+                _graphics.PreferredBackBufferHeight = 1080;
+                //_graphics.IsFullScreen = true;
+                _graphics.ApplyChanges();
+                camera = new Camera2D(GraphicsDevice, Vector2.Zero);
+                cameraExists = true;
+            }
 
             // TODO: Add your initialization logic here
+#if DEBUG
+            gameObjects.Add(new PowerUp(new Vector2(150, 700), 0));
+            gameObjects.Add(new PowerUp(new Vector2(450, 700), 1));
+            gameObjects.Add(new PowerUp(new Vector2(750, 700), 2));
+#endif
 
-            gameObjects.Add(new PowerUp(new Vector2(150, 500), 0));
-            gameObjects.Add(new PowerUp(new Vector2(450, 500), 1));
+            gameObjects.Add(new PowerUp(new Vector2(5655, -1385), 0)); //Over first platform 
+            gameObjects.Add(new PowerUp(new Vector2(24871, 850), 1)); //Hidden
+            gameObjects.Add(new PowerUp(new Vector2(12345, -690), 1)); //Over a hiddden area
+            #region Power Up Cathedral
+            gameObjects.Add(new PowerUp(new Vector2(30003, -103), 1));
+            gameObjects.Add(new PowerUp(new Vector2(29983, 533), 0));
+            gameObjects.Add(new PowerUp(new Vector2(29740, -797), 2));
+            gameObjects.Add(new PowerUp(new Vector2(30280, -810), 2));
+            #endregion
+
             //gameObjects.Add(new Player());
-            gameObjects.Add(new IntroScreen(Camera.Position));
+            gameObjects.Add(new IntroScreen());
             gameObjects.Add(new MousePointer(_graphics));
             gameObjects.Add(new CharacterGenerator());
             gameObjects.Add(new Enemy());
             gameObjects.Add(new Overlay());
-            gameObjects.Add(new Background(1));
-            gameObjects.Add(new Background(2));
+            
             gameObjects.AddRange(new Environment(_graphics).Surfaces); //Adding the environment to gameObjects
             gameObjects.Add(new KeybindingsOverlay());
             base.Initialize();
@@ -87,6 +115,9 @@ namespace MortensKomeback
                 Exit();
             if (exitGame)
                 Exit();
+            if (restart)
+                Restart();
+
             if (removeScreen)
             {
                 foreach (GameObject gameObj in gameObjects)
@@ -108,17 +139,28 @@ namespace MortensKomeback
             mortenLives = false;
             foreach (GameObject gameObject in gameObjects)
             {
+                //Surface don't need to run Update() unless they are AvSurface, so this if, makes them continue to save resources.
+                if ((gameObject is Surface) && !(gameObject is AvSurface))
+                {
+                    continue;
+                }
                 foreach (GameObject other in gameObjects)
                 {
+                    //An object should not be able to collide with a member of the same class
+                    if (gameObject == other)
+                    {
+                        continue;
+                    }
+                    //Only Player, MousePointer, Enemy and Ammo needs to check for collisions, so GameOjects of any other class will now need to complete the loop
+                    if (!((gameObject is Player) || (gameObject is MousePointer) || (gameObject is Enemy) || (gameObject is Ammo)))
+                    {
+                        continue;
+                    }
                     if (gameObject is MousePointer && other is Button)
                     {
                         gameObject.CheckCollision(other);
                         other.CheckCollision(gameObject);
                     }
-
-                    if (gameObject is Player && other is Enemy)
-                    if (gameObject == other) 
-                        continue;
 
                     if (gameObject is Player)
                     {
@@ -193,7 +235,7 @@ namespace MortensKomeback
 #endif
             }
 #if DEBUG
-            _spriteBatch.DrawString(standardSpriteFont, $"{mousePosition.X}\n{mousePosition.Y}", Camera.Position, Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
+            _spriteBatch.DrawString(standardSpriteFont, $"X: {mouseX}\nY: {mouseY}", new Vector2(Camera.Position.X, Camera.Position.Y - 400), Color.Black, 0f, Vector2.Zero, 3f, SpriteEffects.None, 1f);
 
 #endif
 
@@ -246,6 +288,14 @@ namespace MortensKomeback
             _spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1f);
         }
 #endif
+        public void Restart()
+        {
+            gameObjects.RemoveAll(gameObject => gameObject.Health > 0);
+            Initialize();
+            restart = false;
+            spawnOutro = false;
+        }
 
+        #endregion
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
+using Microsoft.Xna.Framework.Media;
 
 namespace MortensKomeback
 {
@@ -15,7 +16,11 @@ namespace MortensKomeback
         #region field
         private static Texture2D sprite1;
         private static Texture2D sprite2;
+        private static Texture2D sprite3;
+        private static Texture2D sprite4;
+        private static Texture2D sprite5;
         private int spriteID; //Which sprite is going to be used
+        private Song backgroundMusic;
 
         #endregion
 
@@ -24,15 +29,14 @@ namespace MortensKomeback
         #endregion
 
         #region constructor
-        public Background(int spriteID)
+        public Background(int spriteID, int xPosition, int yPosition)
         {
             this.layer = 0f;
             this.scale = 1f;
-            this.position.X = 1;
-            this.position.Y = 1;
+            this.position.X = xPosition;
+            this.position.Y = yPosition;
             this.health = 1;
             this.spriteID = spriteID;
-
         }
 
         #endregion
@@ -44,18 +48,12 @@ namespace MortensKomeback
         /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            //Sprite = content.Load<Texture2D>("Sprite\\backgroundTEst");
-
-            if (sprite1 == default)
-            {
-                sprite1 = content.Load<Texture2D>("Sprite\\backgroundTEst");
-            }
-            if (sprite2 == default)
-            {
-                sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
-            }
+            sprite1 = content.Load<Texture2D>("Sprite\\hills_small");
+            sprite2 = content.Load<Texture2D>("Sprite\\Tours_Cathedral_facade");
+            sprite3 = content.Load<Texture2D>("Sprite\\dirt_tile1_background");
+            sprite4 = content.Load<Texture2D>("Sprite\\glorie2");
+            sprite5 = content.Load<Texture2D>("Sprite\\chair");
             
-
             if (spriteID == 1)
             {
                 this.Sprite = sprite1;
@@ -63,10 +61,26 @@ namespace MortensKomeback
             if (spriteID == 2)
             {
                 this.Sprite = sprite2;
-                position.X = 200 * 150;
-                position.Y = 88;
+                this.layer = 0.01f;
             }
-            
+            if (spriteID == 3)
+            {
+                this.Sprite = sprite3;
+                this.layer = 0.92f; //0.01 higher than PowerUp layer 
+            }
+            if (spriteID == 4)
+            {
+                this.Sprite = sprite4;
+            }
+            if (spriteID == 5)
+            {
+                this.Sprite = sprite5;
+            }
+
+            backgroundMusic = content.Load<Song>("Midnight_Tale");
+            MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.2f;
         }
 
         /// <summary>
