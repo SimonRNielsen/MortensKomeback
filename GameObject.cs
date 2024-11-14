@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using System;
 
 namespace MortensKomeback
 {
@@ -74,8 +75,11 @@ namespace MortensKomeback
 
             currentIndex = (int)(timeElapsed * fps);
 
-            Sprite = sprites[currentIndex];
+            //if (currentIndex > sprites.Length - 1)
+            //    currentIndex = 0;
 
+                Sprite = sprites[currentIndex];
+            
             if (currentIndex >= sprites.Length - 1)
             {
                 timeElapsed = 0;

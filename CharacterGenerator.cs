@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,9 @@ namespace MortensKomeback
         private string chosenMortenText;
         //Two dimensional array of sprites. Made so sprites on one axis have different outfits, and the other have different weapons. 
         //3 different outfits and 3 different weapons, gives an array with 9 possibilities.
-        private Texture2D[,] mortenSprites = new Texture2D[3, 3];
+        private Texture2D[,] mortenSprites = new Texture2D[1, 2];
+
+        private Dictionary<string, Texture2D[]> loadedSprites = new Dictionary<string, Texture2D[]>();
         //A Vector2, that is used to choose sprites form the mortenSprites array. 
         private Vector2 mortenIndex;
         //Bool used to make sure that something only happens once per click on w,a,s or d. 
@@ -56,19 +59,38 @@ namespace MortensKomeback
         /// <param name="content">The content manager, provided by MonoGame</param>
         public override void LoadContent(ContentManager content)
         {
+
+            Texture2D[] munkeMortenSling = new Texture2D[4];
+
+            munkeMortenSling[0] = content.Load<Texture2D>("munkeMortenSling0");
+            munkeMortenSling[1] = content.Load<Texture2D>("munkeMortenSling1");
+            munkeMortenSling[2] = content.Load<Texture2D>("munkeMortenSling2");
+            munkeMortenSling[3] = content.Load<Texture2D>("munkeMortenSling3");
+
+            loadedSprites.Add("munkeMortenSling0", munkeMortenSling);
+
+            Texture2D[] underCoverMortenSling = new Texture2D[4];
+
+            underCoverMortenSling[0] = content.Load<Texture2D>("underCoverMortenSling0");
+            underCoverMortenSling[1] = content.Load<Texture2D>("underCoverMortenSling1");
+            underCoverMortenSling[2] = content.Load<Texture2D>("underCoverMortenSling2");
+            underCoverMortenSling[3] = content.Load<Texture2D>("underCoverMortenSling3");
+
+            loadedSprites.Add("underCoverMortenSling0", underCoverMortenSling);
+
             standardFont = content.Load<SpriteFont>("standardSpriteFont");
-            mortenSprites[0, 0] = content.Load<Texture2D>("morten_sprite");
-            mortenSprites[0, 1] = content.Load<Texture2D>("morten_sprite2");
-            mortenSprites[0, 2] = content.Load<Texture2D>("morten_sprite3");
+            mortenSprites[0, 0] = content.Load<Texture2D>("munkeMortenSling0");
+            mortenSprites[0, 1] = content.Load<Texture2D>("underCoverMortenSling0");
+            /*mortenSprites[0, 2] = content.Load<Texture2D>("morten_sprite3");
             mortenSprites[1, 0] = content.Load<Texture2D>("morten_spritea");
             mortenSprites[1, 1] = content.Load<Texture2D>("morten_sprite2a");
             mortenSprites[1, 2] = content.Load<Texture2D>("morten_sprite3a");
             mortenSprites[2, 0] = content.Load<Texture2D>("morten_spriteb");
             mortenSprites[2, 1] = content.Load<Texture2D>("morten_sprite2b");
-            mortenSprites[2, 2] = content.Load<Texture2D>("morten_sprite3b");
+            mortenSprites[2, 2] = content.Load<Texture2D>("morten_sprite3b");*/
 
             sprite = mortenSprites[(int)mortenIndex.X, (int)mortenIndex.Y];
-
+            
         }
 
         /// <summary>
@@ -113,7 +135,8 @@ namespace MortensKomeback
         /// </summary>
         private void AddPlayer()
         {
-            GameWorld.newGameObjects.Add(new Player(this.sprite));
+            sprites = loadedSprites[this.sprite.Name];
+            GameWorld.newGameObjects.Add(new Player(this.sprite, sprites));
         }
         /// <summary>
         /// Handles the input from the player. 
@@ -206,16 +229,18 @@ namespace MortensKomeback
             switch (mortenIndex.Y)
             {
                 case 0:
-                    chosenMortenText = "Undercover Morten";
+                    chosenMortenText = "Munke Morten";
                     break;
                 case 1:
-                    chosenMortenText = "PURPLE! Undercover Morten";
+                    chosenMortenText = "Undercover Morten";
                     break;
                 case 2:
                     chosenMortenText = "Green! Undercover Morten";
                     break;
             }
         }
+
+        
 
         #endregion
     }
