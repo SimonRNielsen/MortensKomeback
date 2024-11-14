@@ -100,6 +100,13 @@ namespace MortensKomeback
         public override void Update(GameTime gameTime)
         {
             invincibleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if ( this.position.X > 39700)
+            {
+                this.health = 0;
+                GameWorld.win = true;
+            }
+
             if (invincibleTimer > invincibleCooldown)
             {
                 invincible = false;
