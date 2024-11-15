@@ -35,7 +35,7 @@ namespace MortensKomeback
             this.powerUpType = type;
             this.position = placement;
             this.health = 1;
-            this.layer = 0.91f;
+            this.layer = 0.88f;
 
         }
 

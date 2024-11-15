@@ -23,6 +23,9 @@ namespace MortensKomeback
         private SoundEffect honkSound;
         private bool isAggro = false;
         private static Vector2 playerPosition;
+
+        private bool spawned = false;
+        private float spawnDistance = 1600; //distance between enemy and player, before enemy spawns
         #endregion
 
         #region properties
@@ -42,14 +45,14 @@ namespace MortensKomeback
         /// <summary>
         /// enemy constructor
         /// </summary>
-        public Enemy()
+        public Enemy(Vector2 placement)
         {
-            this.position.X = 1000;
-            this.position.Y = 0;
-            this.speed = 250;
+            this.position = placement;
+            this.layer = 0.91f;
+            this.speed = 200;
             this.velocity = new Vector2(1, 0);
             this.fps = 15f;
-            this.Health = 1;
+            this.health = 1;
             this.layer = 0.8f;
             this.scale = 1;
             this.IsHit = false;
@@ -69,8 +72,8 @@ namespace MortensKomeback
         public override void LoadContent(ContentManager content)
         {
             //Loader sprites til animation
-            sprites = new Texture2D[7];
-            normalSprites = new Texture2D[7];
+            sprites = new Texture2D[8];
+            normalSprites = new Texture2D[8];
             for (int i = 0; i < sprites.Length; i++)
             {
                 normalSprites[i] = content.Load<Texture2D>("gooseWalk" + i);
@@ -79,18 +82,16 @@ namespace MortensKomeback
             //Sætter default sprite
             sprites = normalSprites;
             sprite = sprites[0];
-            ////Indlæs honk Lyd
-            //honkSound = content.Load<SoundEffect>("gooseSound_cut");
 
-
-            //Indlæs honk Lyd
-            honkSound = content.Load<SoundEffect>("gooseSound_Short");
             //loader aggro animation 
-            aggroSprite = new Texture2D[7]; //sæt til 7
+            aggroSprite = new Texture2D[8]; //sæt til 7
             for (int i = 0; i < aggroSprite.Length; i++)
             {
                 aggroSprite[i] = content.Load<Texture2D>("aggro" + i);
             }
+
+            //Indlæs honk Lyd
+            honkSound = content.Load<SoundEffect>("gooseSound_Short");
 
         }
 
@@ -102,7 +103,7 @@ namespace MortensKomeback
             {
                 surfaceContact = true;
             }
-            if (gameObject is Ammo && !isHit)
+            if (gameObject is Ammo && !isHit && (gameObject as Ammo).Collided == false)
             {
                 honkSound.Play();
                 this.Health--;
@@ -117,6 +118,34 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
+            //We find distance to player, and set "aggro"
+            distanceToPlayer = CalculateDistanceToPLayer(PlayerPosition);
+
+
+            //Checks if player is within enemy spawn distance
+            if (!spawned && distanceToPlayer <=spawnDistance)
+            {
+                spawned = true; 
+            }
+
+            if (!spawned)
+            {
+                return;
+            }
+
+            if (spawned)
+            {
+                if (velocity.X == 1)
+                {
+                    spriteEffectIndex = 1; 
+                }
+                else
+                {
+                    spriteEffectIndex = 0;
+                }
+            }
+
+
             #region flip enemy
             // Inverter sprite horisontalt, hvis fjenden ændrer retning
             if (velocity.X == 1)
@@ -128,10 +157,8 @@ namespace MortensKomeback
                 spriteEffectIndex = 0;
             }
 
-            //We find distance to player, and set "aggro"
-            distanceToPlayer = CalculateDistanceToPLayer(PlayerPosition);
 
-            if (distanceToPlayer <= 1000f)
+            if (distanceToPlayer <= 800f)
             {
                 speed = 500;
                 sprite = aggroSprite[0];

@@ -17,6 +17,7 @@ namespace MortensKomeback
         #endregion
 
         #region Property
+        public bool Collided { get => collided; set => collided = value; }
 
         #endregion
 
@@ -50,6 +51,7 @@ namespace MortensKomeback
             this.deathSoundEffect = player.AmmoSound; 
         }
 
+
         #endregion
 
         #region Methods
@@ -73,17 +75,17 @@ namespace MortensKomeback
                 if (this.health == 1)
                 {
 
-                    if (gameObject is Surface && !collided)
+                    if (gameObject is Surface && !Collided)
                     {
-                        this.collided = true;
+                        this.Collided = true;
                         timer = 0f;
                         this.sprite = this.sprites[4];
                         this.rotation = 0f;
                         this.deathSoundEffect.Play();
                     }
-                    else if (gameObject is Enemy && !collided)
+                    else if (gameObject is Enemy && !Collided)
                     {
-                        this.collided = true;
+                        this.Collided = true;
                         timer = 0f;
                         this.sprite = this.sprites[random.Next(2, 4)];
                         if (flipped)
@@ -98,15 +100,15 @@ namespace MortensKomeback
                     }
 
                 }
-                else if (gameObject is Enemy && !((gameObject as Enemy).IsHit))
+                else if (gameObject is Enemy && !((gameObject as Enemy).IsHit) && !Collided)
                 {
                     this.health--;
                     this.deathSoundEffect.Play();
                     (gameObject as Enemy).IsHit = true;
                 }
-                else if (!collided)
+                else if (!Collided)
                 {
-                    this.collided = true;
+                    this.Collided = true;
                     timer = 0f;
                     this.sprite = this.sprites[4];
                     this.rotation = 0f;
@@ -130,7 +132,7 @@ namespace MortensKomeback
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (!collided)
+            if (!Collided)
             {
 
                 if (flipped)
@@ -161,7 +163,7 @@ namespace MortensKomeback
 
             
             
-            if (collided && timer > collisionTimer)
+            if (Collided && timer > collisionTimer)
             {
                 this.Health = 0;
             }
