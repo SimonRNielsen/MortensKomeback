@@ -11,18 +11,18 @@ namespace MortensKomeback
     {
         #region fields
         private bool flipped = false;
-        private Vector2 direction;
-        private Random rnd = new Random();
+        private bool isAggro = false;
+        private bool isHit;
         private SpriteEffects spriteEffects;
-        protected float distanceToPlayer;
+        private Vector2 direction;
+        private static Vector2 playerPosition;
+        private Random rnd = new Random();
+        private SoundEffect honkSound;
         private Texture2D[] aggroSprite;
         private Texture2D[] normalSprites;
-        private bool isHit;
         private float honkCountdown = 1f;
         private float honkTimer;
-        private SoundEffect honkSound;
-        private bool isAggro = false;
-        private static Vector2 playerPosition;
+        protected float distanceToPlayer;
 
         private bool spawned = false;
         private float spawnDistance = 1600; //distance between enemy and player, before enemy spawns
