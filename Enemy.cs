@@ -46,8 +46,6 @@ namespace MortensKomeback
         {
             this.position = placement;
             this.layer = 0.91f;
-            //this.position.X = 1000;
-            //this.position.Y = 0;
             this.speed = 200;
             this.velocity = new Vector2(1, 0);
             this.fps = 15f;
