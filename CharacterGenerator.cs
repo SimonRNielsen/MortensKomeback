@@ -25,7 +25,7 @@ namespace MortensKomeback
         private string chosenMortenText;
         //Two dimensional array of sprites. Made so sprites on one axis have different outfits, and the other have different weapons. 
         //3 different outfits and 3 different weapons, gives an array with 9 possibilities.
-        private Texture2D[,] mortenSprites = new Texture2D[3, 2];
+        private Texture2D[,] mortenSprites = new Texture2D[2, 3];
 
         private Dictionary<string, Texture2D[]> loadedSprites = new Dictionary<string, Texture2D[]>();
         //A Vector2, that is used to choose sprites form the mortenSprites array. 
@@ -108,8 +108,8 @@ namespace MortensKomeback
             mortenSprites[0, 1] = content.Load<Texture2D>("underCoverMortenSling0");
             mortenSprites[1, 0] = content.Load<Texture2D>("munkeMortenSlingGul0");
             mortenSprites[1, 1] = content.Load<Texture2D>("underCoverMortenSlingGul0");
-            mortenSprites[2, 0] = content.Load<Texture2D>("munkeMortenHvid0");
-            mortenSprites[2, 1] = content.Load<Texture2D>("munkeMortenHvidSlingGul0");
+            mortenSprites[0, 2] = content.Load<Texture2D>("munkeMortenHvid0");
+            mortenSprites[1, 2] = content.Load<Texture2D>("munkeMortenHvidSlingGul0");
             /*mortenSprites[2, 0] = content.Load<Texture2D>("morten_spriteb");
             mortenSprites[2, 1] = content.Load<Texture2D>("morten_sprite2b");
             mortenSprites[2, 2] = content.Load<Texture2D>("morten_sprite3b");*/
