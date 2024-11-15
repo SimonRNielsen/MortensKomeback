@@ -16,7 +16,7 @@ namespace MortensKomeback
         private SpriteEffects spriteEffects;
         private Vector2 direction;
         private static Vector2 playerPosition;
-        private Random rnd = new Random();
+        //private Random rnd = new Random();
         private SoundEffect honkSound;
         private Texture2D[] aggroSprite;
         private Texture2D[] normalSprites;
