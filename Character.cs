@@ -22,8 +22,15 @@ namespace MortensKomeback
         {
             if (gameObject is Surface)
             {
-                surfaceContact = true;
                 this.velocity.Y = 0;
+                if ((this.CollisionBox.Y) > (gameObject.CollisionBox.Y-(gameObject.CollisionBox.Height/2)))
+                {
+                    this.position.Y =  gameObject.CollisionBox.Bottom + (this.Sprite.Height / 1.5f);
+                }
+                else
+                {
+                surfaceContact = true;
+                }
             }
         }
 
