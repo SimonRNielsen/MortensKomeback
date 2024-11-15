@@ -57,7 +57,7 @@ namespace MortensKomeback
 
             if (spriteID == 3)
             {
-                this.layer = 0.92f;
+                this.layer = 0.89f;
             }
 
             backgroundMusic = content.Load<Song>("Midnight_Tale");
