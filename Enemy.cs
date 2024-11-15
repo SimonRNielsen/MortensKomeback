@@ -23,6 +23,9 @@ namespace MortensKomeback
         private SoundEffect honkSound;
         private bool isAggro = false;
         private static Vector2 playerPosition;
+
+        private bool spawned = false;
+        private float spawnDistance = 1600; //distance between enemy and player, before enemy spawns
         #endregion
 
         #region properties
@@ -100,7 +103,7 @@ namespace MortensKomeback
             {
                 surfaceContact = true;
             }
-            if (gameObject is Ammo && !isHit)
+            if (gameObject is Ammo && !isHit && (gameObject as Ammo).Collided == false)
             {
                 honkSound.Play();
                 this.Health--;
@@ -115,6 +118,34 @@ namespace MortensKomeback
 
         public override void Update(GameTime gameTime)
         {
+            //We find distance to player, and set "aggro"
+            distanceToPlayer = CalculateDistanceToPLayer(PlayerPosition);
+
+
+            //Checks if player is within enemy spawn distance
+            if (!spawned && distanceToPlayer <=spawnDistance)
+            {
+                spawned = true; 
+            }
+
+            if (!spawned)
+            {
+                return;
+            }
+
+            if (spawned)
+            {
+                if (velocity.X == 1)
+                {
+                    spriteEffectIndex = 1; 
+                }
+                else
+                {
+                    spriteEffectIndex = 0;
+                }
+            }
+
+
             #region flip enemy
             // Inverter sprite horisontalt, hvis fjenden ændrer retning
             if (velocity.X == 1)
@@ -126,10 +157,8 @@ namespace MortensKomeback
                 spriteEffectIndex = 0;
             }
 
-            //We find distance to player, and set "aggro"
-            distanceToPlayer = CalculateDistanceToPLayer(PlayerPosition);
 
-            if (distanceToPlayer <= 1000f)
+            if (distanceToPlayer <= 800f)
             {
                 speed = 500;
                 sprite = aggroSprite[0];

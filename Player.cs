@@ -352,11 +352,11 @@ namespace MortensKomeback
                         spriteYDisplacement = 100;
                         if (flipped)
                         {
-                            spriteXDisplacement = 63;
+                            spriteXDisplacement = 73;
                         }
                         else
                         {
-                            spriteXDisplacement = 3;
+                            spriteXDisplacement = 13;
                         }
                         break;
                 }
