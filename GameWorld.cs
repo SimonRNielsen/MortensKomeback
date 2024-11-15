@@ -291,9 +291,12 @@ namespace MortensKomeback
         public void Restart()
         {
             gameObjects.RemoveAll(gameObject => gameObject.Health > 0);
+            Overlay.KillCount = 0;
+            Overlay.PlayerAmmoCount = 0;
             Initialize();
             restart = false;
             spawnOutro = false;
+            win = false;
         }
 
         #endregion
