@@ -135,8 +135,8 @@ namespace MortensKomeback
 
             if (this.position.X > 40100)
             {
-                this.health = 0;
                 GameWorld.win = true;
+                this.health = 0;
             }
 
             if (invincibleTimer > invincibleCooldown)

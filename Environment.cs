@@ -156,9 +156,9 @@ namespace MortensKomeback
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 2),  grass, 29, 29);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 2), dirt, 30, 30);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 3),  grass, 30, 31);
-            AddSurface(tileSize * 33, graphicsHeight - (tileSize * 5), cloud3);
+            AddSurface(tileSize * 33, graphicsHeight - (tileSize * 5), cloud5);
 
-            AddSurface((tileSize * 35), graphicsHeight - (tileSize * 6), cloud5); 
+            AddSurface((tileSize * 35), graphicsHeight - (tileSize * 6), cloud3); 
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 7),  grass, 39, 41);
             AddSurfaces((tileSize), graphicsHeight - (tileSize * 9),  grass, 36, 37);
 

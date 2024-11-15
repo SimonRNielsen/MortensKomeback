@@ -42,7 +42,7 @@ namespace MortensKomeback
 
             if (GameWorld.win == true)
             {
-                GameWorld.win = false;
+               // GameWorld.win = false;
                 this.sprite = sprites[1];
             }
             else

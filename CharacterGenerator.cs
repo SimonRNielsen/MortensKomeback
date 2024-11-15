@@ -70,11 +70,11 @@ namespace MortensKomeback
             loadedSprites.Add("munkeMortenSling0", munkeMortenSling);
 
             Texture2D[] munkeMortenSlingGul = new Texture2D[4];
-            munkeMortenSling[0] = content.Load<Texture2D>("munkeMortenSlingGul0");
-            munkeMortenSling[1] = content.Load<Texture2D>("munkeMortenSlingGul1");
-            munkeMortenSling[2] = content.Load<Texture2D>("munkeMortenSlingGul2");
-            munkeMortenSling[3] = content.Load<Texture2D>("munkeMortenSlingGul3");
-            loadedSprites.Add("munkeMortenSlingGul0", munkeMortenSling);
+            munkeMortenSlingGul[0] = content.Load<Texture2D>("munkeMortenSlingGul0");
+            munkeMortenSlingGul[1] = content.Load<Texture2D>("munkeMortenSlingGul1");
+            munkeMortenSlingGul[2] = content.Load<Texture2D>("munkeMortenSlingGul2");
+            munkeMortenSlingGul[3] = content.Load<Texture2D>("munkeMortenSlingGul3");
+            loadedSprites.Add("munkeMortenSlingGul0", munkeMortenSlingGul);
 
             Texture2D[] underCoverMortenSling = new Texture2D[4];
             underCoverMortenSling[0] = content.Load<Texture2D>("underCoverMortenSling0");
@@ -84,31 +84,31 @@ namespace MortensKomeback
             loadedSprites.Add("underCoverMortenSling0", underCoverMortenSling);
 
             Texture2D[] underCoverMortenSlingGul = new Texture2D[4];
-            underCoverMortenSling[0] = content.Load<Texture2D>("underCoverMortenSlingGul0");
-            underCoverMortenSling[1] = content.Load<Texture2D>("underCoverMortenSlingGul1");
-            underCoverMortenSling[2] = content.Load<Texture2D>("underCoverMortenSlingGul2");
-            underCoverMortenSling[3] = content.Load<Texture2D>("underCoverMortenSlingGul3");
-            loadedSprites.Add("underCoverMortenSlingGul0", underCoverMortenSling);
+            underCoverMortenSlingGul[0] = content.Load<Texture2D>("underCoverMortenSlingGul0");
+            underCoverMortenSlingGul[1] = content.Load<Texture2D>("underCoverMortenSlingGul1");
+            underCoverMortenSlingGul[2] = content.Load<Texture2D>("underCoverMortenSlingGul2");
+            underCoverMortenSlingGul[3] = content.Load<Texture2D>("underCoverMortenSlingGul3");
+            loadedSprites.Add("underCoverMortenSlingGul0", underCoverMortenSlingGul);
 
-            Texture2D[] munkeMortenHvid0 = new Texture2D[4];
-            underCoverMortenSling[0] = content.Load<Texture2D>("helligMortenHvid0");
-            underCoverMortenSling[1] = content.Load<Texture2D>("helligMortenHvid1");
-            underCoverMortenSling[2] = content.Load<Texture2D>("helligMortenHvid2");
-            underCoverMortenSling[3] = content.Load<Texture2D>("helligMortenHvid3");
-            loadedSprites.Add("helligMortenHvid0", munkeMortenHvid0);
+            Texture2D[] helligMortenHvid0 = new Texture2D[4];
+            helligMortenHvid0[0] = content.Load<Texture2D>("helligMortenHvid0");
+            helligMortenHvid0[1] = content.Load<Texture2D>("helligMortenHvid1");
+            helligMortenHvid0[2] = content.Load<Texture2D>("helligMortenHvid2");
+            helligMortenHvid0[3] = content.Load<Texture2D>("helligMortenHvid3");
+            loadedSprites.Add("helligMortenHvid0", helligMortenHvid0);
 
             Texture2D[] helligMortenHvidSlingGul0 = new Texture2D[4];
-            underCoverMortenSling[0] = content.Load<Texture2D>("helligMortenHvidSlingGul0");
-            underCoverMortenSling[1] = content.Load<Texture2D>("helligMortenHvidSlingGul1");
-            underCoverMortenSling[2] = content.Load<Texture2D>("helligMortenHvidSlingGul2");
-            underCoverMortenSling[3] = content.Load<Texture2D>("helligMortenHvidSlingGul3");
+            helligMortenHvidSlingGul0[0] = content.Load<Texture2D>("helligMortenHvidSlingGul0");
+            helligMortenHvidSlingGul0[1] = content.Load<Texture2D>("helligMortenHvidSlingGul1");
+            helligMortenHvidSlingGul0[2] = content.Load<Texture2D>("helligMortenHvidSlingGul2");
+            helligMortenHvidSlingGul0[3] = content.Load<Texture2D>("helligMortenHvidSlingGul3");
             loadedSprites.Add("helligMortenHvidSlingGul0", helligMortenHvidSlingGul0);
 
             standardFont = content.Load<SpriteFont>("standardSpriteFont");
             mortalKombatFont = content.Load<SpriteFont>("mortalKombatFont");
             mortenSprites[0, 0] = content.Load<Texture2D>("munkeMortenSling0");
-            mortenSprites[0, 1] = content.Load<Texture2D>("underCoverMortenSling0");
             mortenSprites[1, 0] = content.Load<Texture2D>("munkeMortenSlingGul0");
+            mortenSprites[0, 1] = content.Load<Texture2D>("underCoverMortenSling0");
             mortenSprites[1, 1] = content.Load<Texture2D>("underCoverMortenSlingGul0");
             mortenSprites[0, 2] = content.Load<Texture2D>("helligMortenHvid0");
             mortenSprites[1, 2] = content.Load<Texture2D>("helligMortenHvidSlingGul0");
