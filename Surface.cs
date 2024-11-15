@@ -14,7 +14,7 @@ namespace MortensKomeback
         #region properties
         public override Rectangle CollisionBox
         {
-            get { return new Rectangle((int)(Position.X - (Sprite.Width / 2) + 25), (int)Position.Y - (Sprite.Height / 2), Sprite.Width - 50, Sprite.Height / 2); }
+            get { return new Rectangle((int)(Position.X - (Sprite.Width / 2) + 25), (int)Position.Y - (Sprite.Height / 2), Sprite.Width - 50, Sprite.Height); }
         }
 
         public Rectangle LeftSideCollisionBox
